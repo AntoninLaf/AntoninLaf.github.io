@@ -462,3 +462,51 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .ruled td:first-child { white-space: normal; }
   .window iframe { height: 560px; }
 }
+
+/* ---------- Acteurly: Monday morning ---------- */
+.monday { display: grid; grid-template-columns: 300px 1fr; gap: 28px; margin: 12px 0 10px; align-items: start; }
+.monday-controls { display: flex; flex-direction: column; gap: 22px; position: sticky; top: 90px; }
+.monday-label { display: block; font-family: var(--hand); font-weight: 300; font-size: 17px; color: var(--pencil); margin-bottom: 8px; }
+.monday-label b { font-weight: 400; color: var(--ink); }
+.monday-biz { display: flex; flex-direction: column; gap: 8px; }
+.chip {
+  text-align: left; font-family: var(--hand); font-size: 18px; color: var(--ink);
+  padding: 8px 12px; border: 1.3px solid var(--pencil-light); border-radius: 3px; background: transparent;
+  display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+}
+.chip small { font-size: 14px; font-weight: 300; color: var(--pencil); }
+.chip:hover { border-color: var(--ink); }
+.chip.on { border-color: var(--ink); background: #f5f2ea; box-shadow: 2px 2px 0 var(--paper-shadow); }
+.monday-hours input { width: 100%; accent-color: var(--red-ink); }
+.btn.run { align-self: flex-start; border-bottom-width: 2px; }
+
+.monday-email { background: #f7f5ef; border: 1px solid var(--paper-shadow); box-shadow: 3px 4px 0 var(--paper-shadow); min-height: 520px; }
+.monday-head { padding: 14px 22px; border-bottom: 1px dashed var(--pencil-light); display: flex; flex-direction: column; gap: 2px; }
+.monday-from { font-family: var(--hand); font-size: 15px; color: var(--pencil); }
+.monday-subject { font-weight: 500; font-size: 20px; }
+.monday-body { padding: 16px 22px 22px; font-size: 17px; line-height: 1.45; }
+.monday-body > * { opacity: 0; transform: translateY(6px); transition: opacity .35s ease, transform .35s var(--ease-ink); }
+.monday-body > .in { opacity: 1; transform: none; }
+.m-step { font-family: var(--hand); font-weight: 300; font-size: 16px; color: var(--pencil); margin: 14px 0 6px; }
+.m-step:first-child { margin-top: 0; }
+.m-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green-ink); margin-right: 8px; animation: pulse 1.2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .3; } }
+.m-signal { margin: 0 0 4px 14px; padding-left: 12px; border-left: 1.5px solid var(--amber-ink); }
+.m-books { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 0 0 4px 14px; }
+.m-books span { font-family: var(--hand); font-size: 15px; padding: 2px 9px; border: 1px solid var(--pencil-light); border-radius: 12px; color: var(--ink-soft); }
+.m-action { margin: 10px 0 0 14px; }
+.m-action-head { font-size: 18px; }
+.m-action-head b { font-family: var(--hand); color: var(--red-ink); margin-right: 4px; }
+.m-action-head em { font-style: normal; font-family: var(--hand); font-size: 15px; color: var(--pencil); margin-left: 8px; white-space: nowrap; }
+.m-why { margin: 2px 0 0 22px; font-size: 16px; color: var(--ink-soft); }
+.m-why span { font-family: var(--hand); color: var(--pencil); }
+.m-total { font-family: var(--hand); color: var(--pencil); margin: 14px 0 0 14px; }
+.m-skipped, .m-none { font-family: var(--hand); font-weight: 300; font-size: 15.5px; color: var(--pencil); margin: 8px 0 0 14px; }
+
+.rings dt .ring-n { display: inline-block; width: 26px; height: 26px; border: 1.3px solid var(--ink); border-radius: 50%; text-align: center; line-height: 24px; font-family: var(--hand); font-size: 15px; margin-right: 10px; }
+.rules { margin-top: 26px; padding-top: 14px; border-top: 1px dashed var(--pencil-light); }
+
+@media (max-width: 860px) {
+  .monday { grid-template-columns: 1fr; }
+  .monday-controls { position: static; }
+}

@@ -1,5 +1,9 @@
 // Acteurly: an AI marketing analyst for Québec small businesses.
+import { render as story, mount } from "./story.js";
+
 export default {
+  story,
+  mount,
   slug: "acteurly",
   order: 1,
   map: { x: 420, y: 200, noteSide: "right" },

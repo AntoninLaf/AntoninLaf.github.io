@@ -69,6 +69,7 @@ function render(first) {
   backLink.textContent = r.name === "story" ? t("story.index") : t("nav.back");
   backLink.setAttribute("href", r.name === "story" ? "#/about" : "#/");
   armInk(host);
+  if (r.name === "project") { const p = findProject(r.slug); if (p && p.mount) p.mount(host.querySelector(".sheet:not(.leaving)"), lang()); }
   document.title = pageTitle(r);
 }
 
