@@ -1,5 +1,9 @@
 // VersyNow: an agentic post-event brief that never invents a number.
+import { render as story, mount } from "./story.js";
+
 export default {
+  story,
+  mount,
   slug: "versynow",
   order: 3,
   map: { x: 930, y: 540, noteSide: "left" },

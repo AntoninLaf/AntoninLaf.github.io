@@ -1,5 +1,9 @@
 // VersyTalks: an online debate platform grown from 40 to 10,000 users.
+import { render as story, mount } from "./story.js";
+
 export default {
+  story,
+  mount,
   slug: "versytalks",
   order: 2,
   map: { x: 660, y: 470, noteSide: "right" },
