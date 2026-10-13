@@ -1,5 +1,6 @@
 // Draws the home map from the project registry.
 import { t, lang } from "./i18n.js";
+import { esc, inkable } from "./ink.js";
 
 const W = 1200, H = 620;
 const ABOUT = { x: 150, y: 520, noteSide: "right" };
@@ -21,16 +22,6 @@ const deskLandmark = () => `
   <path class="thin" d="M66 -54 C66 -60 72 -60 72 -66"/>
 `;
 
-function esc(s) {
-  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-}
-
-// Every stroke gets pathLength="1" so a single dash animation draws it.
-function inkable(svg) {
-  return svg
-    .replace(/<path class="([^"]*)"/g, '<path pathLength="1" class="inks $1"')
-    .replace(/<path (?!pathLength)/g, '<path pathLength="1" class="inks" ');
-}
 
 function place({ x, y, noteSide }, { label, small, note, href, delay, landmark }) {
   const side = noteSide === "left" ? -1 : 1;

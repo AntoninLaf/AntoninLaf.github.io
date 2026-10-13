@@ -1,6 +1,8 @@
 import { t, detectLang, setLang, lang } from "./i18n.js";
-import { renderHome, renderAbout, renderProject, renderNotFound } from "./pages.js";
+import { renderHome, renderAbout, renderProject, renderStory, renderNotFound } from "./pages.js";
 import { findProject } from "../projects/index.js";
+import { findStory } from "../stories/index.js";
+import { armInk } from "./ink.js";
 
 const host = document.getElementById("sheet-host");
 const backLink = document.getElementById("back-link");
@@ -20,6 +22,8 @@ function route() {
   if (h === "about") return { name: "about" };
   const m = h.match(/^p\/([a-z0-9-]+)$/);
   if (m) return { name: "project", slug: m[1] };
+  const st = h.match(/^story\/([a-z0-9-]+)$/);
+  if (st) return { name: "story", slug: st[1] };
   return { name: "404" };
 }
 
@@ -27,6 +31,7 @@ function pageTitle(r) {
   const base = "Antonin Laferrière-Mailfait";
   if (r.name === "about") return `${t("about.title")}, ${base}`;
   if (r.name === "project") { const p = findProject(r.slug); if (p) return `${p.text.en.title}, ${base}`; }
+  if (r.name === "story") { const s = findStory(r.slug); if (s) return `${(s.text[lang()] || s.text.en).title}, ${base}`; }
   return base;
 }
 
@@ -42,6 +47,9 @@ function render(first) {
   } else if (r.name === "project") {
     const p = findProject(r.slug);
     html = p ? renderProject(p) : renderNotFound();
+  } else if (r.name === "story") {
+    const s = findStory(r.slug);
+    html = s ? renderStory(s) : renderNotFound();
   } else {
     html = renderNotFound();
   }
@@ -58,7 +66,9 @@ function render(first) {
   window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
 
   backLink.hidden = r.name === "home";
-  backLink.textContent = t("nav.back");
+  backLink.textContent = r.name === "story" ? t("story.index") : t("nav.back");
+  backLink.setAttribute("href", r.name === "story" ? "#/about" : "#/");
+  armInk(host);
   document.title = pageTitle(r);
 }
 

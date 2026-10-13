@@ -331,3 +331,77 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0s !important; transition-duration: 0.01ms !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ---------- stories ---------- */
+.page.story { row-gap: 0; }
+.page.story .margin + .body h2:first-child { margin-top: 44px; }
+.page.story .margin:not(:first-child) .margin-note:not(.sticky) { margin-top: 52px; }
+.page.story .margin .margin-note.red { margin-top: 16px; }
+.chapter { font-family: var(--hand); font-weight: 300; font-size: 16px; color: var(--pencil); margin: 0 0 6px; }
+.place-line .years { font-family: var(--hand); color: var(--pencil-light); margin-left: 12px; }
+.page > .wide { grid-column: 1 / -1; margin: 36px 0 8px; }
+
+.ink-fig { margin: 0; }
+.ink-fig svg { width: 100%; height: auto; display: block; overflow: visible; }
+.ink-fig path, .ink-fig circle, .ink-fig line {
+  fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke;
+}
+.ink-fig .thin { stroke-width: 1; stroke: var(--ink-soft); }
+.ink-fig .pencil { stroke: var(--pencil); stroke-width: 1.1; }
+.ink-fig .route { stroke: var(--pencil); stroke-width: 1.4; stroke-dasharray: 6 7; }
+.ink-fig text { fill: var(--ink); font-family: var(--hand); font-weight: 400; font-size: 20px; }
+.ink-fig text.small { font-size: 16px; font-weight: 300; fill: var(--pencil); }
+.ink-fig figcaption { font-family: var(--hand); font-weight: 300; font-size: 16px; color: var(--pencil); margin-top: 6px; text-align: right; }
+
+/* draws itself when scrolled into view */
+.ink-on-view .inks { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.ink-on-view text { opacity: 0; }
+.ink-on-view.inked .inks { animation: draw 1.4s var(--ease-ink) both; }
+.ink-on-view.inked .pencil.inks { animation-delay: 1.2s; }
+.ink-on-view.inked text { animation: fade .6s ease 1s forwards; }
+
+.career .stop.quiet { opacity: .8; }
+.career a.stop { cursor: pointer; }
+.career a.stop .hit { fill: transparent; stroke: none; }
+.career a.stop:hover text, .career a.stop:focus text { fill: var(--red-ink); }
+.career a.stop:hover circle { stroke: var(--red-ink); }
+.career circle { fill: var(--paper); }
+.career a.stop circle { fill: var(--ink); }
+.career a.stop:hover circle { fill: var(--red-ink); }
+
+.tallies { display: flex; flex-wrap: wrap; gap: 18px 36px; margin: 8px 0 22px; }
+.tally { position: relative; padding: 12px 22px 10px; min-width: 150px; }
+.tally .ring { position: absolute; left: 0; top: 0; width: calc(100% - 10px); height: 62px; }
+.tally .ring path { fill: none; stroke: var(--pencil); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.tally.inked .ring .inks { animation-delay: calc(var(--i) * .25s); animation-duration: .9s; }
+.tally-num { display: block; font-family: var(--hand); font-weight: 400; font-size: 38px; line-height: 1; color: var(--ink); }
+.tally-label { display: block; font-family: var(--hand); font-weight: 300; font-size: 16px; color: var(--pencil); margin-top: 6px; max-width: 22ch; }
+
+.judgment {
+  margin: 10px 0 0;
+  padding: 6px 0 6px 22px;
+  border-left: 2px solid var(--red-ink);
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.4;
+  font-variation-settings: "opsz" 28;
+}
+.h-quiet { font-size: 21px; color: var(--ink-soft); }
+.questions { list-style: none; padding: 0; margin: 0; font-family: var(--hand); font-weight: 300; font-size: 18px; color: var(--ink-soft); }
+.questions li { padding: 6px 0 6px 24px; position: relative; }
+.questions li::before { content: "?"; position: absolute; left: 2px; color: var(--red-ink); font-weight: 400; }
+.turn { display: flex; flex-wrap: wrap; gap: 14px 28px; margin: 48px 0 0; padding-top: 18px; border-top: 1px dashed var(--pencil-light); }
+
+.toc li { padding: 12px 0; }
+.toc a { text-decoration: none; display: flex; flex-direction: column; gap: 2px; }
+.toc a:hover .toc-title { color: var(--red-ink); }
+.toc-title { font-size: 20px; }
+.toc-where { font-family: var(--hand); font-weight: 300; font-size: 16px; color: var(--pencil); }
+.toc-page { font-family: var(--hand); font-weight: 300; font-size: 16px; color: var(--pencil-light); white-space: nowrap; }
+
+@media (max-width: 860px) {
+  .page > .wide { margin: 24px 0 4px; }
+  .ink-fig text { font-size: 24px; }
+  .ink-fig text.small { font-size: 19px; }
+  .judgment { font-size: 21px; }
+}

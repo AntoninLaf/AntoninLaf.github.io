@@ -1,12 +1,10 @@
 import { t, lang } from "./i18n.js";
 import { renderMap } from "./map.js";
+import { esc, inkFigure, tally } from "./ink.js";
 import { projects } from "../projects/index.js";
+import { stories, career } from "../stories/index.js";
 
 const RESUME_PDF = null; // set to "assets/resume.pdf" once the file is in place
-
-function esc(s) {
-  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-}
 
 export function renderHome({ intro, stacked }) {
   return `
@@ -23,18 +21,56 @@ export function renderHome({ intro, stacked }) {
   </section>`;
 }
 
+// The career route: a pencil road with a stop per chapter.
+function renderCareer() {
+  const L = lang();
+  const W = 900, n = career.length;
+  const x0 = 60, x1 = W - 60;
+  const step = (x1 - x0) / (n - 1);
+  const road = `M${x0} 150 C${x0 + step * 0.6} 120 ${x0 + step * 1.2} 170 ${x0 + step * 2} 150 S${x0 + step * 3.4} 150 ${x0 + step * 4} 150 S${x0 + step * 5.6} 120 ${x0 + step * 6} 150`;
+  const stops = career.map((c, i) => {
+    const x = x0 + step * i;
+    const up = i % 2 === 0;
+    const label = c[L] || c.en;
+    const [org, role] = label.split(" | ");
+    const y = up ? 92 : 212;
+    const href = c.story ? `#/story/${c.story}` : "";
+    const inner = `
+      <circle cx="${x}" cy="150" r="${c.story ? 7 : 5}" class="${c.story ? "" : "thin"}"/>
+      <path class="thin" d="M${x} ${up ? 143 : 157} V${up ? y + 26 : y - 36}"/>
+      <text x="${x}" y="${y - 18}" class="hand small" text-anchor="middle">${esc(c.year)}</text>
+      <text x="${x}" y="${y + 4}" class="hand" text-anchor="middle">${esc(org)}</text>
+      <text x="${x}" y="${y + 22}" class="hand small" text-anchor="middle">${esc(role || "")}</text>`;
+    return href
+      ? `<a class="stop" href="${href}"><rect class="hit" x="${x - 70}" y="${y - 34}" width="140" height="70" rx="6"/>${inner}</a>`
+      : `<g class="stop quiet">${inner}</g>`;
+  }).join("");
+  return `
+  <figure class="ink-fig wide ink-on-view career">
+    <svg viewBox="0 0 ${W} 280" role="img" aria-label="${esc(t("about.route"))}">
+      <path pathLength="1" class="inks route" d="${road}"/>
+      ${stops.replace(/<(path|circle) /g, '<$1 pathLength="1" class="inks" ').replace(/class="inks" class="/g, 'class="inks ')}
+    </svg>
+    <figcaption>${esc(t("about.route.note"))}</figcaption>
+  </figure>`;
+}
+
 export function renderAbout() {
   const L = lang();
-  const stories = [
-    { en: "STEKAR: building inbound from nothing", fr: "STEKAR : bâtir l'inbound à partir de rien", where: { en: "Industrial B2B", fr: "B2B industriel" } },
-    { en: "VersyTalks: 40 to 10,000, and everything that didn't work", fr: "VersyTalks : de 40 à 10 000, et tout ce qui n'a pas marché", where: { en: "Startup", fr: "Startup" } },
-    { en: "VersyNow: an agent people could trust, at cents a brief", fr: "VersyNow : un agent digne de confiance, à quelques cents", where: { en: "AI product", fr: "Produit IA" } },
-    { en: "Acteurly: the human in the loop", fr: "Acteurly : l'humain dans la boucle", where: { en: "Marketing + AI", fr: "Marketing + IA" } },
-    { en: "GoCo, a TELUS company: a migration without the churn", fr: "GoCo, une entreprise de TELUS : une migration sans l'attrition", where: { en: "Corporate", fr: "Grande entreprise" } }
-  ];
   const resume = RESUME_PDF
     ? `<a class="btn" href="${RESUME_PDF}" download>${esc(t("about.resume"))}</a>`
     : `<span class="btn quiet" title="${esc(t("about.resume.note"))}">${esc(t("about.resume"))}</span>`;
+  const toc = stories.map((s, i) => {
+    const tx = s.text[L] || s.text.en;
+    return `
+      <li>
+        <a href="#/story/${s.slug}">
+          <span class="toc-title">${esc(tx.title)}</span>
+          <span class="toc-where">${esc(tx.where)}</span>
+        </a>
+        <span class="toc-page">${esc(t("about.page"))} ${i + 1}</span>
+      </li>`;
+  }).join("");
   return `
   <section class="sheet">
     <div class="page">
@@ -49,11 +85,75 @@ export function renderAbout() {
           ${resume}
           <a class="btn" href="mailto:${esc(t("ask.email"))}">${esc(t("about.contact"))}</a>
         </div>
+      </div>
+      ${renderCareer()}
+      <aside class="margin">
+        <p class="margin-note">${esc(t("about.stories.note"))}</p>
+      </aside>
+      <div class="body">
         <h2>${esc(t("about.stories"))}</h2>
-        <ol class="toc">
-          ${stories.map((s) => `<li><span>${esc(s[L] || s.en)}</span><span class="where">${esc(s.where[L] || s.where.en)}</span></li>`).join("")}
-        </ol>
-        <p class="margin-note" style="margin-top:18px">${esc(t("about.coming"))}</p>
+        <ol class="toc">${toc}</ol>
+      </div>
+    </div>
+  </section>`;
+}
+
+export function renderStory(s) {
+  const L = lang();
+  const tx = s.text[L] || s.text.en;
+  const idx = stories.indexOf(s);
+  const next = stories[(idx + 1) % stories.length];
+  const nextTx = next.text[L] || next.text.en;
+  return `
+  <section class="sheet">
+    <div class="page story">
+      <aside class="margin">
+        <p class="margin-note sticky">${esc(tx.note)}</p>
+      </aside>
+      <div class="body">
+        <p class="chapter">${esc(t("about.page"))} ${idx + 1} ${esc(t("story.of"))} ${stories.length}</p>
+        <h1>${esc(tx.title)}</h1>
+        <p class="place-line">${esc(tx.where)}<br>${esc(tx.place)}<span class="years">${esc(s.years)}</span></p>
+      </div>
+
+      <aside class="margin"><p class="margin-note">${esc(t("story.situation.note"))}</p></aside>
+      <div class="body">
+        <h2>${esc(t("story.situation"))}</h2>
+        <p class="lede">${esc(tx.situation)}</p>
+      </div>
+
+      ${inkFigure(s.diagram(tx.diagram), { viewBox: "0 0 900 300", caption: tx.diagram.caption, cls: "wide" })}
+
+      <aside class="margin"><p class="margin-note">${esc(t("story.did.note"))}</p></aside>
+      <div class="body">
+        <h2>${esc(t("story.did"))}</h2>
+        ${tx.did.map((d) => `<p>${esc(d)}</p>`).join("")}
+      </div>
+
+      <aside class="margin"><p class="margin-note">${esc(t("story.changed.note"))}</p></aside>
+      <div class="body">
+        <h2>${esc(t("story.changed"))}</h2>
+        ${tally(tx.tallies)}
+        <p>${esc(tx.changed)}</p>
+      </div>
+
+      <aside class="margin"><p class="margin-note red">${esc(t("story.judgment.note"))}</p></aside>
+      <div class="body">
+        <blockquote class="judgment">${esc(tx.judgment)}</blockquote>
+      </div>
+
+      <aside class="margin"></aside>
+      <div class="body">
+        <h2 class="h-quiet">${esc(t("story.questions"))}</h2>
+        <ul class="questions">${tx.questions.map((q) => `<li>${esc(q)}</li>`).join("")}</ul>
+      </div>
+
+      <aside class="margin"></aside>
+      <div class="body">
+        <nav class="turn">
+          <a class="btn" href="#/story/${next.slug}">${esc(t("story.next"))}: ${esc(nextTx.title)}</a>
+          <a class="btn quiet" href="#/about">${esc(t("story.index"))}</a>
+        </nav>
       </div>
     </div>
   </section>`;

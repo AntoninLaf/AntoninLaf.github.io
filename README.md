@@ -16,6 +16,8 @@ js/map.js             draws the home map from the project registry
 js/pages.js           home, about, project page renderers
 projects/index.js     the project registry
 projects/<slug>/      one folder per project: text (EN/FR), links, map position, landmark drawing
+stories/<slug>.js     one file per About story: text (EN/FR), numbers, a hand-drawn diagram
+js/ink.js             inking helpers: figures that draw themselves on scroll, hand-drawn tallies
 ```
 
 ## Adding a project
@@ -25,6 +27,10 @@ projects/<slug>/      one folder per project: text (EN/FR), links, map position,
 3. Add one import line and one entry in `projects/index.js`.
 
 The map, the route and the navigation update on their own.
+
+## Adding a story
+
+Copy any file under `stories/`, fill in the text, the tallies and the diagram, and add it to `stories/index.js`. The About index, the page numbers and the next-story links update on their own.
 
 ## Running locally
 
