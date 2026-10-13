@@ -1,5 +1,8 @@
 // GLRlight: supplier risk from the UK public register.
+import { render as story } from "./story.js";
+
 export default {
+  story,
   slug: "glrlight",
   order: 4,
   map: { x: 1020, y: 190, noteSide: "left" },

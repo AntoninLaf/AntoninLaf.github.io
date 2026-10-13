@@ -161,6 +161,7 @@ export function renderStory(s) {
 
 export function renderProject(p) {
   const L = lang();
+  if (p.story) return p.story(p, L, t);
   const tx = p.text[L] || p.text.en;
   const links = [];
   if (p.links.live) links.push(`<a class="btn" href="${esc(p.links.live)}" target="_blank" rel="noopener">${esc(t("project.try"))}</a>`);
