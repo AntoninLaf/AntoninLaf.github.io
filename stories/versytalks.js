@@ -4,8 +4,8 @@ export default {
   years: "2024 – ",
   text: {
     en: {
-      title: "40 to 10,000, and everything that didn't work",
-      where: "VersyTalks, Product Manager, AI & Growth",
+      title: "Scaling from 40 to 10,000 through product and growth experimentation",
+      where: "VersyTalks · Product Manager, AI & Growth",
       place: "An online debate platform",
       note: "Acquisition wasn't the hard part. Retention was.",
       situation: "An online debate platform with 40 users and two sides that don't show up without each other: debaters, and the coaches and organizers who bring them. No budget to buy either side.",
@@ -13,7 +13,7 @@ export default {
         "Grew through three levers: content and social, events and competitions, and partnerships with debate coaches, who bring whole teams at once.",
         "Set the two metrics that mattered: time spent on the platform and arguments written. Arguments weren't just engagement; they were the training data for our own small language model.",
         "Built for those two numbers: drills, an onboarding with explicit goals, profiles, following and achievements, and a debate assessment tied to each debater's coaching profile.",
-        "Specified an AI grader that scores debates, calibrated against 42 human-graded submissions so its scores match what coaches would give.",
+        "Specified an AI grader calibrated on 42 real submissions, with a rubric built from coaches' own framework, launched as a capped free beta with go/stop targets and user corrections captured as training labels.",
         "Let coaches host their own events on the platform, turning the people who already bring teams into hosts."
       ],
       changed: "The community grew from 40 to 10,000 users. Several bets along the way didn't move retention: the argument arena, matching rooms, teams, speech-to-text, and a pivot to schools under the VersyEdu name.",
@@ -31,6 +31,46 @@ export default {
       diagram: {
         start: "40",
         end: "10,000",
+        bets: [
+          { x: 150, ok: false, label: "argument arena" },
+          { x: 250, ok: false, label: "matching rooms" },
+          { x: 340, ok: false, label: "VersyEdu pivot" },
+          { x: 450, ok: true, label: "drills" },
+          { x: 560, ok: true, label: "onboarding with goals" },
+          { x: 680, ok: true, label: "assessment tied to coaching" },
+          { x: 790, ok: true, label: "coach-hosted events" }
+        ],
+        caption: "The bets that moved the two numbers, and the ones that didn't."
+      }
+    },
+    fr: {
+      title: "Passer de 40 à 10 000 par l'expérimentation produit et croissance",
+      where: "VersyTalks · chef de produit, IA et croissance",
+      place: "Une plateforme de débat en ligne",
+      note: "L'acquisition n'était pas le problème. La rétention, oui.",
+      situation: "Une plateforme de débat en ligne avec 40 utilisateurs et deux côtés qui ne viennent pas l'un sans l'autre : les débatteurs, et les entraîneurs et organisateurs qui les amènent. Aucun budget pour acheter l'un ou l'autre.",
+      did: [
+        "Croissance par trois leviers : contenu et réseaux sociaux, événements et compétitions, et partenariats avec des entraîneurs de débat, qui amènent des équipes entières.",
+        "Fixé les deux mesures qui comptaient : le temps passé sur la plateforme et les arguments écrits. Les arguments n'étaient pas qu'un signe d'engagement : c'étaient les données d'entraînement de notre propre petit modèle de langage.",
+        "Construit pour ces deux chiffres : des exercices, un accueil avec des objectifs explicites, des profils, les abonnements et les réussites, et une évaluation de débat rattachée au profil d'entraînement de chaque débatteur.",
+        "Spécifié un correcteur IA calibré sur 42 vraies soumissions, avec une grille bâtie à partir du cadre des entraîneurs eux-mêmes, lancé en bêta gratuite plafonnée avec des cibles go/stop et les corrections des utilisateurs captées comme étiquettes d'entraînement.",
+        "Laissé les entraîneurs organiser leurs propres événements sur la plateforme : ceux qui amènent déjà des équipes deviennent des hôtes."
+      ],
+      changed: "La communauté est passée de 40 à 10 000 utilisateurs. Plusieurs paris en chemin n'ont pas bougé la rétention : l'arène d'arguments, les salles d'appariement, les équipes, la transcription vocale, et un virage vers les écoles sous le nom VersyEdu.",
+      judgment: "Livrer plus de fonctionnalités n'est pas une stratégie de rétention. Quand chaque fonctionnalité a dû répondre à deux comportements mesurables, et aux données dont notre modèle avait besoin, la feuille de route est devenue plus courte et plus nette.",
+      questions: [
+        "Comment avez-vous su que VersyEdu ne marchait pas, et quand avez-vous arrêté ?",
+        "Pourquoi calibrer le correcteur sur 42 débats plutôt que livrer et itérer ?",
+        "Qu'auriez-vous fait autrement pour les 1 000 premiers utilisateurs ?"
+      ],
+      tallies: [
+        { value: "40 → 10 000", label: "utilisateurs" },
+        { value: "2", label: "mesures auxquelles chaque fonctionnalité répondait" },
+        { value: "42", label: "débats notés par des humains derrière le correcteur IA" }
+      ],
+      diagram: {
+        start: "40",
+        end: "10 000",
         bets: [
           { x: 150, ok: false, label: "arène d'arguments" },
           { x: 250, ok: false, label: "salles d'appariement" },

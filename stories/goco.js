@@ -4,15 +4,17 @@ export default {
   years: "2022 – 2023",
   text: {
     en: {
-      title: "A migration without the churn",
-      where: "GoCo, a TELUS company, Marketing Manager",
+      title: "Protecting customer retention through a business migration",
+      where: "GoCo, a TELUS company · Marketing Manager",
       place: "Corporate, business customers",
       note: "A migration is a moment every customer reconsiders you. Small businesses reconsider fastest.",
-      situation: "A platform migration: every customer had to move, and every one of them would have a reason to leave during the move. The goal was to lose as few as possible, with small and medium businesses, the most exposed, as the priority.",
+      situation: "A platform migration of more than 900 B2B voice accounts: every customer had to move, and every one of them would have a reason to leave during the move. The goal was to lose as few as possible, with small and medium businesses, the most exposed, as the priority.",
       did: [
-        "Led the effort to keep customers through the migration, with SMEs first."
+        "Led marketing for the migration, with SMEs first.",
+        "Used usage and engagement signals to identify the accounts most at risk of leaving, rather than treating every account the same.",
+        "Ran segmented campaigns in Salesforce and Pardot, with messaging aligned with the sales team so customers heard one story."
       ],
-      changed: "Churn down 30 percent.",
+      changed: "Contributed to a 30 percent reduction in churn across the migration.",
       judgment: "In a large company, the work is rarely a new idea. It is getting the right message to the right customer before they decide, with every team pulling the same way.",
       questions: [
         "What did SMEs need to hear that larger accounts didn't?",
@@ -20,6 +22,7 @@ export default {
         "What would you measure if you did it again?"
       ],
       tallies: [
+        { value: "900+", label: "B2B accounts migrated" },
         { value: "−30%", label: "churn through the migration" }
       ],
       diagram: {
@@ -31,15 +34,17 @@ export default {
       }
     },
     fr: {
-      title: "Une migration sans l'attrition",
-      where: "GoCo, une entreprise de TELUS, gestionnaire marketing",
+      title: "Protéger la rétention des clients pendant une migration d'affaires",
+      where: "GoCo, une entreprise de TELUS · gestionnaire marketing",
       place: "Grande entreprise, clients d'affaires",
       note: "Une migration est un moment où chaque client vous reconsidère. Les petites entreprises reconsidèrent le plus vite.",
-      situation: "Une migration de plateforme : chaque client devait changer, et chacun aurait une raison de partir pendant le passage. L'objectif : en perdre le moins possible, avec les petites et moyennes entreprises, les plus exposées, en priorité.",
+      situation: "Une migration de plateforme de plus de 900 comptes d'affaires de téléphonie : chaque client devait changer, et chacun aurait une raison de partir pendant le passage. L'objectif : en perdre le moins possible, avec les petites et moyennes entreprises, les plus exposées, en priorité.",
       did: [
-        "Mené l'effort pour garder les clients à travers la migration, les PME d'abord."
+        "Mené le marketing de la migration, les PME d'abord.",
+        "Utilisé les signaux d'usage et d'engagement pour repérer les comptes les plus à risque de partir, plutôt que de traiter chaque compte de la même façon.",
+        "Mené des campagnes segmentées dans Salesforce et Pardot, avec des messages alignés sur l'équipe des ventes pour que les clients entendent une seule histoire."
       ],
-      changed: "Attrition en baisse de 30 pour cent.",
+      changed: "Contribué à une baisse de 30 pour cent de l'attrition pendant la migration.",
       judgment: "Dans une grande entreprise, le travail est rarement une idée neuve. C'est livrer le bon message au bon client avant qu'il décide, avec chaque équipe qui tire dans le même sens.",
       questions: [
         "Qu'est-ce que les PME devaient entendre que les grands comptes n'avaient pas besoin d'entendre ?",
@@ -47,6 +52,7 @@ export default {
         "Que mesureriez-vous si c'était à refaire ?"
       ],
       tallies: [
+        { value: "900+", label: "comptes d'affaires migrés" },
         { value: "−30 %", label: "d'attrition pendant la migration" }
       ],
       diagram: {

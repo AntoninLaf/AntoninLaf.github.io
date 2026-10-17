@@ -4,7 +4,6 @@ import { esc, inkFigure, tally } from "./ink.js";
 import { projects } from "../projects/index.js";
 import { stories, career } from "../stories/index.js";
 
-const RESUME_PDF = null; // set to "assets/resume.pdf" once the file is in place
 
 export function renderHome({ intro, stacked }) {
   return `
@@ -55,44 +54,100 @@ function renderCareer() {
   </figure>`;
 }
 
+const BACKGROUND = {
+  en: {
+    education: ["McGill University, Desautels Faculty of Management: Master of Management in Analytics, 2026–2027", "Université de Montréal: Bachelor of Communication Sciences, concentration in Marketing, 2019–2022"],
+    certifications: ["Cornell Product Management", "Google Data Analytics", "Certified ScrumMaster (CSM)"],
+    languages: "French (native), English (fluent), Spanish and German (conversational)",
+    interests: "Quebec U23 100 m champion in track and field; language learning and travel; personal AI projects"
+  },
+  fr: {
+    education: ["Université McGill, Faculté de gestion Desautels : maîtrise en gestion analytique, 2026–2027", "Université de Montréal : baccalauréat en sciences de la communication, concentration marketing, 2019–2022"],
+    certifications: ["Cornell Product Management", "Google Data Analytics", "Certified ScrumMaster (CSM)"],
+    languages: "français (langue maternelle), anglais (courant), espagnol et allemand (conversationnel)",
+    interests: "champion québécois U23 du 100 m en athlétisme ; apprentissage des langues et voyages ; projets personnels en IA"
+  }
+};
+
+const INDEPENDENT = {
+  en: [
+    { slug: "glrlight", title: "GLRlight: turning corporate filings into explainable counterparty risk signals", paras: [
+      "Corporate filings contain signals that are easy to overlook in isolation. GLRlight examines their timing, sequence and concentration to help people decide where further diligence is warranted.",
+      "A rules engine evaluates sixteen signals across filing behaviour, governance, director history, ownership, security interests and register events. It aggregates them into a green, amber or red screening band, with the underlying evidence visible. An AI-generated memo explains what changed, why it may matter, plausible benign explanations and specific questions to ask the counterparty.",
+      "The core design principle: make the evidence inspectable, the uncertainty explicit and the next questions actionable. GLRlight supports human judgment; its screening bands are not credit ratings."
+    ] },
+    { slug: "acteurly", title: "Acteurly: an accessible AI agency for small businesses", paras: [
+      "Marketing is often the capability gap that limits a small business's growth. Acteurly learns the business, interprets its marketing data and turns that understanding into priorities suited to the owner's budget, capacity and objectives. I supplied the marketing judgment behind it: the playbooks its AI consults, the evaluation rubrics, and the review of its recommendations as the human in the loop."
+    ] }
+  ],
+  fr: [
+    { slug: "glrlight", title: "GLRlight : transformer les dépôts d'entreprise en signaux de risque de contrepartie explicables", paras: [
+      "Les dépôts d'entreprise contiennent des signaux faciles à négliger isolément. GLRlight examine leur chronologie, leur séquence et leur concentration pour aider à décider où une vérification plus poussée est justifiée.",
+      "Un moteur de règles évalue seize signaux couvrant le comportement de dépôt, la gouvernance, l'historique des administrateurs, l'actionnariat, les sûretés et les événements du registre. Il les agrège en une bande de filtrage verte, ambre ou rouge, avec les preuves sous-jacentes visibles. Un mémo généré par IA explique ce qui a changé, pourquoi cela peut compter, les explications bénignes plausibles et les questions précises à poser à la contrepartie.",
+      "Le principe de conception central : rendre les preuves inspectables, l'incertitude explicite et les prochaines questions actionnables. GLRlight appuie le jugement humain ; ses bandes de filtrage ne sont pas des cotes de crédit."
+    ] },
+    { slug: "acteurly", title: "Acteurly : une agence IA accessible pour les petites entreprises", paras: [
+      "Le marketing est souvent le manque de capacité qui freine la croissance d'une petite entreprise. Acteurly apprend l'entreprise, interprète ses données marketing et transforme cette compréhension en priorités adaptées au budget, à la capacité et aux objectifs du propriétaire. J'ai fourni le jugement marketing derrière : les playbooks que son IA consulte, les grilles d'évaluation et la révision de ses recommandations comme humain dans la boucle."
+    ] }
+  ]
+};
+
 export function renderAbout() {
   const L = lang();
-  const resume = RESUME_PDF
-    ? `<a class="btn" href="${RESUME_PDF}" download>${esc(t("about.resume"))}</a>`
-    : `<span class="btn quiet" title="${esc(t("about.resume.note"))}">${esc(t("about.resume"))}</span>`;
+  const bg = BACKGROUND[L] || BACKGROUND.en;
+  const ind = INDEPENDENT[L] || INDEPENDENT.en;
   const toc = stories.map((s, i) => {
     const tx = s.text[L] || s.text.en;
     return `
       <li>
         <a href="#/story/${s.slug}">
+          <span class="toc-n">${i + 1}.</span>
           <span class="toc-title">${esc(tx.title)}</span>
           <span class="toc-where">${esc(tx.where)}</span>
+          <span class="toc-go">${esc(t("about.explore"))}</span>
         </a>
-        <span class="toc-page">${esc(t("about.page"))} ${i + 1}</span>
       </li>`;
   }).join("");
+  const projects = ind.map((p) => `
+      <li>
+        <a href="#/p/${p.slug}">
+          <span class="toc-title">${esc(p.title)}</span>
+          ${p.paras.map((x) => `<span class="toc-para">${esc(x)}</span>`).join("")}
+          <span class="toc-go">${esc(t("about.explore.project"))}</span>
+        </a>
+      </li>`).join("");
   return `
   <section class="sheet">
     <div class="page">
-      <aside class="margin">
-        <p class="margin-note sticky">${esc(t("about.note"))}</p>
-      </aside>
+      <aside class="margin"></aside>
       <div class="body">
         <h1>${esc(t("about.title"))}</h1>
         <p class="place-line">${esc(t("about.place"))}</p>
         <p class="lede">${esc(t("about.lede"))}</p>
         <div class="actions">
-          ${resume}
           <a class="btn" href="mailto:${esc(t("ask.email"))}">${esc(t("about.contact"))}</a>
         </div>
       </div>
       ${renderCareer()}
-      <aside class="margin">
-        <p class="margin-note">${esc(t("about.stories.note"))}</p>
-      </aside>
+      <aside class="margin"></aside>
       <div class="body">
         <h2>${esc(t("about.stories"))}</h2>
-        <ol class="toc">${toc}</ol>
+        <ol class="toc cases">${toc}</ol>
+      </div>
+      <aside class="margin"></aside>
+      <div class="body">
+        <h2>${esc(t("about.projects"))}</h2>
+        <ul class="toc cases projects">${projects}</ul>
+      </div>
+      <aside class="margin"></aside>
+      <div class="body">
+        <h2>${esc(t("about.background"))}</h2>
+        <dl class="background">
+          <dt>${esc(t("about.education"))}</dt>${bg.education.map((e) => `<dd>${esc(e)}</dd>`).join("")}
+          <dt>${esc(t("about.certifications"))}</dt><dd>${esc(bg.certifications.join(" · "))}</dd>
+          <dt>${esc(t("about.languages"))}</dt><dd>${esc(bg.languages)}</dd>
+          <dt>${esc(t("about.interests"))}</dt><dd>${esc(bg.interests)}</dd>
+        </dl>
       </div>
     </div>
   </section>`;

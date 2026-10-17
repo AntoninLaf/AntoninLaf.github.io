@@ -4,8 +4,8 @@ export default {
   years: "2026",
   text: {
     en: {
-      title: "The human in the loop",
-      where: "Acteurly, marketing expert and reviewer",
+      title: "Embedding expert judgment into AI-driven marketing",
+      where: "Acteurly · Marketing Expert & Reviewer",
       place: "An AI marketing analyst for Québec small businesses",
       note: "The product isn't the dashboard. It's the sentence at the end: here's what to do Monday.",
       situation: "Owners of businesses with one to fifty people, trades, clinics, shops, restaurants, have their numbers scattered across Google, Meta and review sites. Nobody has time to read them, and an agency costs too much. Acteurly reads their marketing data, explains in plain words what works, and recommends the next actions that fit their budget and hours.",
@@ -38,8 +38,8 @@ export default {
       }
     },
     fr: {
-      title: "L'humain dans la boucle",
-      where: "Acteurly, expert marketing et réviseur",
+      title: "Intégrer le jugement d'expert dans un marketing piloté par l'IA",
+      where: "Acteurly · expert marketing et réviseur",
       place: "Un analyste marketing IA pour les petites entreprises du Québec",
       note: "Le produit, ce n'est pas le tableau de bord. C'est la phrase à la fin : voici quoi faire lundi.",
       situation: "Les propriétaires d'entreprises de un à cinquante employés, métiers, cliniques, commerces, restaurants, ont leurs chiffres éparpillés entre Google, Meta et les sites d'avis. Personne n'a le temps de les lire, et une agence coûte trop cher. Acteurly lit leurs données marketing, explique en mots simples ce qui fonctionne et recommande les prochaines actions selon leur budget et leurs heures.",

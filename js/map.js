@@ -66,14 +66,14 @@ export function renderMap(projects, stacked = false) {
   const step = 0.55;
   const places = [];
   places.push(place(ABOUT, {
-    label: t("about.label"), small: t("about.title").toLowerCase(), note: t("about.note"),
+    label: t("about.title"), small: t("about.tagline"), note: t("about.note"),
     href: "#/about", delay, landmark: inkable(deskLandmark())
   }));
   for (const p of projects) {
     delay += step;
     const tx = p.text[L] || p.text.en;
     places.push(place(p.map, {
-      label: tx.label, small: tx.small, note: tx.note,
+      label: tx.title, small: tx.tagline || tx.label, note: tx.note,
       href: `#/p/${p.slug}`, delay, landmark: inkable(p.landmark())
     }));
   }
@@ -115,13 +115,13 @@ function renderStacked(projects) {
     const delay = 1.2 + i * 0.4;
     if (e.about) {
       return place({ x, y, noteSide: "right" }, {
-        label: t("about.label"), small: t("about.title").toLowerCase(), note: t("about.note"),
+        label: t("about.title"), small: t("about.tagline"), note: t("about.note"),
         href: "#/about", delay, landmark: inkable(deskLandmark())
       });
     }
     const tx = e.text[L] || e.text.en;
     return place({ x, y, noteSide: "right" }, {
-      label: tx.label, small: tx.small, note: tx.note,
+      label: tx.title, small: tx.tagline || tx.label, note: tx.note,
       href: `#/p/${e.slug}`, delay, landmark: inkable(e.landmark())
     });
   });

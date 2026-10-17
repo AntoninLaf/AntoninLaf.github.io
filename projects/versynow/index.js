@@ -17,7 +17,8 @@ export default {
       label: "The event hall",
       small: "VersyNow",
       note: "No number on screen is model-generated.",
-      lede: "Event organizers collect plenty of audience data and rarely know what to do with it afterwards. VersyNow's brief is an AI agent that reads the event's data, spots the weak session, reads what attendees wrote there, compares with the organizer's own past events, and writes what happened and what to change next time. Two hard problems: trust, solved by re-checking every claim against the database before the brief is saved, so no number on screen is model-generated; and cost, held at about eight cents a brief."
+      lede: "Event organizers collect plenty of audience data and rarely know what to do with it afterwards. VersyNow's brief is an AI agent that reads the event's data, spots the weak session, reads what attendees wrote there, compares with the organizer's own past events, and writes what happened and what to change next time. Two hard problems: trust, solved by re-checking every claim against the database before the brief is saved, so no number on screen is model-generated; and cost, held at about eight cents a brief.",
+      tagline: "live Q&A and audience insight for events",
     },
     fr: {
       title: "VersyNow",
@@ -25,7 +26,8 @@ export default {
       label: "La salle d'événement",
       small: "VersyNow",
       note: "Aucun chiffre à l'écran ne vient du modèle.",
-      lede: "Les organisateurs d'événements récoltent beaucoup de données sur leur public et savent rarement quoi en faire ensuite. Le compte rendu de VersyNow est un agent IA qui lit les données de l'événement, repère la séance faible, lit ce que les participants y ont écrit, compare avec les événements passés de l'organisateur et écrit ce qui s'est passé et quoi changer la prochaine fois. Deux problèmes difficiles : la confiance, réglée en revérifiant chaque affirmation contre la base de données avant d'enregistrer le compte rendu, si bien qu'aucun chiffre à l'écran ne vient du modèle ; et le coût, tenu à environ huit cents par compte rendu."
+      lede: "Les organisateurs d'événements récoltent beaucoup de données sur leur public et savent rarement quoi en faire ensuite. Le compte rendu de VersyNow est un agent IA qui lit les données de l'événement, repère la séance faible, lit ce que les participants y ont écrit, compare avec les événements passés de l'organisateur et écrit ce qui s'est passé et quoi changer la prochaine fois. Deux problèmes difficiles : la confiance, réglée en revérifiant chaque affirmation contre la base de données avant d'enregistrer le compte rendu, si bien qu'aucun chiffre à l'écran ne vient du modèle ; et le coût, tenu à environ huit cents par compte rendu.",
+      tagline: "Q&A en direct et compréhension du public pour les événements",
     }
   },
   landmark: () => `

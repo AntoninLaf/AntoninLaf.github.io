@@ -16,16 +16,18 @@ export default {
       place: "Main street, Québec",
       label: "Main street, Québec",
       small: "Acteurly",
-      note: "An analyst for the shops that can't afford one.",
-      lede: "A plumber, a clinic, a bakery: their numbers are scattered across Google, Meta and review sites, nobody has time to read them, and an agency costs too much. Acteurly reads a small business's marketing data, explains in plain words what works, and recommends the next actions that fit the owner's budget and hours. I was the marketing expert behind it and the human in the loop: I wrote the playbooks its AI reads before every answer, built the rubrics for judging its recommendations, and reviewed what it produced."
+      note: "An accessible AI agency for small businesses.",
+      lede: "For small businesses, marketing is often a capability gap that limits growth: owners lack the time and expertise to define their positioning, decide where to invest and understand whether their efforts are paying off, while an agency is beyond their budget. Acteurly was built as an accessible AI agency that learns the business, interprets its marketing data and turns that understanding into priorities suited to the owner's budget, capacity and growth objectives.\n\nAI made ongoing, personalized support economically viable; its agentic workflow connects gathering context, assessing performance and recommending next steps, with optimized context windows bringing relevant business knowledge and expert playbooks into each response as the business evolves. I supplied the marketing judgment behind that process: writing the playbooks, building evaluation rubrics and reviewing recommendations as the human in the loop to assess whether they were grounded, commercially sound and actionable, giving owners a practical way to start marketing, measure progress and make better growth decisions.",
+      tagline: "an accessible AI agency for small businesses",
     },
     fr: {
       title: "Acteurly",
       place: "Rue principale, Québec",
       label: "Rue principale, Québec",
       small: "Acteurly",
-      note: "Un analyste pour les commerces qui n'en ont pas les moyens.",
-      lede: "Un plombier, une clinique, une boulangerie : leurs chiffres sont éparpillés entre Google, Meta et les sites d'avis, personne n'a le temps de les lire, et une agence coûte trop cher. Acteurly lit les données marketing d'une petite entreprise, explique en mots simples ce qui fonctionne et recommande les prochaines actions selon le budget et les heures du propriétaire. J'en ai été l'expert marketing et l'humain dans la boucle : j'ai écrit les playbooks que son IA lit avant chaque réponse, bâti les grilles pour juger ses recommandations et révisé ce qu'elle produisait."
+      note: "Une agence IA accessible pour les petites entreprises.",
+      lede: "Pour les petites entreprises, le marketing est souvent un manque de capacité qui freine la croissance : les propriétaires n'ont ni le temps ni l'expertise pour définir leur positionnement, décider où investir et savoir si leurs efforts rapportent, et une agence dépasse leur budget. Acteurly a été bâti comme une agence IA accessible qui apprend l'entreprise, interprète ses données marketing et transforme cette compréhension en priorités adaptées au budget, à la capacité et aux objectifs de croissance du propriétaire.\n\nL'IA a rendu un accompagnement continu et personnalisé économiquement viable ; son flux agentique relie la collecte du contexte, l'évaluation de la performance et la recommandation des prochaines étapes, avec des fenêtres de contexte optimisées qui apportent à chaque réponse les connaissances pertinentes sur l'entreprise et les playbooks d'expert, à mesure qu'elle évolue. J'ai fourni le jugement marketing derrière ce processus : écrire les playbooks, bâtir les grilles d'évaluation et réviser les recommandations comme humain dans la boucle, pour juger si elles étaient fondées, commercialement sensées et réalisables, et donner aux propriétaires une façon concrète de commencer à faire du marketing, de mesurer leurs progrès et de prendre de meilleures décisions de croissance.",
+      tagline: "une agence IA accessible pour les petites entreprises",
     }
   },
   landmark: () => `

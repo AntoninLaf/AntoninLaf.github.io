@@ -14,7 +14,7 @@ export function findStory(slug) {
 // The career route drawn on the About page, oldest first.
 export const career = [
   { year: "2021", en: "Groupe EGS | Marketing Coordinator", fr: "Groupe EGS | coordonnateur marketing" },
-  { year: "2022", en: "Université de Montréal | BSc", fr: "Université de Montréal | B. Sc." },
+  { year: "2022", en: "Université de Montréal | Bachelor, Communication Sciences", fr: "Université de Montréal | baccalauréat, sciences de la communication" },
   { year: "2022", en: "GoCo, a TELUS company | Marketing Manager", fr: "GoCo, une entreprise de TELUS | gestionnaire marketing", story: "goco" },
   { year: "2023", en: "Acteur Social | Marketing Consultant", fr: "Acteur Social | consultant marketing" },
   { year: "2024", en: "STEKAR & Vitralum | Marketing Director", fr: "STEKAR & Vitralum | directeur marketing", story: "stekar" },

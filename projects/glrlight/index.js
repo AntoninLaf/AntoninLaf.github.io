@@ -16,16 +16,18 @@ export default {
       place: "City of London",
       label: "City of London",
       small: "GLRlight",
-      note: "16 rules, no AI. Carillion came out red.",
-      lede: "About five million companies sit on the UK register, and most supplier and client decisions involve no check at all: the credit bureaus are priced for procurement teams and the free register is unreadable. GLRlight reads six Companies House registers in one second, runs sixteen rules over them and returns a green, amber or red verdict with every finding dated and sourced. Then an AI agent goes back and investigates whatever looked unusual."
+      note: "Explainable counterparty risk from corporate filings.",
+      lede: "About five million companies sit on the UK register, and most supplier and client decisions involve no check at all: the credit bureaus are priced for procurement teams and the free register is unreadable. GLRlight reads six Companies House registers in one second, runs sixteen rules over them and returns a green, amber or red verdict with every finding dated and sourced. Then an AI agent goes back and investigates whatever looked unusual.",
+      tagline: "explainable counterparty risk from UK filings",
     },
     fr: {
       title: "GLRlight",
       place: "City de Londres",
       label: "City de Londres",
       small: "GLRlight",
-      note: "16 règles, zéro IA. Carillion est sorti rouge.",
-      lede: "Environ cinq millions d'entreprises figurent au registre britannique, et la plupart des décisions d'achat ou de vente se prennent sans aucune vérification : les agences de crédit sont tarifées pour les équipes d'approvisionnement, et le registre gratuit est illisible. GLRlight lit six registres de Companies House en une seconde, y applique seize règles et rend un verdict vert, ambre ou rouge, chaque constat daté et sourcé. Puis un agent IA retourne enquêter sur ce qui semblait inhabituel."
+      note: "Un risque de contrepartie explicable, à partir des dépôts d'entreprise.",
+      lede: "Environ cinq millions d'entreprises figurent au registre britannique, et la plupart des décisions d'achat ou de vente se prennent sans aucune vérification : les agences de crédit sont tarifées pour les équipes d'approvisionnement, et le registre gratuit est illisible. GLRlight lit six registres de Companies House en une seconde, y applique seize règles et rend un verdict vert, ambre ou rouge, chaque constat daté et sourcé. Puis un agent IA retourne enquêter sur ce qui semblait inhabituel.",
+      tagline: "risque de contrepartie explicable, à partir des dépôts britanniques",
     }
   },
   // Drawn in local coordinates: ground line at y=0, x from -90 to 90, up is negative.

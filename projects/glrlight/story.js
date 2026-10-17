@@ -353,11 +353,11 @@ export function render(p, L, t) {
   return `
   <section class="sheet">
     <div class="page story world">
-      <aside class="margin"><p class="margin-note sticky">${esc(px.note)}</p></aside>
+      <aside class="margin">${px.note ? `<p class="margin-note sticky">${esc(px.note)}</p>` : ""}</aside>
       <div class="body">
         <h1>${esc(px.title)}</h1>
         <p class="place-line">${esc(px.place)}</p>
-        <p class="lede">${esc(px.lede)}</p>
+        ${px.lede.split("\n\n").map((x, i) => `<p class="${i ? "" : "lede"}">${esc(x)}</p>`).join("")}
       </div>
 
       ${inkFigure(street(tx.street), { viewBox: "0 0 1100 350", caption: tx.street.caption, cls: "wide street" })}

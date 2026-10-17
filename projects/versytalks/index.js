@@ -17,7 +17,8 @@ export default {
       label: "The debate hall",
       small: "VersyTalks",
       note: "40 to 10,000 debaters. Retention was the real fight.",
-      lede: "An online debate platform with 40 users and two sides that don't show up without each other: debaters, and the coaches and organizers who bring them. Growth came from content, competitions and partnerships with coaches. The harder problem was keeping people, so every feature was tied to two numbers, time spent on the platform and arguments written, which were also the training data for our own small language model. The community grew to 10,000 users; several bets along the way didn't work, and those taught us the most."
+      lede: "An online debate platform with 40 users and two sides that don't show up without each other: debaters, and the coaches and organizers who bring them. Growth came from content, competitions and partnerships with coaches. The harder problem was keeping people, so every feature was tied to two numbers, time spent on the platform and arguments written, which were also the training data for our own small language model. The community grew to 10,000 users; several bets along the way didn't work, and those taught us the most.",
+      tagline: "a debate platform grown from 40 to 10,000 users",
     },
     fr: {
       title: "VersyTalks",
@@ -25,7 +26,8 @@ export default {
       label: "La salle de débat",
       small: "VersyTalks",
       note: "De 40 à 10 000 débatteurs. La rétention, c'était la vraie bataille.",
-      lede: "Une plateforme de débat en ligne avec 40 utilisateurs et deux côtés qui ne viennent pas l'un sans l'autre : les débatteurs, et les entraîneurs et organisateurs qui les amènent. La croissance est venue du contenu, des compétitions et des partenariats avec les entraîneurs. Le vrai problème, c'était de garder les gens : chaque fonctionnalité a donc été rattachée à deux chiffres, le temps passé sur la plateforme et les arguments écrits, qui servaient aussi de données d'entraînement à notre propre petit modèle de langage. La communauté a atteint 10 000 utilisateurs ; plusieurs paris en chemin n'ont pas marché, et ce sont eux qui nous ont le plus appris."
+      lede: "Une plateforme de débat en ligne avec 40 utilisateurs et deux côtés qui ne viennent pas l'un sans l'autre : les débatteurs, et les entraîneurs et organisateurs qui les amènent. La croissance est venue du contenu, des compétitions et des partenariats avec les entraîneurs. Le vrai problème, c'était de garder les gens : chaque fonctionnalité a donc été rattachée à deux chiffres, le temps passé sur la plateforme et les arguments écrits, qui servaient aussi de données d'entraînement à notre propre petit modèle de langage. La communauté a atteint 10 000 utilisateurs ; plusieurs paris en chemin n'ont pas marché, et ce sont eux qui nous ont le plus appris.",
+      tagline: "une plateforme de débat passée de 40 à 10 000 utilisateurs",
     }
   },
   landmark: () => `

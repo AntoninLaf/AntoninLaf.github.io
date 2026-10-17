@@ -4,8 +4,8 @@ export default {
   years: "2024 – ",
   text: {
     en: {
-      title: "An agent people could trust, at cents a brief",
-      where: "VersyNow, Product Manager, AI & Growth",
+      title: "Making AI analysis trustworthy, and economically viable",
+      where: "VersyNow · Product Manager, AI & Growth",
       place: "Event analytics",
       note: "In AI products, the model is rarely the hard part. Deciding what it is not allowed to do is.",
       situation: "Event organizers collect plenty of audience data, questions, polls, satisfaction, and rarely know what to do with it afterwards. VersyNow already computed the facts; it told organizers almost nothing about what they meant. The ask: an AI brief that says what happened and what to change next time.",
@@ -13,7 +13,8 @@ export default {
         "Specified an agent rather than one big prompt: a bounded loop of five to nine tool calls that reads the overview, spots the weak session, drills into it, samples what attendees wrote there, and compares with the organizer's own past events.",
         "Trust, solved by design: every claim carries structured evidence, the metric, its value and its sample size, and the server re-checks each one against the database with eight rules before the brief is saved. A claim that fails is dropped. The agent must also list its own limitations.",
         "Cost, solved by design: the smallest capable model with prompt caching, plus eight independent spending ceilings and a kill switch, so no single one has to be right.",
-        "Usefulness, measured: a brief can be truthful and still useless, so a 'shallow' signal flags any brief that never used a session or the organizer's history."
+        "Usefulness, measured: a brief can be truthful and still useless, so a 'shallow' signal flags any brief that never used a session or the organizer's history.",
+        "Took VersyNow to market in Québec in parallel: positioning, pricing, and a free-trial-to-paid funnel that signed paying organizations, including an annual licence."
       ],
       changed: "No number on screen is model-generated. A brief costs about eight cents, roughly two dollars a year for an organizer running 26 events, and every figure in it can be checked against its source one scroll down.",
       judgment: "Anyone can summarize one event. Only VersyNow holds each organizer's history, so only it can say 'attendance is 12 points below your last two galas'. The moat is the history, not the summarization.",
@@ -37,8 +38,8 @@ export default {
       }
     },
     fr: {
-      title: "Un agent digne de confiance, à quelques cents",
-      where: "VersyNow, chef de produit, IA et croissance",
+      title: "Rendre l'analyse par IA digne de confiance, et économiquement viable",
+      where: "VersyNow · chef de produit, IA et croissance",
       place: "Analytique d'événements",
       note: "Dans un produit IA, le modèle est rarement la partie difficile. Décider ce qu'il n'a pas le droit de faire, oui.",
       situation: "Les organisateurs d'événements récoltent beaucoup de données sur leur public, questions, sondages, satisfaction, et savent rarement quoi en faire ensuite. VersyNow calculait déjà les faits ; il ne disait presque rien de ce qu'ils voulaient dire. La demande : un compte rendu IA qui dit ce qui s'est passé et quoi changer la prochaine fois.",
@@ -46,7 +47,8 @@ export default {
         "Spécifié un agent plutôt qu'une seule grande requête : une boucle bornée de cinq à neuf appels d'outils qui lit la vue d'ensemble, repère la séance faible, y plonge, échantillonne ce que les participants y ont écrit et compare avec les événements passés de l'organisateur.",
         "La confiance, réglée par la conception : chaque affirmation porte une preuve structurée, la mesure, sa valeur et la taille de l'échantillon, et le serveur revérifie chacune contre la base de données avec huit règles avant d'enregistrer le compte rendu. Une affirmation qui échoue est retirée. L'agent doit aussi lister ses propres limites.",
         "Le coût, réglé par la conception : le plus petit modèle capable, avec mise en cache des requêtes, plus huit plafonds de dépense indépendants et un interrupteur d'arrêt, pour qu'aucun n'ait à être le bon.",
-        "L'utilité, mesurée : un compte rendu peut être vrai et inutile, alors un signal « superficiel » marque tout compte rendu qui n'a utilisé ni une séance ni l'historique de l'organisateur."
+        "L'utilité, mesurée : un compte rendu peut être vrai et inutile, alors un signal « superficiel » marque tout compte rendu qui n'a utilisé ni une séance ni l'historique de l'organisateur.",
+        "Mis VersyNow en marché au Québec en parallèle : positionnement, tarification, et un parcours essai gratuit → payant qui a signé des organisations payantes, dont une licence annuelle."
       ],
       changed: "Aucun chiffre à l'écran ne vient du modèle. Un compte rendu coûte environ huit cents, à peu près deux dollars par année pour un organisateur qui tient 26 événements, et chaque chiffre peut être vérifié contre sa source un écran plus bas.",
       judgment: "N'importe qui peut résumer un événement. Seul VersyNow détient l'historique de chaque organisateur, donc lui seul peut dire « la présence est 12 points sous vos deux derniers galas ». L'avantage, c'est l'historique, pas le résumé.",

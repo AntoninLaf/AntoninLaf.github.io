@@ -6,13 +6,13 @@ export const text = {
     street: { caption: "Rue Principale. Every shop has numbers somewhere. Nobody has a Monday to read them." },
     problem: {
       h: "The problem",
-      note: "Dashboards everywhere. Decisions nowhere.",
-      p1: "A plumber, a physio clinic, a bakery: businesses of one to fifty people, with no marketer, little time and a small budget. Their numbers are scattered across Google, Meta and the review sites. Nobody has time to read them, and an agency costs too much.",
-      p2: "What they need is not another dashboard. It is the sentence at the end: here is what to do Monday, sized to the hours and the dollars you actually have."
+      note: "",
+      p1: "Small businesses need a complete marketing function long before they can afford a marketing team. The owner has to understand the market, articulate why customers should choose them, generate leads, create content and turn interest into revenue, all while running the business. The constraint goes beyond budget: effective marketing requires expertise, consistent execution and the ability to learn from results.",
+      p2: "That leaves a gap between ambition and capacity. Owners want to grow, but often lack both a clear strategy and someone accountable for carrying it out. Tools can help with individual tasks, yet the owner still has to connect them, provide context and decide what happens next. Acteurly addresses that gap as a full marketing AI agent: understanding the business, identifying opportunities, creating content and generating leads within its resources. Its purpose is to make an ongoing marketing capability accessible to businesses that could otherwise never sustain one."
     },
     monday: {
       h: "Monday, 7:02",
-      note: "A scripted walkthrough: same logic Aly runs, example numbers. The real Aly reads your real accounts.",
+      note: "A scripted walkthrough of the logic Aly, Acteurly's main AI, runs each week, with example numbers. The real Aly reads your real accounts.",
       pick: "Pick a business",
       hours: "Hours the owner has this week",
       run: "Run Monday",
@@ -73,7 +73,7 @@ export const text = {
     thinks: {
       h: "How Aly thinks",
       note: "The model is a replaceable part. The value is in what surrounds it.",
-      p1: "Aly is a language model wrapped in Acteurly's rules, data and knowledge. The code gathers the facts and computes every number, the model explains and recommends, and the code checks the answer. The same seven steps run for a chat question, the weekly plan and every analysis.",
+      p1: "Aly brings together business context, marketing expertise and a structured agentic workflow to turn an owner's question into an informed course of action. Every chat response, weekly plan and analysis follows the same seven-step process: code gathers the relevant facts and calculates the metrics; the language model interprets the evidence through Acteurly's expert playbooks and the business's objectives, budget and capacity; and automated checks validate the response before delivery. This division of responsibility grounds Aly's recommendations in verified inputs while allowing its guidance to adapt to each business.",
       diagram: {
         steps: ["Check and book the cost", "Context: numbers computed by code", "Retrieve 4–5 playbooks of 24", "Add the rules", "Call the model", "Check the answer in code", "Reuse from cache"],
         rule: "the model never calculates a figure",
@@ -82,9 +82,9 @@ export const text = {
     },
     role: {
       h: "My role: the human in the loop",
-      note: "I didn't write the code. I wrote what the code can't know.",
-      p1: "I was the marketing expert and the reviewer. The playbooks Aly reads before every answer come from years of agency work: what the signals mean, what to do, what to measure, and the trap. I built the rubrics for judging its recommendations and reviewed what it produced against them before a business owner saw it.",
-      p2: "The loop closes with the owners: they rate each recommendation and say whether an action worked. Each outcome is stored with the playbooks behind it and the type of business, never the business's name. With three or more businesses behind a playbook, its track record is shown to the model too.",
+      note: "",
+      p1: "I translated years of marketing and agency experience into the judgment behind Aly's recommendations. I authored the playbooks it consults before each answer: how to interpret a signal, which actions to consider, what to measure and where a recommendation can go wrong. I also developed evaluation rubrics and reviewed its outputs before they reached business owners, assessing whether the diagnosis was supported, the priorities made commercial sense and the proposed actions were realistic for the business.",
+      p2: "Owner feedback extends that review into practice. Owners rate recommendations and report whether an action worked. Each reported outcome is linked to the relevant playbook and business type, without storing the business's name in that record. Once a playbook has feedback from at least three businesses, its track record is included in the model's context, giving Aly evidence from previous applications to inform future recommendations, alongside expert guidance.",
       diagram: {
         me: "me", playbooks: "24 playbooks", rubrics: "rubrics", aly: "Aly", owner: "the owner", review: "review before it ships", rate: "rates, reports outcomes", learn: "track record per playbook",
         caption: "What I put in, what comes back, and where the data moat starts."
@@ -92,11 +92,12 @@ export const text = {
     },
     moat: {
       h: "The moat",
-      note: "Three layers a US tool can translate but cannot copy.",
+      note: "Four assets that compound with use, and that a bigger competitor cannot copy by translating its product.",
       rings: [
-        ["Expert knowledge", "Playbooks written from agency practice, with the Québec calendar and the Charter of the French language built in."],
-        ["Each company's memory", "Its history, its decisions, and what happened after each action."],
-        ["Outcomes across companies", "What actually works, by sector and region, in Québec. Later, what trains specialized marketing models."]
+        ["Proprietary marketing expertise encoded into workflows", "The playbooks capture how an experienced marketer diagnoses problems, weighs trade-offs and chooses actions, with the Québec calendar and the Charter of the French language built in. Their defensibility grows through refinement against real cases and expert evaluation."],
+        ["An outcome-linked learning loop", "Connecting recommendations to playbooks, business types and reported outcomes builds a proprietary understanding of which actions work under which conditions. It becomes more valuable as feedback grows and its reliability improves."],
+        ["Compounding business context", "As Aly accumulates a business's objectives, constraints, marketing history and results, its recommendations become more specific. Replacing Acteurly would mean rebuilding that working knowledge elsewhere."],
+        ["A repeatable system for trustworthy recommendations", "Expert rubrics, code-based calculations, automated checks and human review form a quality-control capability. The hard-to-replicate asset is the growing evaluation framework: knowing where AI advice fails and how to detect it."]
       ]
     },
     ladder: {
@@ -152,13 +153,13 @@ export const text = {
     street: { caption: "Rue Principale. Chaque commerce a des chiffres quelque part. Personne n'a un lundi pour les lire." },
     problem: {
       h: "Le problème",
-      note: "Des tableaux de bord partout. Des décisions nulle part.",
-      p1: "Un plombier, une clinique de physio, une boulangerie : des entreprises de un à cinquante employés, sans marketeur, avec peu de temps et un petit budget. Leurs chiffres sont éparpillés entre Google, Meta et les sites d'avis. Personne n'a le temps de les lire, et une agence coûte trop cher.",
-      p2: "Ce qu'il leur faut, ce n'est pas un autre tableau de bord. C'est la phrase à la fin : voici quoi faire lundi, à la mesure des heures et des dollars que vous avez vraiment."
+      note: "",
+      p1: "Les petites entreprises ont besoin d'une fonction marketing complète bien avant de pouvoir se payer une équipe marketing. Le propriétaire doit comprendre le marché, expliquer pourquoi les clients devraient le choisir, générer des leads, créer du contenu et transformer l'intérêt en revenus, tout en faisant tourner l'entreprise. La contrainte dépasse le budget : un marketing efficace exige de l'expertise, une exécution constante et la capacité d'apprendre des résultats.",
+      p2: "Il reste donc un écart entre l'ambition et la capacité. Les propriétaires veulent grandir, mais manquent souvent à la fois d'une stratégie claire et de quelqu'un de responsable de la mener. Des outils aident pour des tâches isolées, mais le propriétaire doit encore les relier, fournir le contexte et décider de la suite. Acteurly comble cet écart comme agent marketing IA complet : comprendre l'entreprise, repérer les occasions, créer du contenu et générer des leads dans la limite de ses ressources. Son but : rendre une capacité marketing continue accessible à des entreprises qui ne pourraient jamais en soutenir une autrement."
     },
     monday: {
       h: "Lundi, 7 h 02",
-      note: "Une démonstration scénarisée : la même logique qu'Aly, avec des chiffres d'exemple. Le vrai Aly lit vos vrais comptes.",
+      note: "Une démonstration scénarisée de la logique qu'Aly, l'IA principale d'Acteurly, exécute chaque semaine, avec des chiffres d'exemple. Le vrai Aly lit vos vrais comptes.",
       pick: "Choisissez un commerce",
       hours: "Heures dont le propriétaire dispose cette semaine",
       run: "Lancer le lundi",
@@ -219,7 +220,7 @@ export const text = {
     thinks: {
       h: "Comment Aly réfléchit",
       note: "Le modèle est une pièce remplaçable. La valeur est dans ce qui l'entoure.",
-      p1: "Aly est un modèle de langage enveloppé dans les règles, les données et le savoir d'Acteurly. Le code rassemble les faits et calcule chaque nombre, le modèle explique et recommande, et le code vérifie la réponse. Les mêmes sept étapes s'exécutent pour une question, le plan hebdomadaire et chaque analyse.",
+      p1: "Aly réunit le contexte de l'entreprise, l'expertise marketing et un flux agentique structuré pour transformer la question d'un propriétaire en une ligne de conduite éclairée. Chaque réponse de clavardage, plan hebdomadaire et analyse suit le même processus en sept étapes : le code rassemble les faits pertinents et calcule les mesures ; le modèle de langage interprète les preuves à travers les playbooks d'expert d'Acteurly et les objectifs, le budget et la capacité de l'entreprise ; et des vérifications automatisées valident la réponse avant la livraison. Cette répartition des responsabilités ancre les recommandations d'Aly dans des intrants vérifiés tout en laissant ses conseils s'adapter à chaque entreprise.",
       diagram: {
         steps: ["Vérifier et réserver le coût", "Contexte : chiffres calculés par le code", "Retenir 4–5 playbooks sur 24", "Ajouter les règles", "Appeler le modèle", "Vérifier la réponse en code", "Réutiliser le cache"],
         rule: "le modèle ne calcule jamais un chiffre",
@@ -228,9 +229,9 @@ export const text = {
     },
     role: {
       h: "Mon rôle : l'humain dans la boucle",
-      note: "Je n'ai pas écrit le code. J'ai écrit ce que le code ne peut pas savoir.",
-      p1: "J'ai été l'expert marketing et le réviseur. Les playbooks qu'Aly lit avant chaque réponse viennent d'années d'agence : ce que les signaux veulent dire, quoi faire, quoi mesurer, et le piège. J'ai bâti les grilles pour juger ses recommandations et révisé ce qu'il produisait selon ces grilles avant qu'un propriétaire ne le voie.",
-      p2: "La boucle se ferme avec les propriétaires : ils notent chaque recommandation et disent si une action a marché. Chaque résultat est enregistré avec les playbooks derrière et le type d'entreprise, jamais son nom. Avec trois entreprises ou plus derrière un playbook, son historique est montré au modèle aussi.",
+      note: "",
+      p1: "J'ai traduit des années d'expérience en marketing et en agence dans le jugement derrière les recommandations d'Aly. J'ai rédigé les playbooks qu'il consulte avant chaque réponse : comment interpréter un signal, quelles actions envisager, quoi mesurer et où une recommandation peut dérailler. J'ai aussi conçu les grilles d'évaluation et révisé ses réponses avant qu'elles n'atteignent les propriétaires, en vérifiant si le diagnostic était appuyé, si les priorités avaient un sens commercial et si les actions proposées étaient réalistes pour l'entreprise.",
+      p2: "Les commentaires des propriétaires prolongent cette révision dans la pratique. Ils notent les recommandations et rapportent si une action a fonctionné. Chaque résultat rapporté est lié au playbook concerné et au type d'entreprise, sans que le nom de l'entreprise soit conservé dans ce dossier. Dès qu'un playbook a reçu les commentaires d'au moins trois entreprises, son historique entre dans le contexte du modèle, ce qui donne à Aly des preuves tirées d'applications précédentes pour éclairer ses prochaines recommandations, aux côtés des conseils d'expert.",
       diagram: {
         me: "moi", playbooks: "24 playbooks", rubrics: "grilles", aly: "Aly", owner: "le propriétaire", review: "révision avant livraison", rate: "note, rapporte les résultats", learn: "historique par playbook",
         caption: "Ce que j'ai mis, ce qui revient, et où commence l'avantage par les données."
@@ -238,11 +239,12 @@ export const text = {
     },
     moat: {
       h: "L'avantage",
-      note: "Trois couches qu'un outil américain peut traduire, mais pas copier.",
+      note: "Quatre actifs qui se renforcent à l'usage, et qu'un concurrent plus gros ne peut pas copier en traduisant son produit.",
       rings: [
-        ["Le savoir d'expert", "Des playbooks tirés de la pratique d'agence, avec le calendrier québécois et la Charte de la langue française intégrés."],
-        ["La mémoire de chaque entreprise", "Son historique, ses décisions, et ce qui est arrivé après chaque action."],
-        ["Les résultats entre entreprises", "Ce qui marche vraiment, par secteur et par région, au Québec. Plus tard, ce qui entraîne des modèles marketing spécialisés."]
+        ["Une expertise marketing propriétaire encodée dans les flux", "Les playbooks capturent comment un marketeur d'expérience diagnostique les problèmes, pèse les compromis et choisit les actions, avec le calendrier québécois et la Charte de la langue française intégrés. Leur défendabilité grandit par le raffinement contre de vrais cas et l'évaluation d'experts."],
+        ["Une boucle d'apprentissage liée aux résultats", "Relier les recommandations aux playbooks, aux types d'entreprise et aux résultats rapportés bâtit une compréhension propriétaire de ce qui fonctionne dans quelles conditions. Elle prend de la valeur à mesure que les commentaires s'accumulent et gagnent en fiabilité."],
+        ["Un contexte d'entreprise qui se cumule", "À mesure qu'Aly accumule les objectifs, les contraintes, l'historique marketing et les résultats d'une entreprise, ses recommandations deviennent plus précises. Remplacer Acteurly voudrait dire rebâtir ce savoir de travail ailleurs."],
+        ["Un système répétable pour des recommandations fiables", "Les grilles d'expert, les calculs en code, les vérifications automatisées et la révision humaine forment une capacité de contrôle de la qualité. L'actif difficile à copier, c'est le cadre d'évaluation qui grandit : savoir où les conseils de l'IA échouent et comment le détecter."]
       ]
     },
     ladder: {
@@ -544,16 +546,16 @@ export function render(p, L, t) {
   return `
   <section class="sheet">
     <div class="page story world">
-      <aside class="margin"><p class="margin-note sticky">${esc(px.note)}</p></aside>
+      <aside class="margin">${px.note ? `<p class="margin-note sticky">${esc(px.note)}</p>` : ""}</aside>
       <div class="body">
         <h1>${esc(px.title)}</h1>
         <p class="place-line">${esc(px.place)}</p>
-        <p class="lede">${esc(px.lede)}</p>
+        ${px.lede.split("\n\n").map((x, i) => `<p class="${i ? "" : "lede"}">${esc(x)}</p>`).join("")}
       </div>
 
       ${inkFigure(street(), { viewBox: "0 0 1100 350", caption: tx.street.caption, cls: "wide street" })}
 
-      <aside class="margin"><p class="margin-note">${esc(tx.problem.note)}</p></aside>
+      <aside class="margin">${tx.problem.note ? `<p class="margin-note">${esc(tx.problem.note)}</p>` : ""}</aside>
       <div class="body">
         <h2>${esc(tx.problem.h)}</h2>
         <p class="lede">${esc(tx.problem.p1)}</p>
@@ -571,7 +573,7 @@ export function render(p, L, t) {
       </div>
       ${inkFigure(pipeline(tx.thinks.diagram), { viewBox: "0 0 900 240", caption: tx.thinks.diagram.caption, cls: "wide" })}
 
-      <aside class="margin"><p class="margin-note red">${esc(tx.role.note)}</p></aside>
+      <aside class="margin">${tx.role.note ? `<p class="margin-note red">${esc(tx.role.note)}</p>` : ""}</aside>
       <div class="body">
         <h2>${esc(tx.role.h)}</h2>
         <p class="lede">${esc(tx.role.p1)}</p>

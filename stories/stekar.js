@@ -4,14 +4,15 @@ export default {
   years: "2024 – 2026",
   text: {
     en: {
-      title: "Building inbound from nothing",
-      where: "STEKAR & Vitralum, Marketing Director",
+      title: "Building an inbound acquisition engine from the ground up",
+      where: "STEKAR & Vitralum · Marketing Director",
       place: "Industrial B2B, Québec and the United States",
       note: "Fewer, cheaper leads was the brief. A system that keeps producing them was the job.",
       situation: "A premium industrial materials company with almost no inbound leads. The few that came in cost too much, and sales depended on outbound effort and on luck. Architects and specifiers decide what gets installed on a building, and none of them were finding us.",
       did: [
         "Built the inbound system from zero: conversion paths on the website, a content strategy, paid campaigns, and tradeshows chosen for who walks the floor rather than for the size of the hall.",
         "Opened an online Lunch & Learn booking flow for architects and specifiers, so the sales conversation starts with an education session they asked for.",
+        "Grew website traffic about 1,000% with AI-assisted SEO and content, earning visibility in AI search answers.",
         "Measured brand recognition two ways, branded search and a survey, so the result couldn't be argued with."
       ],
       changed: "Three to four qualified inquiries a week, by phone and through the website. Cost per lead down 15 percent. Brand recognition up 57 percent year over year. The Lunch & Learn flow brought in leads from the United States and opened that market.",
@@ -24,7 +25,8 @@ export default {
       tallies: [
         { value: "3–4", label: "qualified inquiries a week" },
         { value: "−15%", label: "cost per lead" },
-        { value: "+57%", label: "brand recognition, year over year" }
+        { value: "+57%", label: "brand recognition, year over year" },
+        { value: "≈1,000%", label: "website traffic growth" }
       ],
       diagram: {
         channels: ["Website", "Content", "Paid ads", "Tradeshows", "Lunch & Learn"],
@@ -34,14 +36,15 @@ export default {
       }
     },
     fr: {
-      title: "Bâtir l'inbound à partir de rien",
-      where: "STEKAR & Vitralum, directeur marketing",
+      title: "Bâtir un moteur d'acquisition entrante à partir de zéro",
+      where: "STEKAR & Vitralum · directeur marketing",
       place: "B2B industriel, Québec et États-Unis",
       note: "Le mandat : des leads moins chers. Le vrai travail : un système qui continue d'en produire.",
       situation: "Un fabricant de matériaux industriels haut de gamme, presque sans leads entrants. Les rares qui arrivaient coûtaient trop cher, et les ventes dépendaient de la prospection et de la chance. Les architectes et les prescripteurs décident de ce qui s'installe sur un bâtiment, et aucun d'eux ne nous trouvait.",
       did: [
         "Bâti le système inbound à partir de zéro : parcours de conversion sur le site, stratégie de contenu, campagnes payantes et salons choisis pour qui arpente les allées plutôt que pour la taille de la salle.",
         "Ouvert une réservation en ligne de Lunch & Learn pour architectes et prescripteurs : la conversation de vente commence par une séance de formation qu'ils ont demandée.",
+        "Fait croître le trafic du site d'environ 1 000 % grâce au SEO et au contenu assistés par l'IA, avec une visibilité dans les réponses des moteurs d'IA.",
         "Mesuré la notoriété de deux façons, recherches de marque et sondage, pour que le résultat soit incontestable."
       ],
       changed: "Trois à quatre demandes qualifiées par semaine, par téléphone et par le site. Coût par lead en baisse de 15 pour cent. Notoriété en hausse de 57 pour cent d'une année à l'autre. Les Lunch & Learn ont amené des leads des États-Unis et ouvert ce marché.",
@@ -54,7 +57,8 @@ export default {
       tallies: [
         { value: "3–4", label: "demandes qualifiées par semaine" },
         { value: "−15 %", label: "coût par lead" },
-        { value: "+57 %", label: "notoriété, d'une année à l'autre" }
+        { value: "+57 %", label: "notoriété, d'une année à l'autre" },
+        { value: "≈1 000 %", label: "de croissance du trafic web" }
       ],
       diagram: {
         channels: ["Site web", "Contenu", "Publicité", "Salons", "Lunch & Learn"],
