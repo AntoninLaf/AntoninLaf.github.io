@@ -3,6 +3,7 @@ import { renderHome, renderAbout, renderProject, renderStory, renderNotFound } f
 import { findProject } from "../projects/index.js";
 import { findStory } from "../stories/index.js";
 import { armInk } from "./ink.js";
+import { renderAsk } from "./ask.js";
 
 const host = document.getElementById("sheet-host");
 const backLink = document.getElementById("back-link");
@@ -79,10 +80,7 @@ function paintChrome() {
   langBtn.setAttribute("aria-label", other === "fr" ? "Passer au français" : "Switch to English");
   askTab.textContent = t("ask.tab");
   document.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = t(el.dataset.i18n); });
-  askBody.innerHTML = `
-    <p class="margin-note">${t("ask.setup")}</p>
-    <input class="ask-input" type="text" placeholder="${t("ask.placeholder")}" disabled>
-    <p style="margin-top:18px"><a class="btn" href="mailto:${t("ask.email")}">${t("ask.email")}</a></p>`;
+  renderAsk(askBody);
 }
 
 langBtn.addEventListener("click", () => {
@@ -94,6 +92,7 @@ langBtn.addEventListener("click", () => {
 askTab.addEventListener("click", () => {
   askPanel.classList.add("open");
   askPanel.setAttribute("aria-hidden", "false");
+  setTimeout(() => { const i = document.getElementById("ask-input"); if (i) i.focus(); }, 350);
 });
 askClose.addEventListener("click", () => {
   askPanel.classList.remove("open");

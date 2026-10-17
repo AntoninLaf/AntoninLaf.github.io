@@ -41,6 +41,9 @@ export const strings = {
     "ask.placeholder": "e.g. What did he do at STEKAR?",
     "ask.setup": "The assistant is being set up. It will answer only from what I've written in this notebook, and it will tell you when it doesn't know. Until then, write to me directly.",
     "ask.email": "Antonin.laferriere-mailfait@mail.mcgill.ca",
+    "ask.intro": "Ask anything about my work. The answers come only from what's written in this notebook; when it isn't here, I'll say so.",
+    "ask.send": "Ask",
+    "ask.foot": "An AI assistant, answering from approved notes. For anything else:",
     "footer.made": "Drawn and written by hand. Montréal."
   },
   fr: {
@@ -84,6 +87,9 @@ export const strings = {
     "ask.placeholder": "ex. Qu'a-t-il fait chez STEKAR ?",
     "ask.setup": "L'assistant est en cours d'installation. Il répondra seulement à partir de ce que j'ai écrit dans ce carnet, et il dira quand il ne sait pas. D'ici là, écrivez-moi directement.",
     "ask.email": "Antonin.laferriere-mailfait@mail.mcgill.ca",
+    "ask.intro": "Posez n'importe quelle question sur mon travail. Les réponses viennent seulement de ce qui est écrit dans ce carnet ; quand ce n'est pas ici, je le dis.",
+    "ask.send": "Demander",
+    "ask.foot": "Un assistant IA qui répond à partir de notes approuvées. Pour tout le reste :",
     "footer.made": "Dessiné et écrit à la main. Montréal."
   }
 };
