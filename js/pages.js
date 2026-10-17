@@ -145,6 +145,7 @@ export function renderStory(s) {
       <aside class="margin"></aside>
       <div class="body">
         <h2 class="h-quiet">${esc(t("story.questions"))}</h2>
+        <p class="questions-hint">${esc(t("story.questions.hint"))}</p>
         <ul class="questions">${tx.questions.map((q) => `<li>${esc(q)}</li>`).join("")}</ul>
       </div>
 

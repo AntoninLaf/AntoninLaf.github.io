@@ -5,6 +5,8 @@ import { esc } from "./ink.js";
 const ENDPOINT = "https://portfolio-chat.expworkshopz.workers.dev";
 const history = [];   // per page load only; nothing is stored
 let busy = false;
+let currentBody = null;
+const FEATHER = '<svg class="writing" viewBox="0 0 48 48" aria-hidden="true"><path class="vane" d="M40 6 C31 7 19 17 14 34 C23 33 33 24 40 6 Z"/><path d="M40 6 C30 14 20 26 11 42"/></svg>';
 
 const starters = {
   en: ["What is he best at?", "What did he do at STEKAR?", "How does the VersyNow agent avoid inventing numbers?", "Is he available, and where?"],
@@ -18,6 +20,7 @@ function errorText(code) {
 }
 
 export function renderAsk(body) {
+  currentBody = body;
   const L = lang();
   body.innerHTML = `
     <p class="margin-note ask-intro">${esc(t("ask.intro"))}</p>
@@ -25,7 +28,7 @@ export function renderAsk(body) {
     <div class="ask-starters" id="ask-starters">${starters[L].map((s) => `<button type="button" class="ask-starter">${esc(s)}</button>`).join("")}</div>
     <form class="ask-form" id="ask-form">
       <input class="ask-input" id="ask-input" type="text" maxlength="600" autocomplete="off" placeholder="${esc(t("ask.placeholder"))}" aria-label="${esc(t("ask.title"))}">
-      <button class="btn" type="submit">${esc(t("ask.send"))}</button>
+      <button class="ask-send" type="submit">${esc(t("ask.send"))}</button>
     </form>
     <p class="ask-foot">${esc(t("ask.foot"))} <a href="mailto:${esc(t("ask.email"))}">${esc(t("ask.email"))}</a></p>`;
   const log = body.querySelector("#ask-log");
@@ -58,8 +61,9 @@ async function ask(body, raw) {
   body.querySelector("#ask-starters").hidden = true;
   history.push({ role: "user", content: q });
   appendTurn(log, "user", q);
-  const pending = appendTurn(log, "assistant", "…");
+  const pending = appendTurn(log, "assistant", "");
   pending.classList.add("thinking");
+  pending.innerHTML = `${FEATHER}<span>${esc(t("ask.thinking"))}</span>`;
   try {
     const r = await fetch(ENDPOINT, {
       method: "POST",
@@ -69,7 +73,8 @@ async function ask(body, raw) {
     const data = await r.json().catch(() => ({}));
     if (!r.ok || !data.answer) throw new Error(data.error || "upstream");
     pending.classList.remove("thinking");
-    pending.textContent = data.answer;
+    pending.textContent = "";
+    typeOut(pending, data.answer);
     history.push({ role: "assistant", content: data.answer });
   } catch (err) {
     pending.classList.remove("thinking");
@@ -80,4 +85,23 @@ async function ask(body, raw) {
     busy = false;
     log.scrollTop = log.scrollHeight;
   }
+}
+
+// Ask from anywhere on the page (the "questions I'm happy to take" lists).
+export function askFromPage(q) {
+  if (!currentBody) return;
+  ask(currentBody, q);
+}
+
+// Ink the answer in, a few words at a time.
+function typeOut(el, text) {
+  const words = text.split(/(\s+)/);
+  let i = 0;
+  const step = () => {
+    el.textContent += words.slice(i, i + 3).join("");
+    i += 3;
+    el.parentElement.scrollTop = el.parentElement.scrollHeight;
+    if (i < words.length) setTimeout(step, 28);
+  };
+  step();
 }

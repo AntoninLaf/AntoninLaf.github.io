@@ -527,6 +527,7 @@ export function render(p, L, t) {
       <aside class="margin"></aside>
       <div class="body">
         <h2 class="h-quiet">${esc(tx.questions.h)}</h2>
+        <p class="questions-hint">${esc(t("story.questions.hint"))}</p>
         <ul class="questions">${tx.questions.items.map((q) => `<li>${esc(q)}</li>`).join("")}</ul>
         <nav class="turn"><a class="btn quiet" href="#/">${esc(t("nav.back"))}</a></nav>
       </div>

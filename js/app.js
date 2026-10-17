@@ -3,7 +3,7 @@ import { renderHome, renderAbout, renderProject, renderStory, renderNotFound } f
 import { findProject } from "../projects/index.js";
 import { findStory } from "../stories/index.js";
 import { armInk } from "./ink.js";
-import { renderAsk } from "./ask.js";
+import { renderAsk, askFromPage } from "./ask.js";
 
 const host = document.getElementById("sheet-host");
 const backLink = document.getElementById("back-link");
@@ -78,7 +78,6 @@ function paintChrome() {
   const other = lang() === "en" ? "fr" : "en";
   langBtn.innerHTML = lang() === "en" ? `<b>EN</b> / FR` : `EN / <b>FR</b>`;
   langBtn.setAttribute("aria-label", other === "fr" ? "Passer au français" : "Switch to English");
-  askTab.textContent = t("ask.tab");
   document.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = t(el.dataset.i18n); });
   renderAsk(askBody);
 }
@@ -89,16 +88,47 @@ langBtn.addEventListener("click", () => {
   render(true);
 });
 
-askTab.addEventListener("click", () => {
+const askVeil = document.getElementById("ask-veil");
+const callout = document.getElementById("quill-callout");
+function openAsk() {
   askPanel.classList.add("open");
   askPanel.setAttribute("aria-hidden", "false");
+  askVeil.hidden = false;
+  callout.hidden = true;
   setTimeout(() => { const i = document.getElementById("ask-input"); if (i) i.focus(); }, 350);
-});
-askClose.addEventListener("click", () => {
+}
+function closeAsk() {
   askPanel.classList.remove("open");
   askPanel.setAttribute("aria-hidden", "true");
+  askVeil.hidden = true;
+}
+askTab.addEventListener("click", openAsk);
+askClose.addEventListener("click", closeAsk);
+askVeil.addEventListener("click", closeAsk);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeAsk();
+  const typing = /^(INPUT|TEXTAREA)$/.test(document.activeElement && document.activeElement.tagName);
+  if (e.key === "?" && !typing && !askPanel.classList.contains("open")) { e.preventDefault(); openAsk(); }
 });
-document.addEventListener("keydown", (e) => { if (e.key === "Escape") askClose.click(); });
+// Any "question I'm happy to take" asks the notebook.
+document.addEventListener("click", (e) => {
+  const li = e.target.closest(".questions li");
+  if (!li) return;
+  openAsk();
+  setTimeout(() => askFromPage(li.textContent.trim()), 420);
+});
+// A one-time handwritten nudge toward the quill.
+let nudged = false;
+try { nudged = sessionStorage.getItem("nudged") === "1"; } catch (_) {}
+if (!nudged) {
+  setTimeout(() => {
+    if (askPanel.classList.contains("open")) return;
+    callout.textContent = t("ask.callout");
+    callout.hidden = false;
+    try { sessionStorage.setItem("nudged", "1"); } catch (_) {}
+    setTimeout(() => { callout.hidden = true; }, 9000);
+  }, introPlayed ? 2500 : 7000);
+}
 
 window.addEventListener("hashchange", () => render(false));
 narrow.addEventListener("change", () => { if (route().name === "home") render(true); });

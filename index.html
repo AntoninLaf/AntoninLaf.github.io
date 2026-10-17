@@ -38,10 +38,26 @@
 
   <main id="sheet-host"></main>
 
-  <button class="ask-tab" id="ask-tab" type="button"></button>
-  <aside class="ask-panel" id="ask-panel" aria-hidden="true">
+  <div class="quill-wrap" id="quill-wrap">
+    <span class="quill-callout" id="quill-callout" hidden></span>
+    <button class="quill" id="ask-tab" type="button">
+      <svg class="quill-icon" viewBox="0 0 48 48" aria-hidden="true">
+        <path class="vane" d="M40 6 C31 7 19 17 14 34 C23 33 33 24 40 6 Z"/>
+        <path class="spine" d="M40 6 C30 14 20 26 11 42"/>
+        <path class="barb" d="M24 22 C27 21 30 21 33 22 M19 29 C23 27 27 27 31 27 M28 16 C31 15 34 15 37 16"/>
+        <path class="nib" d="M11 42 L8 45"/>
+      </svg>
+      <span class="quill-label" data-i18n="ask.tab"></span>
+    </button>
+  </div>
+  <div class="ask-veil" id="ask-veil" hidden></div>
+  <aside class="ask-panel" id="ask-panel" aria-hidden="true" role="dialog" aria-labelledby="ask-title">
     <div class="ask-head">
-      <span class="ask-title" data-i18n="ask.title"></span>
+      <svg class="ask-head-icon" viewBox="0 0 48 48" aria-hidden="true">
+        <path class="vane" d="M40 6 C31 7 19 17 14 34 C23 33 33 24 40 6 Z"/>
+        <path class="spine" d="M40 6 C30 14 20 26 11 42"/>
+      </svg>
+      <span class="ask-title" id="ask-title" data-i18n="ask.title"></span>
       <button class="ask-close" id="ask-close" type="button" aria-label="Close">×</button>
     </div>
     <div class="ask-body" id="ask-body"></div>

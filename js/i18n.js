@@ -26,6 +26,7 @@ export const strings = {
     "story.changed.note": "Measured, not felt.",
     "story.judgment.note": "What I'd tell a client.",
     "story.questions": "Questions I'm happy to take",
+    "story.questions.hint": "Click one: the notebook answers it, right here.",
     "story.next": "Next story",
     "story.index": "Back to the stories",
         "about.resume": "Download the resume",
@@ -43,6 +44,8 @@ export const strings = {
     "ask.email": "Antonin.laferriere-mailfait@mail.mcgill.ca",
     "ask.intro": "Ask anything about my work. The answers come only from what's written in this notebook; when it isn't here, I'll say so.",
     "ask.send": "Ask",
+    "ask.thinking": "writing…",
+    "ask.callout": "Questions? Ask the notebook. It answers from my notes, and says when it doesn't know.",
     "ask.foot": "An AI assistant, answering from approved notes. For anything else:",
     "footer.made": "Drawn and written by hand. Montréal."
   },
@@ -72,6 +75,7 @@ export const strings = {
     "story.changed.note": "Mesuré, pas ressenti.",
     "story.judgment.note": "Ce que je dirais à un client.",
     "story.questions": "Les questions que je prends volontiers",
+    "story.questions.hint": "Cliquez-en une : le carnet y répond, ici même.",
     "story.next": "Histoire suivante",
     "story.index": "Retour aux histoires",
         "about.resume": "Télécharger le CV",
@@ -89,6 +93,8 @@ export const strings = {
     "ask.email": "Antonin.laferriere-mailfait@mail.mcgill.ca",
     "ask.intro": "Posez n'importe quelle question sur mon travail. Les réponses viennent seulement de ce qui est écrit dans ce carnet ; quand ce n'est pas ici, je le dis.",
     "ask.send": "Demander",
+    "ask.thinking": "j'écris…",
+    "ask.callout": "Des questions ? Demandez au carnet. Il répond à partir de mes notes, et dit quand il ne sait pas.",
     "ask.foot": "Un assistant IA qui répond à partir de notes approuvées. Pour tout le reste :",
     "footer.made": "Dessiné et écrit à la main. Montréal."
   }
