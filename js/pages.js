@@ -24,8 +24,8 @@ export function renderHome({ intro, stacked }) {
 // The career route: a pencil road with a stop per chapter.
 function renderCareer() {
   const L = lang();
-  const W = 900, n = career.length;
-  const x0 = 60, x1 = W - 60;
+  const W = 1000, n = career.length;
+  const x0 = 110, x1 = W - 110;   // room for the end labels inside the viewBox
   const step = (x1 - x0) / (n - 1);
   const road = `M${x0} 150 C${x0 + step * 0.6} 120 ${x0 + step * 1.2} 170 ${x0 + step * 2} 150 S${x0 + step * 3.4} 150 ${x0 + step * 4} 150 S${x0 + step * 5.6} 120 ${x0 + step * 6} 150`;
   const stops = career.map((c, i) => {

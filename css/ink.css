@@ -88,7 +88,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .lang:hover { color: var(--ink); }
 
 /* ---------- sheets (pages) ---------- */
-#sheet-host { position: relative; z-index: 1; min-height: 100vh; }
+#sheet-host { position: relative; z-index: 1; min-height: 100vh; overflow-x: clip; }  /* the page-turn shifts sheets sideways; clip keeps phones from widening the viewport (clip, not hidden, so sticky notes keep working) */
 .sheet {
   position: relative;
   min-height: 100vh;
@@ -299,13 +299,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border-left: 1.5px solid var(--ink);
   box-shadow: -10px 0 30px rgba(31,36,54,.14);
   transform: translateX(104%);
-  transition: transform .4s var(--ease-ink);
+  visibility: hidden;   /* off-canvas and hidden, so a phone never scrolls sideways to find it */
+  transition: transform .4s var(--ease-ink), visibility 0s .4s;
   z-index: 7;
   padding: 22px 28px 20px;
   display: flex; flex-direction: column; gap: 14px;
   overflow: hidden;
 }
-.ask-panel.open { transform: none; }
+.ask-panel.open { transform: none; visibility: visible; transition-delay: 0s; }
 .ask-head { display: flex; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 1.5px solid var(--ink); }
 .ask-head-icon { width: 30px; height: 30px; flex: none; }
 .ask-title { font-family: var(--hand); font-size: 24px; flex: 1; }
@@ -368,6 +369,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .margin-note { transform: none; }
   .place .note { display: none; }
   .map-wrap.stacked { max-width: 420px; }
+  /* the career route stays legible by scrolling sideways instead of shrinking */
+  .career { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .career svg { min-width: 820px; }
+  .career figcaption { position: sticky; left: 0; }
   .map-wrap.stacked .map text { font-size: 22px; }
   .map-wrap.stacked .map text.small { font-size: 18px; }
 }
