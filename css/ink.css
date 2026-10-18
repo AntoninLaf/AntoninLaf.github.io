@@ -653,3 +653,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .background { margin: 8px 0 0; }
 .background dt { font-family: var(--hand); font-weight: 400; font-size: 17px; color: var(--pencil); margin-top: 14px; }
 .background dd { margin: 2px 0 0; }
+
+.ruled.lifecycle td, .ruled.lifecycle th { width: 33%; white-space: normal; font-size: 16px; }
+.ruled.lifecycle td:first-child { font-weight: 400; }

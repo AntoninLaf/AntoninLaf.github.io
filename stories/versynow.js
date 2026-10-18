@@ -14,7 +14,8 @@ export default {
         "Trust, solved by design: every claim carries structured evidence, the metric, its value and its sample size, and the server re-checks each one against the database with eight rules before the brief is saved. A claim that fails is dropped. The agent must also list its own limitations.",
         "Cost, solved by design: the smallest capable model with prompt caching, plus eight independent spending ceilings and a kill switch, so no single one has to be right.",
         "Usefulness, measured: a brief can be truthful and still useless, so a 'shallow' signal flags any brief that never used a session or the organizer's history.",
-        "Took VersyNow to market in Québec in parallel: positioning, pricing, and a free-trial-to-paid funnel that signed paying organizations, including an annual licence."
+        "Took VersyNow to market in Québec in parallel: positioning around the event report rather than the live tools, pricing, and a free-trial-to-paid funnel that signed paying organizations, including an annual licence.",
+        "Chose recurrence over size as the customer profile, because the next event is where the previous analysis becomes visible, and redesigned the trial so a customer runs consecutive similar events inside it. Trial conversion improved; I state the direction, not a verified figure."
       ],
       changed: "No number on screen is model-generated. A brief costs about eight cents, roughly two dollars a year for an organizer running 26 events, and every figure in it can be checked against its source one scroll down.",
       judgment: "Anyone can summarize one event. Only VersyNow holds each organizer's history, so only it can say 'attendance is 12 points below your last two galas'. The moat is the history, not the summarization.",
@@ -48,7 +49,8 @@ export default {
         "La confiance, réglée par la conception : chaque affirmation porte une preuve structurée, la mesure, sa valeur et la taille de l'échantillon, et le serveur revérifie chacune contre la base de données avec huit règles avant d'enregistrer le compte rendu. Une affirmation qui échoue est retirée. L'agent doit aussi lister ses propres limites.",
         "Le coût, réglé par la conception : le plus petit modèle capable, avec mise en cache des requêtes, plus huit plafonds de dépense indépendants et un interrupteur d'arrêt, pour qu'aucun n'ait à être le bon.",
         "L'utilité, mesurée : un compte rendu peut être vrai et inutile, alors un signal « superficiel » marque tout compte rendu qui n'a utilisé ni une séance ni l'historique de l'organisateur.",
-        "Mis VersyNow en marché au Québec en parallèle : positionnement, tarification, et un parcours essai gratuit → payant qui a signé des organisations payantes, dont une licence annuelle."
+        "Mis VersyNow en marché au Québec en parallèle : positionnement autour du rapport d'événement plutôt que des outils en direct, tarification, et un parcours essai gratuit → payant qui a signé des organisations payantes, dont une licence annuelle.",
+        "Choisi la récurrence plutôt que la taille comme profil client, parce que le prochain événement est là où l'analyse précédente devient visible, et redessiné l'essai pour qu'un client tienne des événements similaires consécutifs pendant l'essai. La conversion de l'essai s'est améliorée ; je donne la direction, pas un chiffre vérifié."
       ],
       changed: "Aucun chiffre à l'écran ne vient du modèle. Un compte rendu coûte environ huit cents, à peu près deux dollars par année pour un organisateur qui tient 26 événements, et chaque chiffre peut être vérifié contre sa source un écran plus bas.",
       judgment: "N'importe qui peut résumer un événement. Seul VersyNow détient l'historique de chaque organisateur, donc lui seul peut dire « la présence est 12 points sous vos deux derniers galas ». L'avantage, c'est l'historique, pas le résumé.",

@@ -11,6 +11,49 @@ export const text = {
       p2: "So an organizer read 'average overrun: 23 minutes' and 'satisfaction: 3.8' and had to work out alone that the gala ran long because the Q&A had no hard stop, and that satisfaction dipped in the session where the room went quiet for fourteen minutes. The brief is the interpretation layer that was missing.",
       diagram: { facts: ["averageOverrunMinutes: 23", "satisfaction.average: 3.8", "questions: 61", "attendance: 44"], q: "so what?", caption: "What the organizer had. What the organizer needed." }
     },
+    market: {
+      discovery: {
+        h: "What prospects said",
+        note: "A poll is useful during a session. It is more useful after.",
+        p1: "Prospects kept asking the same things: who was at the event and why, which themes and concerns kept coming back, what the audience actually expressed, and how the next event could be better. Engagement was a means. Understanding the audience and improving from one event to the next was the value they were buying.",
+        p2: "That changed the product story and the demo. Q&A, polls and word clouds stayed, but as inputs into a report an organizer can act on. A demo that stops at 'an attendee can submit a response' now stops too early; it has to show the relationship between interaction, interpretation and the next decision. Interest and sales grew substantially after this focus. I don't attach a percentage to that: the direction is what I can stand behind."
+      },
+      recurrence: {
+        h: "Recurrence over size",
+        note: "The next event is where the previous analysis becomes visible.",
+        p1: "VersyNow prioritizes organizations that run events repeatedly: professional groups, professional bodies, event agencies, communities. A large annual conference produces questions, leads and a report; a repeated event lets the organizer compare audiences, track themes and act on recommendations. The advantage is not only that they can be billed again. Their workflow gives the product's analytical value repeated chances to matter.",
+        p2: "One-off conferences still have a use case, so a one-event path exists for them, priced for their cadence. This is a choice about product fit, not a rejection of large events."
+      },
+      lifecycle: {
+        h: "Before, during, after",
+        note: "What was live when this page was written. For a precise 'is this live today', ask me.",
+        head: ["Before the event", "During", "After"],
+        rows: [
+          ["Pre-event surveys: expectations, questions, optional contact details", "Q&A, polls, quizzes, word clouds, live analytics", "An automatic report about ten minutes after the event closes"],
+          ["Onboarding by event type: panel, conference, town hall, custom", "Prize draws, sponsor lead capture, networking", "Theme clustering, a minute-by-minute engagement timeline"],
+          ["Branding and event configuration", "Finalist voting with table codes, login-to-participate when wanted", "Pre/post comparison, recognition of contacts across events, trends, event comparison, recommendations"]
+        ]
+      },
+      trial: {
+        h: "The trial, designed around the mechanism",
+        note: "If the value shows up on the second event, the trial has to get people to a second event.",
+        p1: "The original design was a 28-day trial without a card, then a free tier: organizers needed time between events to analyze, report and plan. I later refined it toward letting a customer run consecutive similar events inside the trial, because the comparative analytics are what make the product worth keeping, and a single isolated report cannot show that. Trial conversion improved after the change; the comparison isn't defined tightly enough to publish a verified uplift, so the page states the mechanism and the direction.",
+        head: ["Plan, as designed", "Terms (historical, currency unspecified)"],
+        rows: [
+          ["Free tier", "after the trial, with limits"],
+          ["Presenter", "12.99 a month"],
+          ["Organization", "29.99 a month, accounts shared within the organization"],
+          ["Large organization", "custom"],
+          ["One event", "a calculator positioned about 20% below subscription pricing, for infrequent events"]
+        ]
+      },
+      references: {
+        h: "References and what stays private",
+        note: "Three names approved. Counts and revenue are not published.",
+        p1: "Obvia, an AI research organization, holds an annual licence. McGill Desautels uses VersyNow for its MMA program events. CTIA used it for event analytics. Those are the references I can name; no contract values, satisfaction claims or quantified outcomes come with them.",
+        p2: "The competitors tracked are Slido, Mentimeter, Pigeonhole Live and Wooclap. VersyNow's chosen distinction is the complete before, during and after experience, with the emphasis on understanding the audience, collecting leads and improving over time, and on being cheaper, simpler and closer to the customer. That is the focus; I don't claim the competitors lack equivalent features."
+      }
+    },
     decision: {
       h: "The decision: an agent, not one big prompt",
       note: "A single call must decide what to fetch before it knows what it is looking for.",
@@ -158,6 +201,49 @@ export const text = {
       p1: "VersyNow mesurait déjà beaucoup après un événement : la présence, la satisfaction, l'engagement, le dépassement de chaque séance, les questions posées et votées, les opinions qui bougent. Deux couches d'analytique déterministes calculaient tout ça, et s'arrêtaient volontairement aux faits.",
       p2: "Un organisateur lisait donc « dépassement moyen : 23 minutes » et « satisfaction : 3,8 », et devait comprendre seul que le gala s'était étiré parce que la période de questions n'avait pas de fin ferme, et que la satisfaction avait chuté dans la séance où la salle s'est tue pendant quatorze minutes. Le compte rendu est la couche d'interprétation qui manquait.",
       diagram: { facts: ["averageOverrunMinutes: 23", "satisfaction.average: 3.8", "questions: 61", "attendance: 44"], q: "et alors ?", caption: "Ce que l'organisateur avait. Ce dont il avait besoin." }
+    },
+    market: {
+      discovery: {
+        h: "Ce que les prospects ont dit",
+        note: "Un sondage est utile pendant une séance. Il l'est encore plus après.",
+        p1: "Les prospects demandaient toujours les mêmes choses : qui était à l'événement et pourquoi, quels thèmes et préoccupations revenaient, ce que le public exprimait vraiment, et comment le prochain événement pouvait être meilleur. L'engagement était un moyen. Comprendre le public et s'améliorer d'un événement à l'autre, c'était la valeur qu'ils achetaient.",
+        p2: "Cela a changé l'histoire du produit et la démo. Q&A, sondages et nuages de mots sont restés, mais comme intrants d'un rapport sur lequel un organisateur peut agir. Une démo qui s'arrête à « un participant peut soumettre une réponse » s'arrête désormais trop tôt ; elle doit montrer la relation entre l'interaction, l'interprétation et la prochaine décision. L'intérêt et les ventes ont augmenté substantiellement après ce recentrage. Je n'y rattache pas de pourcentage : la direction est ce que je peux défendre."
+      },
+      recurrence: {
+        h: "La récurrence avant la taille",
+        note: "Le prochain événement, c'est là où l'analyse précédente devient visible.",
+        p1: "VersyNow priorise les organisations qui tiennent des événements à répétition : groupes professionnels, ordres, agences événementielles, communautés. Un grand congrès annuel produit des questions, des contacts et un rapport ; un événement répété permet à l'organisateur de comparer les publics, de suivre les thèmes et d'agir sur les recommandations. L'avantage n'est pas seulement qu'on peut les facturer de nouveau : leur façon de travailler donne à la valeur analytique du produit des occasions répétées de compter.",
+        p2: "Les congrès ponctuels gardent un cas d'usage ; un parcours « un événement » existe pour eux, tarifé selon leur cadence. C'est un choix d'adéquation produit, pas un rejet des grands événements."
+      },
+      lifecycle: {
+        h: "Avant, pendant, après",
+        note: "Ce qui était en ligne quand cette page a été écrite. Pour un « est-ce en ligne aujourd'hui » précis, demandez-moi.",
+        head: ["Avant l'événement", "Pendant", "Après"],
+        rows: [
+          ["Sondages pré-événement : attentes, questions, coordonnées facultatives", "Q&A, sondages, quiz, nuages de mots, analytique en direct", "Un rapport automatique environ dix minutes après la fermeture"],
+          ["Accueil par type d'événement : panel, conférence, assemblée, sur mesure", "Tirages, captation de contacts pour les commanditaires, réseautage", "Regroupement thématique, courbe d'engagement minute par minute"],
+          ["Image de marque et configuration de l'événement", "Vote des finalistes avec codes de table, connexion obligatoire au besoin", "Comparaison pré/post, reconnaissance des contacts entre événements, tendances, comparaison d'événements, recommandations"]
+        ]
+      },
+      trial: {
+        h: "L'essai, conçu autour du mécanisme",
+        note: "Si la valeur apparaît au deuxième événement, l'essai doit amener les gens à un deuxième événement.",
+        p1: "La conception d'origine : un essai de 28 jours sans carte, puis un palier gratuit, parce que les organisateurs ont besoin de temps entre les événements pour analyser, rapporter et planifier. Je l'ai ensuite raffiné pour laisser un client tenir des événements similaires consécutifs pendant l'essai, parce que l'analytique comparative est ce qui rend le produit digne d'être gardé, et qu'un rapport isolé ne peut pas le montrer. La conversion de l'essai s'est améliorée après ce changement ; la comparaison n'est pas assez définie pour publier un gain vérifié, alors la page donne le mécanisme et la direction.",
+        head: ["Forfait, tel que conçu", "Conditions (historiques, devise non précisée)"],
+        rows: [
+          ["Palier gratuit", "après l'essai, avec des limites"],
+          ["Présentateur", "12,99 par mois"],
+          ["Organisation", "29,99 par mois, comptes partagés dans l'organisation"],
+          ["Grande organisation", "sur mesure"],
+          ["Un événement", "un calculateur positionné environ 20 % sous l'abonnement, pour les événements peu fréquents"]
+        ]
+      },
+      references: {
+        h: "Références et ce qui reste privé",
+        note: "Trois noms approuvés. Les nombres de clients et les revenus ne sont pas publiés.",
+        p1: "Obvia, un organisme de recherche en IA, détient une licence annuelle. McGill Desautels utilise VersyNow pour les événements de son programme MMA. CTIA l'a utilisé pour l'analytique d'événement. Ce sont les références que je peux nommer ; aucune valeur de contrat, aucune affirmation de satisfaction ni résultat chiffré ne les accompagne.",
+        p2: "Les concurrents suivis sont Slido, Mentimeter, Pigeonhole Live et Wooclap. La distinction choisie par VersyNow : l'expérience complète avant, pendant et après, avec l'accent sur la compréhension du public, la collecte de contacts et l'amélioration dans le temps, et sur le fait d'être moins cher, plus simple et plus proche du client. C'est le recentrage ; je ne prétends pas que les concurrents manquent de fonctions équivalentes."
+      }
     },
     decision: {
       h: "La décision : un agent, pas une grande requête",
@@ -467,6 +553,34 @@ export function render(p, L, t) {
         <p>${esc(tx.situation.p2)}</p>
       </div>
       ${inkFigure(soWhat(tx.situation.diagram), { viewBox: "0 0 900 220", caption: tx.situation.diagram.caption, cls: "wide" })}
+
+      <aside class="margin"><p class="margin-note red">${esc(tx.market.discovery.note)}</p></aside>
+      <div class="body">
+        <h2>${esc(tx.market.discovery.h)}</h2>
+        <p class="lede">${esc(tx.market.discovery.p1)}</p>
+        <p>${esc(tx.market.discovery.p2)}</p>
+      </div>
+      <aside class="margin"><p class="margin-note">${esc(tx.market.recurrence.note)}</p></aside>
+      <div class="body">
+        <h2>${esc(tx.market.recurrence.h)}</h2>
+        <p class="lede">${esc(tx.market.recurrence.p1)}</p>
+        <p>${esc(tx.market.recurrence.p2)}</p>
+      </div>
+      <aside class="margin"><p class="margin-note">${esc(tx.market.lifecycle.note)}</p></aside>
+      <div class="body"><h2>${esc(tx.market.lifecycle.h)}</h2></div>
+      <div class="wide">${table(tx.market.lifecycle.head, tx.market.lifecycle.rows, "lifecycle")}</div>
+      <aside class="margin"><p class="margin-note">${esc(tx.market.trial.note)}</p></aside>
+      <div class="body">
+        <h2>${esc(tx.market.trial.h)}</h2>
+        <p class="lede">${esc(tx.market.trial.p1)}</p>
+        ${table(tx.market.trial.head, tx.market.trial.rows)}
+      </div>
+      <aside class="margin"><p class="margin-note">${esc(tx.market.references.note)}</p></aside>
+      <div class="body">
+        <h2>${esc(tx.market.references.h)}</h2>
+        <p class="lede">${esc(tx.market.references.p1)}</p>
+        <p>${esc(tx.market.references.p2)}</p>
+      </div>
 
       <aside class="margin"><p class="margin-note red">${esc(tx.decision.note)}</p></aside>
       <div class="body">

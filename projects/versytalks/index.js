@@ -16,8 +16,8 @@ export default {
       place: "The debate hall",
       label: "The debate hall",
       small: "VersyTalks",
-      note: "40 to 10,000 debaters. Retention was the real fight.",
-      lede: "An online debate platform with 40 users and two sides that don't show up without each other: debaters, and the coaches and organizers who bring them. Growth came from content, competitions and partnerships with coaches. The harder problem was keeping people, so every feature was tied to two numbers, time spent on the platform and arguments written, which were also the training data for our own small language model. The community grew to 10,000 users; several bets along the way didn't work, and those taught us the most.",
+      note: "Participation is not a business. Progress is.",
+      lede: "A debate platform that had attention but not a business: peak weeks of about 2,500 users, and revenue that stayed low even at low prices. Live discussions, prizes, leaderboards, an argument arena and repeated surveys all shipped; none of it changed what a debater was willing to pay for, because the experience competed with free communities. The direction changed to a competition ecosystem: tournaments and workshops, practice rooms and AI evaluations, a coach marketplace, teams and program licences, a debate assessment and twelve drills. Sales increased substantially afterwards.",
       tagline: "a debate platform grown from 40 to 10,000 users",
     },
     fr: {
@@ -25,8 +25,8 @@ export default {
       place: "La salle de débat",
       label: "La salle de débat",
       small: "VersyTalks",
-      note: "De 40 à 10 000 débatteurs. La rétention, c'était la vraie bataille.",
-      lede: "Une plateforme de débat en ligne avec 40 utilisateurs et deux côtés qui ne viennent pas l'un sans l'autre : les débatteurs, et les entraîneurs et organisateurs qui les amènent. La croissance est venue du contenu, des compétitions et des partenariats avec les entraîneurs. Le vrai problème, c'était de garder les gens : chaque fonctionnalité a donc été rattachée à deux chiffres, le temps passé sur la plateforme et les arguments écrits, qui servaient aussi de données d'entraînement à notre propre petit modèle de langage. La communauté a atteint 10 000 utilisateurs ; plusieurs paris en chemin n'ont pas marché, et ce sont eux qui nous ont le plus appris.",
+      note: "La participation n'est pas un modèle d'affaires. Le progrès, oui.",
+      lede: "Une plateforme de débat qui avait l'attention, mais pas un modèle d'affaires : des semaines de pointe à environ 2 500 utilisateurs, et des revenus restés bas même à bas prix. Discussions en direct, prix, classements, une arène d'arguments et des sondages répétés ont tous été livrés ; rien n'a changé ce qu'un débatteur était prêt à payer, parce que l'expérience rivalisait avec des communautés gratuites. La direction est passée à un écosystème de compétition : tournois et ateliers, salles de pratique et évaluations IA, un marché d'entraîneurs, des équipes et des licences programme, une évaluation de débat et douze exercices. Les ventes ont augmenté substantiellement ensuite.",
       tagline: "une plateforme de débat passée de 40 à 10 000 utilisateurs",
     }
   },

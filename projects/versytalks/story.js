@@ -1,188 +1,216 @@
-// The VersyTalks world: a debate hall, two numbers, and every bet that did or didn't move them.
+// The VersyTalks world: a debate platform that had the traffic and not the business, until the direction changed.
 import { esc, inkFigure, tally } from "../../js/ink.js";
 
 export const text = {
   en: {
-    hall: { motion: "This house believes retention beats acquisition", caption: "The hall. Two sides, one judge, and a room that only fills if both sides show up." },
+    hall: { motion: "This house believes participation is not a business", caption: "The hall. Debaters, coaches and programs, and a room that only fills if the platform is worth their time." },
     situation: {
       h: "The situation",
-      note: "Two sides. Neither shows up without the other.",
-      p1: "An online debate platform with 40 users. Debaters want opponents and feedback; coaches and organizers want a place to run their teams and competitions. Neither side shows up without the other, and there was no budget to buy either.",
-      p2: "Acquisition turned out to be the easier half. People came. The question that decided the product was whether they came back."
+      note: "Traffic, participation, surveys, features. Not a business.",
+      p1: "VersyTalks had attention. Peak weeks reached about 2,500 users, and the forum-like experience generated traffic and periods of high participation. Revenue stayed low, even at low prices, and participation was hard to sustain: debates were not something people wanted to repeat in the same form.",
+      p2: "The team did what a reasonable team does. Live discussions, a debate revival, prizes, promotions, leaderboards, an argument arena, and repeated surveys about topics, formats, friends and following. The requested improvements shipped. The commercial problem stayed where it was."
+    },
+    board: {
+      h: "What we tried, and what we built instead",
+      note: "The left column shipped and kept people busy. None of it changed what a paying debater was willing to pay for.",
+      kept: "Built for the competition ecosystem",
+      cut: "Tried under the forum model",
+      items: [
+        { k: false, t: "Live discussions and debate revival", d: "Bringing conversations back when they faded." },
+        { k: false, t: "Prizes, promotions, leaderboards", d: "Rewards for activity. Activity went up; willingness to pay didn't." },
+        { k: false, t: "Argument arena", d: "A public ring for arguments. Still live, still not the business." },
+        { k: false, t: "Surveys on topics, formats, friends, following", d: "Users asked; we built. Revenue didn't follow." },
+        { k: false, t: "Lower prices", d: "Cheaper access to an experience people could get free elsewhere." },
+        { k: true, t: "Tournaments and workshops", d: "Workshops free, tournaments paid with a commission. Coaches host; debaters show up for a reason." },
+        { k: true, t: "Practice rooms and AI evaluations", d: "Structured practice with feedback, built on coaches' own criteria." },
+        { k: true, t: "Coach marketplace, credits and calendars", d: "A way for coaches to sell expertise, and for debaters to buy it in small units." },
+        { k: true, t: "Teams and program licences", d: "Coaches and programs manage teams and see progress. VersyEdu lives here now." },
+        { k: true, t: "Debate assessment and twelve drills", d: "A starting point for every debater, designed by me." }
+      ]
+    },
+    turn: {
+      h: "The turn",
+      note: "Saying 'we are not a forum' did not stop users from comparing us with one.",
+      p1: "The explanation that held up was uncomfortable. The value was too low for the debater willing to pay, and the experience, whatever we called it, competed with Reddit, Quora, Discord and Facebook groups, all free. Internal intentions and product labels did not remove that comparison.",
+      p2: "So the question changed from 'how do we get more activity' to 'what would a debater value enough to pay for and return to'. The answer was progress: competing, practising in format, getting evaluated, finding a coach. That is a different role in a debater's life than a place to post.",
+      p3: "The repositioning changed the customer job, the role of coaches, the purpose of practice and the institutional offering. Sales increased substantially afterwards. I don't attach a percentage to that: the direction is what I can stand behind."
     },
     numbers: {
       h: "The two numbers",
       note: "Every feature had to answer to these, or it didn't ship.",
-      p1: "I set two metrics for the whole roadmap: time spent on the platform, and arguments written. The second one did double duty. Arguments were engagement, and they were also the training data for our own small language model, so every feature that produced more of them was building the asset at the same time.",
-      diagram: {
-        left: "a feature", a: "time on the platform", b: "arguments written", data: "training data", model: "our small language model", caption: "The test every feature had to pass, and where the arguments went."
-      }
+      p1: "Two metrics anchored the roadmap: time spent on the platform, and arguments written. The second did double duty. Arguments were engagement, and they were also the raw material for a specialist debate model I have been exploring with coaches. That model work is developmental: coaches review and annotate evaluations, and further training is being explored. No proprietary model is in production.",
+      diagram: { left: "a feature", a: "time on the platform", b: "arguments written", data: "annotated by coaches", model: "a specialist model, in development", caption: "The test every feature had to pass, and where the arguments go." }
     },
-    board: {
-      h: "The bets",
-      note: "Twelve bets shipped. Five didn't move the numbers and were cut. The board sorts itself.",
-      kept: "Moved the numbers",
-      cut: "Didn't. Cut.",
-      items: [
-        { k: true, t: "Drills", d: "Short solo reps that lower the cost of a first argument." },
-        { k: true, t: "Onboarding with goals", d: "A debater picks a goal in the first minute; the product aims at it." },
-        { k: true, t: "Profiles", d: "A debater's record, visible to coaches and opponents." },
-        { k: true, t: "Following and achievements", d: "Progression people can see, and others can see too." },
-        { k: true, t: "Debate assessment tied to the coaching profile", d: "Feedback a coach can act on, not a score in a vacuum." },
-        { k: true, t: "AI grader", d: "Scores debates; calibrated against 42 human-graded submissions." },
-        { k: true, t: "Coach-hosted events", d: "The people who bring teams become the hosts." },
-        { k: false, t: "Argument arena", d: "A public ring for arguments. Fun for a week." },
-        { k: false, t: "Matching rooms", d: "Automated opponent matching. Rooms stayed empty at the wrong hours." },
-        { k: false, t: "Teams", d: "Team structure before there were enough teams to structure." },
-        { k: false, t: "Speech-to-text", d: "Spoken arguments transcribed. Nobody wanted to be transcribed." },
-        { k: false, t: "VersyEdu pivot", d: "Schools as the customer. Long sales cycles, no debaters in July." }
-      ]
-    },
-    ledger: {
-      h: "The ledger",
-      note: "What a bet was, what it was supposed to move, and what we learned.",
-      head: ["Bet", "The hypothesis", "What we learned"],
-      rows: [
-        ["Drills", "Fewer people would freeze on their first argument if practice had no opponent.", "Kept. The cheapest first step turned out to be the most important one."],
-        ["Onboarding with goals", "Someone who states a goal in minute one comes back in week two.", "Kept. The goal becomes the reason to return."],
-        ["Profiles, following, achievements", "Visible progression makes arguments worth writing.", "Kept, together. Each alone was weak; the three together carried retention."],
-        ["Assessment tied to coaching", "Feedback a coach can act on keeps both sides engaged.", "Kept. It is what makes a coach bring the next team."],
-        ["AI grader", "Instant scoring removes the wait that kills momentum.", "Kept, once calibrated on 42 human-graded debates. Before calibration, nobody trusted it."],
-        ["Coach-hosted events", "Coaches already bring teams; let them bring the event.", "Kept. The latest bet, and the one that turned a cost into a channel."],
-        ["Argument arena", "A public ring would make arguing a spectator sport.", "Cut. Spectators didn't become debaters."],
-        ["Matching rooms", "Automated matching would fill the quiet hours.", "Cut. Matching needs liquidity; we built it before we had any."],
-        ["Teams", "Team structure would bring organizers.", "Cut. Structure without volume is an empty building."],
-        ["Speech-to-text", "Spoken debate is the real thing; transcribe it.", "Cut. Writing was the behaviour we needed, and the data we needed."],
-        ["VersyEdu pivot", "Schools would pay and bring whole classrooms.", "Cut. Right customer, wrong clock: sales cycles longer than a semester."]
-      ]
+    assessment: {
+      h: "The assessment and the twelve drills",
+      note: "I designed both. The assessment has been completed more than five hundred times.",
+      p1: "A broad platform is hard to enter: every drill, coach and option at once, with no context. The debate assessment is about twenty minutes of questions that give a debater a level and a starting point, linked to coaching. The twelve drills, from Classic Argument to Fallacy Identification, give that starting point something to do next.",
+      p2: "The assessment is also meant to feed a recommendation layer that suggests drills, training and coaches. That layer is upcoming, not shipped. More than five hundred completions say people want the starting point; they don't yet prove learning gains or coaching conversion."
     },
     grader: {
-      h: "The AI grader",
+      h: "AI evaluation and coach feedback",
       note: "An AI that scores debates is only useful if coaches agree with it.",
-      p1: "Instant scoring removes the wait that kills momentum, but a grader that disagrees with coaches is worse than no grader: debaters learn to argue for the machine. So I specified it the other way round. Coaches graded 42 submissions by hand against the rubric; the grader scored the same 42; and the rubric and the prompt were adjusted until the two agreed closely enough that a coach would sign the score.",
-      diagram: { x: "coach's score", y: "grader's score", n: "42 debates", line: "agreement", caption: "The calibration. Each dot is a debate graded by a coach and by the grader. Illustration of the method, not the data." }
+      p1: "About five hundred coach gradings of arguments were used to develop the rubric and the retrieval material. The grader runs on Claude's API with that rubric, calibrated against 42 real submissions so its scores track what coaches would give, and launched as a capped free beta with go/stop targets. About two hundred arguments have been graded by the AI with coaches reviewing and annotating the results for later model work.",
+      p2: "Those three counts measure different things, and the page keeps them apart on purpose: coach gradings, AI-graded arguments and assessment completions. The strongest claim I can make is the design of domain-specific scoring criteria, prompts, retrieval and human review, not an accuracy figure.",
+      diagram: { x: "coach's score", y: "grader's score", n: "42 debates", line: "agreement", caption: "The calibration method: each dot a debate scored by a coach and by the grader. An illustration, not the data." }
     },
-    growth: {
-      h: "How it grew",
-      note: "40 to 10,000. Three levers, one of them a multiplier.",
-      levers: [
-        ["Content and social", "Debate clips, motions of the week, the arguments people were proud of."],
-        ["Events and competitions", "A reason to show up at the same time as everyone else."],
-        ["Coaches", "A coach doesn't bring a user. A coach brings a team, and brings it back next season."]
-      ],
-      diagram: { one: "one coach", team: "a team", season: "next season, again", caption: "Why the coach partnerships mattered more than the other two levers combined." }
+    events: {
+      h: "Workshops and tournaments",
+      note: "The audience we had built became a reason for coaches to host.",
+      p1: "About four events a month, filling within two weeks. Workshops are free; tournaments are paid, with a commission to the platform. Coaches who host have reported about fifteen percent more bookings, and the platform sees roughly five coaching inquiries a week. Those are my own figures with no baseline attached; they describe activity, not a proven causal effect.",
+      p2: "The logic is more specific than 'grow traffic'. An audience becomes useful to a coach when the platform gives them a format for demonstrating expertise and attracting demand. Distribution and product value start to reinforce each other.",
+      diagram: { one: "one coach", team: "a team", season: "next season, again", caption: "Why a coach is worth more than a user: a team, and the same team next season." }
+    },
+    traffic: {
+      h: "The numbers, with their definitions attached",
+      note: "Different units, different periods. They don't add up to one funnel, and the page doesn't pretend they do.",
+      head: ["Figure", "What it counts"],
+      rows: [
+        ["≈ 2,000 a week", "weekly active users; peak weeks reached about 2,500"],
+        ["≈ 800 a month", "new signups"],
+        ["≈ 10,000 a month", "site visits; the United States and Singapore lead"],
+        ["500+", "debate assessment completions"],
+        ["≈ 4 a month", "workshops and tournaments, booked within two weeks"],
+        ["≈ 5 a week", "coaching inquiries"]
+      ]
+    },
+    pricing: {
+      h: "Pricing and credits, as designed",
+      note: "Historical terms, currency unspecified. Not a live price list.",
+      head: ["Term", "Value"],
+      rows: [
+        ["Tier 1", "3.99 a month"],
+        ["Tier 2", "12.99 a month or 119.99 a year; early Tier 1 supporters got it free for nine months"],
+        ["One credit", "one dollar; VersyTalks keeps 17%, the payment processor about 3%, the rest goes to the coach"],
+        ["An evaluation", "five credits, the same price for every coach"],
+        ["Debater of the Month", "100 credits a month, split among debaters"]
+      ]
     },
     judgment: {
       h: "What I'd tell a client",
-      note: "Measured, not felt.",
-      p: "Shipping more features is not a retention strategy. Once every feature had to answer to two measurable behaviours, and to the data our model needed, the roadmap got shorter and sharper, and the bets that failed failed faster."
+      note: "The narrow conclusion, not a universal law.",
+      p: "A product can attract attention and still fail to create enough value for someone to pay. The fix was not another engagement feature; it was a different answer to what the paying user values. More activity never settled that question. Asking what frustrates people, and what would make them change behaviour, did."
     },
     tallies: [
       { value: "40 → 10,000", label: "users" },
-      { value: "2", label: "metrics every feature answered to" },
-      { value: "12", label: "bets shipped, 5 of them cut" },
-      { value: "42", label: "human-graded debates behind the grader" }
+      { value: "≈ 2,500", label: "users in the busiest weeks of the forum era" },
+      { value: "500+", label: "assessment completions" },
+      { value: "12", label: "drills, designed by me" }
     ],
-    tryIt: { h: "See it live", note: "The platform is live. The arguments people write there are the ones that trained the model.", open: "Open VersyTalks" },
+    tryIt: { h: "See it live", note: "The platform is live: assessment, drills, coaching, workshops and tournaments.", open: "Open VersyTalks" },
     questions: {
       h: "Questions I'm happy to take",
       items: [
-        "How did you decide a bet had failed, and how long did you give it?",
-        "Why two metrics rather than one North Star?",
-        "What did you change in the grader after the 42-debate calibration?",
-        "If you had the first 1,000 users again, what would you not build?"
+        "When did you accept that the problem was deeper than engagement, and what did you resist believing?",
+        "Which feature did users strongly request that turned out to be commercially unimportant?",
+        "What did you deliberately stop doing after the repositioning, and what did it cost?",
+        "Why calibrate the grader against coaches before trusting it?"
       ]
     }
   },
   fr: {
-    hall: { motion: "Cette chambre croit que la rétention bat l'acquisition", caption: "La salle. Deux côtés, un juge, et une pièce qui ne se remplit que si les deux côtés se présentent." },
+    hall: { motion: "Cette chambre croit que la participation n'est pas un modèle d'affaires", caption: "La salle. Des débatteurs, des entraîneurs et des programmes, et une pièce qui ne se remplit que si la plateforme vaut leur temps." },
     situation: {
       h: "La situation",
-      note: "Deux côtés. Aucun ne vient sans l'autre.",
-      p1: "Une plateforme de débat en ligne avec 40 utilisateurs. Les débatteurs veulent des adversaires et de la rétroaction ; les entraîneurs et les organisateurs veulent un endroit pour faire vivre leurs équipes et leurs compétitions. Aucun côté ne vient sans l'autre, et il n'y avait pas de budget pour acheter l'un ou l'autre.",
-      p2: "L'acquisition s'est révélée la moitié facile. Les gens venaient. La question qui a décidé du produit, c'était s'ils revenaient."
+      note: "Du trafic, de la participation, des sondages, des fonctionnalités. Pas un modèle d'affaires.",
+      p1: "VersyTalks avait de l'attention. Les meilleures semaines atteignaient environ 2 500 utilisateurs, et l'expérience de type forum générait du trafic et des périodes de forte participation. Les revenus restaient bas, même à bas prix, et la participation était difficile à soutenir : les débats n'étaient pas quelque chose que les gens voulaient répéter sous la même forme.",
+      p2: "L'équipe a fait ce qu'une équipe raisonnable fait. Des discussions en direct, une relance des débats, des prix, des promotions, des classements, une arène d'arguments, et des sondages répétés sur les sujets, les formats, les amis et les abonnements. Les améliorations demandées ont été livrées. Le problème commercial est resté là où il était."
+    },
+    board: {
+      h: "Ce qu'on a essayé, et ce qu'on a bâti à la place",
+      note: "La colonne de gauche a été livrée et a occupé les gens. Rien n'y a changé ce qu'un débatteur était prêt à payer.",
+      kept: "Bâti pour l'écosystème de compétition",
+      cut: "Essayé sous le modèle forum",
+      items: [
+        { k: false, t: "Discussions en direct et relance des débats", d: "Ramener les conversations quand elles s'essoufflaient." },
+        { k: false, t: "Prix, promotions, classements", d: "Des récompenses pour l'activité. L'activité a monté ; la volonté de payer, non." },
+        { k: false, t: "Arène d'arguments", d: "Un ring public pour les arguments. Toujours en ligne, toujours pas le modèle d'affaires." },
+        { k: false, t: "Sondages sur les sujets, formats, amis, abonnements", d: "Les utilisateurs ont demandé ; on a bâti. Les revenus n'ont pas suivi." },
+        { k: false, t: "Prix plus bas", d: "Un accès moins cher à une expérience disponible gratuitement ailleurs." },
+        { k: true, t: "Tournois et ateliers", d: "Ateliers gratuits, tournois payants avec commission. Les entraîneurs animent ; les débatteurs viennent pour une raison." },
+        { k: true, t: "Salles de pratique et évaluations IA", d: "De la pratique structurée avec rétroaction, bâtie sur les critères des entraîneurs." },
+        { k: true, t: "Marché d'entraîneurs, crédits et calendriers", d: "Une façon pour les entraîneurs de vendre leur expertise, et pour les débatteurs de l'acheter en petites unités." },
+        { k: true, t: "Équipes et licences programme", d: "Les entraîneurs et les programmes gèrent des équipes et suivent les progrès. VersyEdu vit ici maintenant." },
+        { k: true, t: "Évaluation de débat et douze exercices", d: "Un point de départ pour chaque débatteur, conçu par moi." }
+      ]
+    },
+    turn: {
+      h: "Le virage",
+      note: "Dire « nous ne sommes pas un forum » n'empêchait pas les utilisateurs de nous comparer à un forum.",
+      p1: "L'explication qui a tenu était inconfortable. La valeur était trop faible pour le débatteur prêt à payer, et l'expérience, peu importe son nom, était en concurrence avec Reddit, Quora, Discord et les groupes Facebook, tous gratuits. Les intentions internes et les étiquettes de produit n'enlevaient pas cette comparaison.",
+      p2: "La question est donc passée de « comment avoir plus d'activité » à « que valoriserait un débatteur au point de payer et de revenir ». La réponse : le progrès. Compétitionner, pratiquer en format, se faire évaluer, trouver un entraîneur. C'est un autre rôle dans la vie d'un débatteur qu'un endroit où publier.",
+      p3: "Le repositionnement a changé le travail du client, le rôle des entraîneurs, le but de la pratique et l'offre institutionnelle. Les ventes ont augmenté substantiellement ensuite. Je n'y rattache pas de pourcentage : la direction est ce que je peux défendre."
     },
     numbers: {
       h: "Les deux chiffres",
       note: "Chaque fonctionnalité devait leur répondre, sinon elle ne sortait pas.",
-      p1: "J'ai fixé deux mesures pour toute la feuille de route : le temps passé sur la plateforme et les arguments écrits. La deuxième servait deux fois. Les arguments étaient de l'engagement, et ils étaient aussi les données d'entraînement de notre propre petit modèle de langage : chaque fonctionnalité qui en produisait plus bâtissait l'actif en même temps.",
-      diagram: {
-        left: "une fonctionnalité", a: "temps sur la plateforme", b: "arguments écrits", data: "données d'entraînement", model: "notre petit modèle de langage", caption: "Le test que chaque fonctionnalité devait passer, et où allaient les arguments."
-      }
+      p1: "Deux mesures ancraient la feuille de route : le temps passé sur la plateforme et les arguments écrits. La deuxième servait deux fois. Les arguments étaient de l'engagement, et aussi la matière première d'un modèle spécialisé en débat que l'équipe explore avec des entraîneurs. Ce travail est en développement : les entraîneurs révisent et annotent des évaluations, et un entraînement plus poussé est à l'étude. Aucun modèle propriétaire n'est en production.",
+      diagram: { left: "une fonctionnalité", a: "temps sur la plateforme", b: "arguments écrits", data: "annotés par des entraîneurs", model: "un modèle spécialisé, en développement", caption: "Le test que chaque fonctionnalité devait passer, et où vont les arguments." }
     },
-    board: {
-      h: "Les paris",
-      note: "Douze paris livrés. Cinq n'ont pas bougé les chiffres et ont été coupés. Le tableau se trie tout seul.",
-      kept: "Ont bougé les chiffres",
-      cut: "Non. Coupés.",
-      items: [
-        { k: true, t: "Exercices", d: "De courtes répétitions en solo qui abaissent le coût d'un premier argument." },
-        { k: true, t: "Accueil avec objectifs", d: "Un débatteur choisit un objectif dès la première minute ; le produit vise celui-là." },
-        { k: true, t: "Profils", d: "Le dossier d'un débatteur, visible par les entraîneurs et les adversaires." },
-        { k: true, t: "Abonnements et réussites", d: "Une progression que les gens voient, et que les autres voient aussi." },
-        { k: true, t: "Évaluation de débat liée au profil d'entraînement", d: "Une rétroaction qu'un entraîneur peut utiliser, pas une note dans le vide." },
-        { k: true, t: "Correcteur IA", d: "Note les débats ; calibré sur 42 débats notés par des humains." },
-        { k: true, t: "Événements des entraîneurs", d: "Ceux qui amènent des équipes deviennent les hôtes." },
-        { k: false, t: "Arène d'arguments", d: "Un ring public pour les arguments. Amusant pendant une semaine." },
-        { k: false, t: "Salles d'appariement", d: "Appariement automatique d'adversaires. Les salles restaient vides aux mauvaises heures." },
-        { k: false, t: "Équipes", d: "Une structure d'équipe avant qu'il y ait assez d'équipes à structurer." },
-        { k: false, t: "Transcription vocale", d: "Arguments parlés transcrits. Personne ne voulait être transcrit." },
-        { k: false, t: "Virage VersyEdu", d: "Les écoles comme client. Cycles de vente longs, pas de débatteurs en juillet." }
-      ]
-    },
-    ledger: {
-      h: "Le registre",
-      note: "Ce qu'était un pari, ce qu'il devait bouger, et ce qu'on a appris.",
-      head: ["Pari", "L'hypothèse", "Ce qu'on a appris"],
-      rows: [
-        ["Exercices", "Moins de gens figeraient devant leur premier argument si la pratique n'avait pas d'adversaire.", "Gardé. Le premier pas le moins cher s'est révélé le plus important."],
-        ["Accueil avec objectifs", "Quelqu'un qui énonce un objectif à la minute un revient à la semaine deux.", "Gardé. L'objectif devient la raison de revenir."],
-        ["Profils, abonnements, réussites", "Une progression visible rend les arguments dignes d'être écrits.", "Gardés, ensemble. Chacun seul était faible ; les trois ensemble ont porté la rétention."],
-        ["Évaluation liée à l'entraînement", "Une rétroaction utilisable par l'entraîneur garde les deux côtés engagés.", "Gardée. C'est ce qui fait qu'un entraîneur amène la prochaine équipe."],
-        ["Correcteur IA", "Une note instantanée enlève l'attente qui tue l'élan.", "Gardé, une fois calibré sur 42 débats notés par des humains. Avant, personne ne lui faisait confiance."],
-        ["Événements des entraîneurs", "Les entraîneurs amènent déjà des équipes ; qu'ils amènent l'événement.", "Gardé. Le pari le plus récent, et celui qui a transformé un coût en canal."],
-        ["Arène d'arguments", "Un ring public ferait de l'argumentation un sport de spectateurs.", "Coupée. Les spectateurs ne sont pas devenus débatteurs."],
-        ["Salles d'appariement", "L'appariement automatique remplirait les heures creuses.", "Coupées. L'appariement a besoin de volume ; on l'a bâti avant d'en avoir."],
-        ["Équipes", "Une structure d'équipe amènerait des organisateurs.", "Coupées. Une structure sans volume est un immeuble vide."],
-        ["Transcription vocale", "Le débat parlé est le vrai ; transcrivons-le.", "Coupée. L'écrit était le comportement qu'il nous fallait, et les données qu'il nous fallait."],
-        ["Virage VersyEdu", "Les écoles paieraient et amèneraient des classes entières.", "Coupé. Bon client, mauvaise horloge : des cycles de vente plus longs qu'un semestre."]
-      ]
+    assessment: {
+      h: "L'évaluation et les douze exercices",
+      note: "J'ai conçu les deux. L'évaluation a été complétée plus de cinq cents fois.",
+      p1: "Une plateforme large est difficile à aborder : tous les exercices, entraîneurs et options d'un coup, sans contexte. L'évaluation de débat, c'est une vingtaine de minutes de questions qui donnent à un débatteur un niveau et un point de départ, liés à l'entraînement. Les douze exercices, de l'argument classique à l'identification des sophismes, donnent à ce point de départ une suite.",
+      p2: "L'évaluation doit aussi alimenter une couche de recommandation qui suggérera des exercices, de la formation et des entraîneurs. Cette couche est à venir, pas livrée. Plus de cinq cents complétions disent que les gens veulent le point de départ ; elles ne prouvent pas encore des gains d'apprentissage ni une conversion vers l'entraînement."
     },
     grader: {
-      h: "Le correcteur IA",
+      h: "Évaluation par IA et rétroaction des entraîneurs",
       note: "Une IA qui note les débats n'est utile que si les entraîneurs sont d'accord avec elle.",
-      p1: "Une note instantanée enlève l'attente qui tue l'élan, mais un correcteur en désaccord avec les entraîneurs est pire que pas de correcteur : les débatteurs apprennent à argumenter pour la machine. Je l'ai donc spécifié à l'envers. Des entraîneurs ont noté 42 débats à la main selon la grille ; le correcteur a noté les mêmes 42 ; et la grille et la consigne ont été ajustées jusqu'à ce que les deux s'accordent assez pour qu'un entraîneur signe la note.",
-      diagram: { x: "note de l'entraîneur", y: "note du correcteur", n: "42 débats", line: "accord", caption: "La calibration. Chaque point est un débat noté par un entraîneur et par le correcteur. Illustration de la méthode, pas les données." }
+      p1: "Environ cinq cents notations d'arguments par des entraîneurs ont servi à développer la grille et le matériel de recherche. Le correcteur fonctionne sur l'API de Claude avec cette grille, calibré contre 42 vraies soumissions pour que ses notes suivent celles des entraîneurs, et lancé en bêta gratuite plafonnée avec des cibles go/stop. Environ deux cents arguments ont été notés par l'IA, les entraîneurs révisant et annotant les résultats en vue d'un travail de modèle ultérieur.",
+      p2: "Ces trois comptes mesurent des choses différentes, et la page les garde séparés exprès : notations d'entraîneurs, arguments notés par l'IA et complétions de l'évaluation. L'affirmation la plus solide que je peux faire, c'est la conception de critères de notation propres au domaine, de consignes, de recherche et de révision humaine, pas un chiffre de précision.",
+      diagram: { x: "note de l'entraîneur", y: "note du correcteur", n: "42 débats", line: "accord", caption: "La méthode de calibration : chaque point, un débat noté par un entraîneur et par le correcteur. Une illustration, pas les données." }
     },
-    growth: {
-      h: "Comment ça a grandi",
-      note: "De 40 à 10 000. Trois leviers, dont un multiplicateur.",
-      levers: [
-        ["Contenu et réseaux sociaux", "Extraits de débats, motions de la semaine, les arguments dont les gens étaient fiers."],
-        ["Événements et compétitions", "Une raison de se présenter en même temps que tout le monde."],
-        ["Les entraîneurs", "Un entraîneur n'amène pas un utilisateur. Il amène une équipe, et la ramène la saison suivante."]
-      ],
-      diagram: { one: "un entraîneur", team: "une équipe", season: "la saison suivante, encore", caption: "Pourquoi les partenariats avec les entraîneurs ont compté plus que les deux autres leviers réunis." }
+    events: {
+      h: "Ateliers et tournois",
+      note: "Le public qu'on avait bâti est devenu une raison pour les entraîneurs d'animer.",
+      p1: "Environ quatre événements par mois, complets en moins de deux semaines. Les ateliers sont gratuits ; les tournois sont payants, avec une commission à la plateforme. Les entraîneurs qui animent rapportent environ quinze pour cent de réservations de plus, et la plateforme reçoit à peu près cinq demandes d'entraînement par semaine. Ce sont mes propres chiffres, sans base de comparaison ; ils décrivent l'activité, pas un effet causal prouvé.",
+      p2: "La logique est plus précise que « faire grandir le trafic ». Un public devient utile à un entraîneur quand la plateforme lui donne un format pour démontrer son expertise et attirer la demande. La distribution et la valeur du produit commencent à se renforcer l'une l'autre.",
+      diagram: { one: "un entraîneur", team: "une équipe", season: "la saison suivante, encore", caption: "Pourquoi un entraîneur vaut plus qu'un utilisateur : une équipe, et la même équipe la saison suivante." }
+    },
+    traffic: {
+      h: "Les chiffres, avec leurs définitions",
+      note: "Des unités différentes, des périodes différentes. Ils ne forment pas un seul entonnoir, et la page ne fait pas semblant.",
+      head: ["Chiffre", "Ce qu'il compte"],
+      rows: [
+        ["≈ 2 000 par semaine", "utilisateurs actifs hebdomadaires ; les meilleures semaines ont atteint environ 2 500"],
+        ["≈ 800 par mois", "nouvelles inscriptions"],
+        ["≈ 10 000 par mois", "visites du site ; les États-Unis et Singapour en tête"],
+        ["500+", "complétions de l'évaluation de débat"],
+        ["≈ 4 par mois", "ateliers et tournois, complets en moins de deux semaines"],
+        ["≈ 5 par semaine", "demandes d'entraînement"]
+      ]
+    },
+    pricing: {
+      h: "Tarification et crédits, tels que conçus",
+      note: "Conditions historiques, devise non précisée. Pas une liste de prix en vigueur.",
+      head: ["Terme", "Valeur"],
+      rows: [
+        ["Palier 1", "3,99 par mois"],
+        ["Palier 2", "12,99 par mois ou 119,99 par année ; les premiers abonnés du palier 1 l'ont eu gratuitement neuf mois"],
+        ["Un crédit", "un dollar ; VersyTalks garde 17 %, le processeur de paiement environ 3 %, le reste va à l'entraîneur"],
+        ["Une évaluation", "cinq crédits, le même prix pour tous les entraîneurs"],
+        ["Débatteur du mois", "100 crédits par mois, répartis entre les débatteurs"]
+      ]
     },
     judgment: {
       h: "Ce que je dirais à un client",
-      note: "Mesuré, pas ressenti.",
-      p: "Livrer plus de fonctionnalités n'est pas une stratégie de rétention. Quand chaque fonctionnalité a dû répondre à deux comportements mesurables, et aux données dont notre modèle avait besoin, la feuille de route est devenue plus courte et plus nette, et les paris ratés ont raté plus vite."
+      note: "La conclusion étroite, pas une loi universelle.",
+      p: "Un produit peut attirer l'attention et quand même ne pas créer assez de valeur pour que quelqu'un paie. La solution n'était pas une autre fonctionnalité d'engagement ; c'était une autre réponse à ce que l'utilisateur payant valorise. Plus d'activité n'a jamais réglé cette question. Demander ce qui frustre les gens, et ce qui les ferait changer de comportement, oui."
     },
     tallies: [
       { value: "40 → 10 000", label: "utilisateurs" },
-      { value: "2", label: "mesures auxquelles chaque fonctionnalité répondait" },
-      { value: "12", label: "paris livrés, dont 5 coupés" },
-      { value: "42", label: "débats notés par des humains derrière le correcteur" }
+      { value: "≈ 2 500", label: "utilisateurs dans les meilleures semaines de l'ère forum" },
+      { value: "500+", label: "complétions de l'évaluation" },
+      { value: "12", label: "exercices, conçus par moi" }
     ],
-    tryIt: { h: "Voir en ligne", note: "La plateforme est en ligne. Les arguments qu'on y écrit sont ceux qui ont entraîné le modèle.", open: "Ouvrir VersyTalks" },
+    tryIt: { h: "Voir en ligne", note: "La plateforme est en ligne : évaluation, exercices, entraînement, ateliers et tournois.", open: "Ouvrir VersyTalks" },
     questions: {
       h: "Les questions que je prends volontiers",
       items: [
-        "Comment décidiez-vous qu'un pari avait échoué, et combien de temps lui donniez-vous ?",
-        "Pourquoi deux mesures plutôt qu'une seule étoile polaire ?",
-        "Qu'avez-vous changé dans le correcteur après la calibration sur 42 débats ?",
-        "Si vous aviez de nouveau les 1 000 premiers utilisateurs, que ne bâtiriez-vous pas ?"
+        "Quand avez-vous accepté que le problème était plus profond que l'engagement, et qu'avez-vous résisté à croire ?",
+        "Quelle fonctionnalité fortement demandée s'est révélée commercialement sans importance ?",
+        "Qu'avez-vous délibérément arrêté de faire après le repositionnement, et qu'est-ce que ça a coûté ?",
+        "Pourquoi calibrer le correcteur contre les entraîneurs avant de lui faire confiance ?"
       ]
     }
   }
@@ -284,8 +312,8 @@ function coach(d) {
 function board(b) {
   return `
   <div class="board ink-on-view" id="board">
-    <div class="board-col kept"><h3>${esc(b.kept)}</h3></div>
     <div class="board-col cut"><h3>${esc(b.cut)}</h3></div>
+    <div class="board-col kept"><h3>${esc(b.kept)}</h3></div>
     <div class="board-pile">
       ${b.items.map((it, i) => `<div class="note ${it.k ? "k" : "c"}" style="--i:${i};--r:${((i * 37) % 7) - 3}deg"><b>${esc(it.t)}</b><span>${esc(it.d)}</span></div>`).join("")}
     </div>
@@ -313,6 +341,14 @@ export function mount(root) {
 export function render(p, L, t) {
   const tx = text[L] || text.en;
   const px = p.text[L] || p.text.en;
+  const table = (head, rows, cls = "") => `
+    <table class="ruled ${cls}">
+      <thead><tr>${head.map((h) => `<th>${esc(h)}</th>`).join("")}</tr></thead>
+      <tbody>${rows.map((r) => `<tr>${r.map((c) => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody>
+    </table>`;
+  const section = (sec, body) => `
+      <aside class="margin">${sec.note ? `<p class="margin-note">${esc(sec.note)}</p>` : ""}</aside>
+      <div class="body"><h2>${esc(sec.h)}</h2>${body}</div>`;
   return `
   <section class="sheet">
     <div class="page story world">
@@ -325,51 +361,37 @@ export function render(p, L, t) {
 
       ${inkFigure(hall(tx.hall), { viewBox: "0 0 1100 360", caption: tx.hall.caption, cls: "wide street" })}
 
-      <aside class="margin"><p class="margin-note">${esc(tx.situation.note)}</p></aside>
-      <div class="body">
-        <h2>${esc(tx.situation.h)}</h2>
-        <p class="lede">${esc(tx.situation.p1)}</p>
-        <p>${esc(tx.situation.p2)}</p>
-      </div>
-
-      <aside class="margin"><p class="margin-note red">${esc(tx.numbers.note)}</p></aside>
-      <div class="body">
-        <h2>${esc(tx.numbers.h)}</h2>
-        <p class="lede">${esc(tx.numbers.p1)}</p>
-      </div>
-      ${inkFigure(twoNumbers(tx.numbers.diagram), { viewBox: "0 0 900 240", caption: tx.numbers.diagram.caption, cls: "wide" })}
+      ${section(tx.situation, `<p class="lede">${esc(tx.situation.p1)}</p><p>${esc(tx.situation.p2)}</p>`)}
 
       <aside class="margin"><p class="margin-note">${esc(tx.board.note)}</p></aside>
       <div class="body"><h2>${esc(tx.board.h)}</h2></div>
       <div class="wide">${board(tx.board)}</div>
 
-      <aside class="margin"><p class="margin-note">${esc(tx.ledger.note)}</p></aside>
+      <aside class="margin"><p class="margin-note red">${esc(tx.turn.note)}</p></aside>
       <div class="body">
-        <h2>${esc(tx.ledger.h)}</h2>
-      </div>
-      <div class="wide">
-        <table class="ruled ledger">
-          <thead><tr>${tx.ledger.head.map((h) => `<th>${esc(h)}</th>`).join("")}</tr></thead>
-          <tbody>${tx.ledger.rows.map((r) => `<tr class="${/^(Kept|Gard)/.test(r[2]) ? "kept" : "cut"}">${r.map((c) => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody>
-        </table>
+        <h2>${esc(tx.turn.h)}</h2>
+        <p class="lede">${esc(tx.turn.p1)}</p>
+        <p>${esc(tx.turn.p2)}</p>
+        <p>${esc(tx.turn.p3)}</p>
       </div>
 
-      <aside class="margin"><p class="margin-note">${esc(tx.grader.note)}</p></aside>
-      <div class="body">
-        <h2>${esc(tx.grader.h)}</h2>
-        <p class="lede">${esc(tx.grader.p1)}</p>
-      </div>
+      ${section(tx.numbers, `<p class="lede">${esc(tx.numbers.p1)}</p>`)}
+      ${inkFigure(twoNumbers(tx.numbers.diagram), { viewBox: "0 0 900 240", caption: tx.numbers.diagram.caption, cls: "wide" })}
+
+      ${section(tx.assessment, `<p class="lede">${esc(tx.assessment.p1)}</p><p>${esc(tx.assessment.p2)}</p>`)}
+
+      ${section(tx.grader, `<p class="lede">${esc(tx.grader.p1)}</p><p>${esc(tx.grader.p2)}</p>`)}
       ${inkFigure(calibration(tx.grader.diagram), { viewBox: "0 0 900 300", caption: tx.grader.diagram.caption, cls: "wide" })}
 
-      <aside class="margin"><p class="margin-note">${esc(tx.growth.note)}</p></aside>
-      <div class="body">
-        <h2>${esc(tx.growth.h)}</h2>
-        <dl class="gaps">${tx.growth.levers.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
-      </div>
-      ${inkFigure(coach(tx.growth.diagram), { viewBox: "0 0 900 220", caption: tx.growth.diagram.caption, cls: "wide" })}
+      ${section(tx.events, `<p class="lede">${esc(tx.events.p1)}</p><p>${esc(tx.events.p2)}</p>`)}
+      ${inkFigure(coach(tx.events.diagram), { viewBox: "0 0 900 220", caption: tx.events.diagram.caption, cls: "wide" })}
+
+      ${section(tx.traffic, table(tx.traffic.head, tx.traffic.rows))}
+      ${section(tx.pricing, table(tx.pricing.head, tx.pricing.rows))}
 
       <aside class="margin"><p class="margin-note red">${esc(tx.judgment.note)}</p></aside>
       <div class="body">
+        <h2>${esc(tx.judgment.h)}</h2>
         <blockquote class="judgment">${esc(tx.judgment.p)}</blockquote>
       </div>
 
