@@ -27,7 +27,7 @@ export default {
       small: "VersyTalks",
       note: "La participation n'est pas un modèle d'affaires. Le progrès, oui.",
       lede: "Une plateforme de débat qui avait l'attention, mais pas un modèle d'affaires : des semaines de pointe à environ 2 500 utilisateurs, et des revenus restés bas même à bas prix. Discussions en direct, prix, classements, une arène d'arguments et des sondages répétés ont tous été livrés ; rien n'a changé ce qu'un débatteur était prêt à payer, parce que l'expérience rivalisait avec des communautés gratuites. La direction est passée à un écosystème de compétition : tournois et ateliers, salles de pratique et évaluations IA, un marché d'entraîneurs, des équipes et des licences programme, une évaluation de débat et douze exercices. Les ventes ont augmenté substantiellement ensuite.",
-      tagline: "une plateforme de débat passée de 40 à 10 000 utilisateurs",
+      tagline: "plateforme de débat, de 40 à 10 000 utilisateurs",
     }
   },
   landmark: () => `

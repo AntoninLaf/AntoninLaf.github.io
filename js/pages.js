@@ -3,6 +3,7 @@ import { renderMap } from "./map.js";
 import { esc, inkFigure, tally } from "./ink.js";
 import { projects } from "../projects/index.js";
 import { stories, career } from "../stories/index.js";
+import { WORDS } from "../stories/words.js";
 
 
 export function renderHome({ intro, stacked }) {
@@ -138,6 +139,15 @@ export function renderAbout() {
       <div class="body">
         <h2>${esc(t("about.projects"))}</h2>
         <ul class="toc cases projects">${projects}</ul>
+      </div>
+      <aside class="margin"><p class="margin-note sticky">${esc(t("about.words.note"))}</p></aside>
+      <div class="body words">
+        <h2>${esc(t("about.words"))}</h2>
+        ${(WORDS[L] || WORDS.en).map((w) => `
+        <section class="words-note">
+          <h3>${esc(w.title)}</h3>
+          ${w.paras.map((p) => `<p>${esc(p)}</p>`).join("")}
+        </section>`).join("")}
       </div>
       <aside class="margin"></aside>
       <div class="body">

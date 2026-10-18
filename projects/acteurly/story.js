@@ -1,5 +1,6 @@
 // The Acteurly world: a Québec main street, and an analyst that fits in the owner's week.
 import { esc, inkFigure, tally } from "../../js/ink.js";
+import { wordsBlock } from "../../stories/words.js";
 
 export const text = {
   en: {
@@ -89,6 +90,13 @@ export const text = {
         me: "me", playbooks: "24 playbooks", rubrics: "rubrics", aly: "Aly", owner: "the owner", review: "review before it ships", rate: "rates, reports outcomes", learn: "track record per playbook",
         caption: "What I put in, what comes back, and where the data moat starts."
       }
+    },
+    generic: {
+      h: "The failure I watch for: generic advice",
+      note: "Not false. Not connected to the business. That is the harder defect.",
+      p1: "The main problem I ran into with Aly's answers was advice that was not wrong, just insufficiently connected to the business. An owner does not need to be told to post more consistently if the real obstacle is an unclear offer, weak follow-up or no capacity to serve new customers. A polished answer that could be sent unchanged to almost anyone fails my standard.",
+      p2: "Groundedness asks whether an answer is supported. Decision quality also asks whether it addresses the right issue for this business now. That is why the retrieval system and the playbooks organize advice around industry, business model, history, geography, language and practical constraints. It remains substantial ongoing work: business context is not an accessory to marketing judgment.",
+      p3: "The same test decides when Aly should ask a question: only when the missing information could materially change the recommendation. If an owner asks how to get more leads, Aly should not assume acquisition is the problem; how leads are handled, and whether the business has the capacity to serve them, can change the answer. If the missing detail has little effect, Aly makes a reasonable assumption, states it, and continues. Owners do not have unlimited patience for intake forms."
     },
     moat: {
       h: "The moat",
@@ -236,6 +244,13 @@ export const text = {
         me: "moi", playbooks: "24 playbooks", rubrics: "grilles", aly: "Aly", owner: "le propriétaire", review: "révision avant livraison", rate: "note, rapporte les résultats", learn: "historique par playbook",
         caption: "Ce que j'ai mis, ce qui revient, et où commence l'avantage par les données."
       }
+    },
+    generic: {
+      h: "La faille que je surveille : le conseil générique",
+      note: "Pas faux. Pas relié à l'entreprise. C'est le défaut le plus difficile.",
+      p1: "Le principal problème rencontré avec les réponses d'Aly, c'était un conseil qui n'était pas faux, mais pas assez relié à l'entreprise. Un propriétaire n'a pas besoin qu'on lui dise de publier plus régulièrement si le vrai obstacle est une offre floue, un suivi faible ou aucune capacité à servir de nouveaux clients. Une réponse soignée qu'on pourrait envoyer telle quelle à presque n'importe qui échoue à mon critère.",
+      p2: "L'ancrage demande si une réponse est appuyée. La qualité de la décision demande aussi si elle s'attaque au bon enjeu pour cette entreprise, maintenant. C'est pourquoi le système de recherche et les playbooks organisent le conseil selon l'industrie, le modèle d'affaires, l'historique, la géographie, la langue et les contraintes pratiques. Cela reste un chantier substantiel : le contexte d'affaires n'est pas un accessoire du jugement marketing.",
+      p3: "Le même test décide quand Aly doit poser une question : seulement quand l'information manquante pourrait changer la recommandation de façon importante. Si un propriétaire demande comment obtenir plus de prospects, Aly ne doit pas supposer que l'acquisition est le problème ; la façon de traiter les prospects, et la capacité de l'entreprise à les servir, peuvent changer la réponse. Si le détail manquant pèse peu, Aly fait une hypothèse raisonnable, la dit, et continue. Les propriétaires n'ont pas une patience illimitée pour les formulaires."
     },
     moat: {
       h: "L'avantage",
@@ -580,6 +595,16 @@ export function render(p, L, t) {
         <p>${esc(tx.role.p2)}</p>
       </div>
       ${inkFigure(loop(tx.role.diagram), { viewBox: "0 0 900 300", caption: tx.role.diagram.caption, cls: "wide" })}
+
+      ${wordsBlock("ai", L, t("words.note"))}
+
+      <aside class="margin"><p class="margin-note red">${esc(tx.generic.note)}</p></aside>
+      <div class="body">
+        <h2>${esc(tx.generic.h)}</h2>
+        <p class="lede">${esc(tx.generic.p1)}</p>
+        <p>${esc(tx.generic.p2)}</p>
+        <p>${esc(tx.generic.p3)}</p>
+      </div>
 
       <aside class="margin"><p class="margin-note">${esc(tx.moat.note)}</p></aside>
       <div class="body">

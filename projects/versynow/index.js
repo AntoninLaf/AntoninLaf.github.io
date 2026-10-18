@@ -6,7 +6,7 @@ export default {
   mount,
   slug: "versynow",
   order: 3,
-  map: { x: 930, y: 540, noteSide: "left" },
+  map: { x: 930, y: 540, noteSide: "above" },
   links: {
     live: "https://versynow.com/"
   },
@@ -27,7 +27,7 @@ export default {
       small: "VersyNow",
       note: "Aucun chiffre à l'écran ne vient du modèle.",
       lede: "VersyNow est une plateforme québécoise d'engagement et d'analyse du public pour les événements professionnels : la période avant l'événement, la participation en direct, puis l'analyse et le suivi. Les organisateurs nous ont dit ce qu'ils achetaient vraiment : qui était dans la salle et pourquoi, quels thèmes revenaient, et comment rendre le prochain événement meilleur. Le produit est donc devenu une plateforme d'engagement et de rapport, où le Q&A et les sondages servent le rapport.\n\nJ'en tiens la feuille de route et je mène ses fonctions d'IA. La plus profonde est le compte rendu post-événement : un agent qui lit les données de l'événement, trouve la séance faible, lit ce que les participants y ont écrit, compare avec les événements passés de l'organisateur et écrit ce qui s'est passé et quoi changer, chaque chiffre revérifié contre la base de données avant qu'un organisateur le voie, pour environ huit cents par compte rendu.",
-      tagline: "Q&A en direct et compréhension du public pour les événements",
+      tagline: "Q&A en direct et compréhension du public",
     }
   },
   landmark: () => `

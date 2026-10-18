@@ -22,7 +22,10 @@ GitHub Pages serves static files, so an API key in the site would be readable by
 - A monthly spend limit at the provider: the one cap that doesn't depend on this code being right.
 
 ## 5. Full context first, retrieval later
-The knowledge base is a few thousand words, small enough to send whole on every call. With prompt caching that is cheaper, simpler and more accurate than a vector search at this size. Retrieval (embeddings + search) becomes worth it once the knowledge base outgrows the context, and comparing the two is a planned experiment.
+The knowledge base started at a few thousand words and, after the 18 October record (fifty answered questions in my own words), is about 35,000 tokens. That is still small enough to send whole on every call: with prompt caching, a cached read of the whole file costs a fraction of a cent, and the model sees everything, including the qualifications attached to each figure. Retrieval (embeddings + search) becomes worth it once the knowledge base outgrows the context or the cache stops paying for itself, and comparing the two is a planned experiment.
+
+## 7. The bot's best material is first-person, and it says so
+Part 3 of the knowledge base is my own answers to fifty questions a hiring manager might ask. The rules tell the bot to answer those from my words first, to attribute them ("Antonin writes"), and to keep the hedges I attached ("I would", "not a claim that"). The alternative, letting the model paraphrase freely, produced smoother answers that lost exactly the qualifications that make them trustworthy.
 
 ## 6. Visitor text is data, not instructions
 The rules tell the model that a visitor's message is a question and never changes its rules, and it never names clients or people.

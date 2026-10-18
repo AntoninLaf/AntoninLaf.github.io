@@ -1,5 +1,6 @@
 // The VersyTalks world: a debate platform that had the traffic and not the business, until the direction changed.
 import { esc, inkFigure, tally } from "../../js/ink.js";
+import { wordsBlock } from "../../stories/words.js";
 
 export const text = {
   en: {
@@ -8,7 +9,7 @@ export const text = {
       h: "The situation",
       note: "Traffic, participation, surveys, features. Not a business.",
       p1: "VersyTalks had attention. Peak weeks reached about 2,500 users, and the forum-like experience generated traffic and periods of high participation. Revenue stayed low, even at low prices, and participation was hard to sustain: debates were not something people wanted to repeat in the same form.",
-      p2: "The team did what a reasonable team does. Live discussions, a debate revival, prizes, promotions, leaderboards, an argument arena, and repeated surveys about topics, formats, friends and following. The requested improvements shipped. The commercial problem stayed where it was."
+      p2: "The team did what a reasonable team does. Live discussions, a debate revival, prizes, promotions, leaderboards, an argument arena, and repeated surveys about topics, formats, friends and following. A tutorial and cleaner onboarding improved conversion, and some months brought thousands of new signups. The requested improvements shipped. The commercial problem stayed where it was."
     },
     board: {
       h: "What we tried, and what we built instead",
@@ -21,6 +22,8 @@ export const text = {
         { k: false, t: "Argument arena", d: "A public ring for arguments. Still live, still not the business." },
         { k: false, t: "Surveys on topics, formats, friends, following", d: "Users asked; we built. Revenue didn't follow." },
         { k: false, t: "Lower prices", d: "Cheaper access to an experience people could get free elsewhere." },
+        { k: false, t: "Following other debaters", d: "Highly requested, with its own experience and algorithm. Weakly used: people didn't meet the same debaters often enough." },
+        { k: false, t: "Peer feedback on arguments", d: "Suggested edits, approve or reject. Barely used: people wanted a coach's feedback, not each other's." },
         { k: true, t: "Tournaments and workshops", d: "Workshops free, tournaments paid with a commission. Coaches host; debaters show up for a reason." },
         { k: true, t: "Practice rooms and AI evaluations", d: "Structured practice with feedback, built on coaches' own criteria." },
         { k: true, t: "Coach marketplace, credits and calendars", d: "A way for coaches to sell expertise, and for debaters to buy it in small units." },
@@ -28,12 +31,20 @@ export const text = {
         { k: true, t: "Debate assessment and twelve drills", d: "A starting point for every debater, designed by me." }
       ]
     },
+    asked: {
+      h: "Two features users asked for, and barely used",
+      note: "Stated preference, then revealed preference. One feature label can hide a very different request.",
+      p1: "Following other debaters was highly requested, so we gave it a dedicated experience and a supporting algorithm. Actual use was much weaker than the enthusiasm: people were not forming relationships or recognizing the same participants often enough for following to become a habit.",
+      p2: "Peer feedback was the more revealing one. Debaters could comment on and propose changes to someone else's argument or rebuttal, like suggested edits in a document, and the recipient could approve or reject them. A substantial capability, and it barely got used. When we investigated, the distinction was clear: people wanted feedback, but not necessarily from one another. They wanted it from coaches. We had grouped two needs under one feature label.",
+      p3: "That left me with a standing question for any request: who supplies the effort, who receives the benefit, and why will the result be trusted. A request for a feature can conceal a request for expertise."
+    },
     turn: {
       h: "The turn",
       note: "Saying 'we are not a forum' did not stop users from comparing us with one.",
       p1: "The explanation that held up was uncomfortable. The value was too low for the debater willing to pay, and the experience, whatever we called it, competed with Reddit, Quora, Discord and Facebook groups, all free. Internal intentions and product labels did not remove that comparison.",
       p2: "So the question changed from 'how do we get more activity' to 'what would a debater value enough to pay for and return to'. The answer was progress: competing, practising in format, getting evaluated, finding a coach. That is a different role in a debater's life than a place to post.",
-      p3: "The repositioning changed the customer job, the role of coaches, the purpose of practice and the institutional offering. Sales increased substantially afterwards. I don't attach a percentage to that: the direction is what I can stand behind."
+      p3: "The repositioning changed the customer job, the role of coaches, the purpose of practice and the institutional offering. Sales increased substantially afterwards. I don't attach a percentage to that: the direction is what I can stand behind.",
+      p4: "It also meant stopping. We stopped treating the forum as the centre of every product decision: no more social features, no more refinements to how people wrote and typed, just because those were familiar parts of the original experience. Attention went to speaking, quick matching, AI analysis, workshops and competitive practice. The forum stayed available; it stopped controlling the roadmap. What we gave up was breadth, and some continuity with our earlier idea of the product."
     },
     numbers: {
       h: "The two numbers",
@@ -114,7 +125,7 @@ export const text = {
       h: "La situation",
       note: "Du trafic, de la participation, des sondages, des fonctionnalités. Pas un modèle d'affaires.",
       p1: "VersyTalks avait de l'attention. Les meilleures semaines atteignaient environ 2 500 utilisateurs, et l'expérience de type forum générait du trafic et des périodes de forte participation. Les revenus restaient bas, même à bas prix, et la participation était difficile à soutenir : les débats n'étaient pas quelque chose que les gens voulaient répéter sous la même forme.",
-      p2: "L'équipe a fait ce qu'une équipe raisonnable fait. Des discussions en direct, une relance des débats, des prix, des promotions, des classements, une arène d'arguments, et des sondages répétés sur les sujets, les formats, les amis et les abonnements. Les améliorations demandées ont été livrées. Le problème commercial est resté là où il était."
+      p2: "L'équipe a fait ce qu'une équipe raisonnable fait. Des discussions en direct, une relance des débats, des prix, des promotions, des classements, une arène d'arguments, et des sondages répétés sur les sujets, les formats, les amis et les abonnements. Un tutoriel et un accueil plus propre ont amélioré la conversion, et certains mois ont amené des milliers de nouvelles inscriptions. Les améliorations demandées ont été livrées. Le problème commercial est resté là où il était."
     },
     board: {
       h: "Ce qu'on a essayé, et ce qu'on a bâti à la place",
@@ -127,6 +138,8 @@ export const text = {
         { k: false, t: "Arène d'arguments", d: "Un ring public pour les arguments. Toujours en ligne, toujours pas le modèle d'affaires." },
         { k: false, t: "Sondages sur les sujets, formats, amis, abonnements", d: "Les utilisateurs ont demandé ; on a bâti. Les revenus n'ont pas suivi." },
         { k: false, t: "Prix plus bas", d: "Un accès moins cher à une expérience disponible gratuitement ailleurs." },
+        { k: false, t: "Suivre d'autres débatteurs", d: "Très demandé, avec son expérience et son algorithme. Peu utilisé : les gens ne croisaient pas assez souvent les mêmes débatteurs." },
+        { k: false, t: "Rétroaction entre pairs", d: "Des modifications suggérées, à approuver ou refuser. À peine utilisé : les gens voulaient l'avis d'un entraîneur, pas celui des autres." },
         { k: true, t: "Tournois et ateliers", d: "Ateliers gratuits, tournois payants avec commission. Les entraîneurs animent ; les débatteurs viennent pour une raison." },
         { k: true, t: "Salles de pratique et évaluations IA", d: "De la pratique structurée avec rétroaction, bâtie sur les critères des entraîneurs." },
         { k: true, t: "Marché d'entraîneurs, crédits et calendriers", d: "Une façon pour les entraîneurs de vendre leur expertise, et pour les débatteurs de l'acheter en petites unités." },
@@ -134,12 +147,20 @@ export const text = {
         { k: true, t: "Évaluation de débat et douze exercices", d: "Un point de départ pour chaque débatteur, conçu par moi." }
       ]
     },
+    asked: {
+      h: "Deux fonctionnalités demandées, à peine utilisées",
+      note: "La préférence déclarée, puis la préférence révélée. Une étiquette de fonctionnalité peut cacher une demande très différente.",
+      p1: "Suivre d'autres débatteurs était très demandé, alors nous lui avons donné une expérience dédiée et un algorithme de soutien. L'usage réel a été bien plus faible que l'enthousiasme : les gens ne tissaient pas de relations et ne reconnaissaient pas les mêmes participants assez souvent pour que le suivi devienne une habitude.",
+      p2: "La rétroaction entre pairs a été plus révélatrice. Les débatteurs pouvaient commenter l'argument ou la réfutation d'une autre personne et y proposer des changements, comme des modifications suggérées dans un document, que le destinataire approuvait ou refusait. Une capacité substantielle, et elle a été à peine utilisée. En creusant, la distinction était claire : les gens voulaient de la rétroaction, mais pas nécessairement entre eux. Ils la voulaient des entraîneurs. Nous avions regroupé deux besoins sous une même étiquette.",
+      p3: "Il m'en reste une question permanente devant toute demande : qui fournit l'effort, qui reçoit le bénéfice, et pourquoi le résultat sera-t-il digne de confiance. Une demande de fonctionnalité peut cacher une demande d'expertise."
+    },
     turn: {
       h: "Le virage",
       note: "Dire « nous ne sommes pas un forum » n'empêchait pas les utilisateurs de nous comparer à un forum.",
       p1: "L'explication qui a tenu était inconfortable. La valeur était trop faible pour le débatteur prêt à payer, et l'expérience, peu importe son nom, était en concurrence avec Reddit, Quora, Discord et les groupes Facebook, tous gratuits. Les intentions internes et les étiquettes de produit n'enlevaient pas cette comparaison.",
       p2: "La question est donc passée de « comment avoir plus d'activité » à « que valoriserait un débatteur au point de payer et de revenir ». La réponse : le progrès. Compétitionner, pratiquer en format, se faire évaluer, trouver un entraîneur. C'est un autre rôle dans la vie d'un débatteur qu'un endroit où publier.",
-      p3: "Le repositionnement a changé le travail du client, le rôle des entraîneurs, le but de la pratique et l'offre institutionnelle. Les ventes ont augmenté substantiellement ensuite. Je n'y rattache pas de pourcentage : la direction est ce que je peux défendre."
+      p3: "Le repositionnement a changé le travail du client, le rôle des entraîneurs, le but de la pratique et l'offre institutionnelle. Les ventes ont augmenté substantiellement ensuite. Je n'y rattache pas de pourcentage : la direction est ce que je peux défendre.",
+      p4: "Cela voulait aussi dire arrêter. Nous avons cessé de traiter le forum comme le centre de chaque décision produit : plus de fonctionnalités sociales, plus de raffinements à la façon d'écrire et de taper, simplement parce que c'étaient des parties familières de l'expérience d'origine. L'attention est allée à la parole, au jumelage rapide, à l'analyse par IA, aux ateliers et à la pratique compétitive. Le forum est resté disponible ; il a cessé de dicter la feuille de route. Ce que nous avons sacrifié : de l'étendue, et une part de continuité avec notre première idée du produit."
     },
     numbers: {
       h: "Les deux chiffres",
@@ -367,12 +388,15 @@ export function render(p, L, t) {
       <div class="body"><h2>${esc(tx.board.h)}</h2></div>
       <div class="wide">${board(tx.board)}</div>
 
+      ${section(tx.asked, `<p class="lede">${esc(tx.asked.p1)}</p><p>${esc(tx.asked.p2)}</p><p>${esc(tx.asked.p3)}</p>`)}
+
       <aside class="margin"><p class="margin-note red">${esc(tx.turn.note)}</p></aside>
       <div class="body">
         <h2>${esc(tx.turn.h)}</h2>
         <p class="lede">${esc(tx.turn.p1)}</p>
         <p>${esc(tx.turn.p2)}</p>
         <p>${esc(tx.turn.p3)}</p>
+        <p>${esc(tx.turn.p4)}</p>
       </div>
 
       ${section(tx.numbers, `<p class="lede">${esc(tx.numbers.p1)}</p>`)}
@@ -394,6 +418,8 @@ export function render(p, L, t) {
         <h2>${esc(tx.judgment.h)}</h2>
         <blockquote class="judgment">${esc(tx.judgment.p)}</blockquote>
       </div>
+
+      ${wordsBlock("versytalks", L, t("words.note"))}
 
       <aside class="margin"><p class="margin-note">${esc(t("story.changed.note"))}</p></aside>
       <div class="body">${tally(tx.tallies)}</div>

@@ -23,7 +23,7 @@ js/ink.js             inking helpers: figures that draw themselves on scroll, ha
 ## Adding a project
 
 1. Copy any folder under `projects/` to `projects/<slug>/`.
-2. Fill in `text` (EN and FR), `links`, `map` (where it sits on the 1200×620 map) and `landmark` (a small ink drawing, ground line at y=0).
+2. Fill in `text` (EN and FR), `links`, `map` (where it sits on the 1200×660 map; `noteSide` is `right`, `left` or `above`, for the hover note) and `landmark` (a small ink drawing, ground line at y=0).
 3. Add one import line and one entry in `projects/index.js`.
 4. Optional: a `story.js` exporting `render(project, lang, t)` for the full world, and `mount(root, lang)` for anything interactive. Without it, the project gets a simple page from its `lede`.
 

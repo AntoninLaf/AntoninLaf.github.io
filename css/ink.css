@@ -68,7 +68,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   z-index: 5;
   pointer-events: none;
 }
-.topbar > * { pointer-events: auto; }
+.topbar > * { pointer-events: auto; background: rgba(236,232,222,.9); padding: 2px 8px; margin: 0 -8px; border-radius: 4px; }
 .back {
   font-family: var(--hand);
   font-weight: 300;
@@ -105,7 +105,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 @keyframes sheet-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(-40px) rotate(-.4deg); } }
 
 /* ---------- home ---------- */
-.home { display: grid; grid-template-rows: auto 1fr; gap: 0; padding-bottom: 32px; }
+.home { display: grid; grid-template-rows: auto 1fr; gap: 0; padding-bottom: 120px; }  /* room under the map for the quill */
 .hero { max-width: 1160px; margin: 0 auto; width: 100%; }
 .name {
   font-weight: 500;
@@ -369,6 +369,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .place .note { display: none; }
   .map-wrap.stacked { max-width: 420px; }
   .map-wrap.stacked .map text { font-size: 22px; }
+  .map-wrap.stacked .map text.small { font-size: 18px; }
 }
 @media (max-width: 520px) {
   .sheet { padding-top: 72px; }
@@ -440,6 +441,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-variation-settings: "opsz" 28;
 }
 .h-quiet { font-size: 21px; color: var(--ink-soft); }
+/* his own words: a quieter page, the heading in pencil */
+.words h2 { margin-bottom: 4px; }
+.words h3 { font-family: var(--hand); font-weight: 400; font-size: 20px; color: var(--pencil); margin: 34px 0 6px; }
+.words h3::before { content: "— "; color: var(--red-ink); }
+.words-note:first-of-type h3 { margin-top: 18px; }
+.words p { font-size: 19.5px; line-height: 1.55; }
+.body.words > p:first-of-type { margin-top: 8px; }
 .questions { list-style: none; padding: 0; margin: 0; font-family: var(--hand); font-weight: 300; font-size: 18px; color: var(--ink-soft); }
 .questions li { padding: 6px 0 6px 24px; position: relative; }
 .questions li::before { content: "?"; position: absolute; left: 2px; color: var(--red-ink); font-weight: 400; }

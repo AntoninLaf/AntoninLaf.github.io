@@ -1,5 +1,6 @@
 // The VersyNow world: an event hall, an agent that reasons across the data, and the gate between it and the screen.
 import { esc, inkFigure, tally } from "../../js/ink.js";
+import { wordsBlock } from "../../stories/words.js";
 
 export const text = {
   en: {
@@ -17,6 +18,13 @@ export const text = {
         note: "A poll is useful during a session. It is more useful after.",
         p1: "Prospects kept asking the same things: who was at the event and why, which themes and concerns kept coming back, what the audience actually expressed, and how the next event could be better. Engagement was a means. Understanding the audience and improving from one event to the next was the value they were buying.",
         p2: "That changed the product story and the demo. Q&A, polls and word clouds stayed, but as inputs into a report an organizer can act on. A demo that stops at 'an attendee can submit a response' now stops too early; it has to show the relationship between interaction, interpretation and the next decision. Interest and sales grew substantially after this focus. I don't attach a percentage to that: the direction is what I can stand behind."
+      },
+      networking: {
+        h: "Networking, inside whatever event they were already planning",
+        note: "A request can sound small as 'can attendees match?' and change the information architecture.",
+        p1: "Organizers running recurring events kept asking about networking: matching attendees, connecting them with panelists or sponsors, understanding interest over time. I first read that as demand for a faster way to create a dedicated networking event. The deeper request was to have networking available inside the other formats. A conference or a panel could need matching too.",
+        p2: "That changed the unit of design, from an event category to a capability across event workflows. We rebuilt the onboarding and the home dashboard around faster preparation and networking that can be configured in any event type. When I wrote this page, that direction had brought in five new clients.",
+        p3: "The second pattern pointed the same way. Organizers wanted to understand their audience after the event, because follow-up surveys drew little response. That pushed the analysis across the whole lifecycle, trends, comparisons and dashboards, and it shaped both the agent below and the idea of a trial that spans several events."
       },
       recurrence: {
         h: "Recurrence over size",
@@ -208,6 +216,13 @@ export const text = {
         note: "Un sondage est utile pendant une séance. Il l'est encore plus après.",
         p1: "Les prospects demandaient toujours les mêmes choses : qui était à l'événement et pourquoi, quels thèmes et préoccupations revenaient, ce que le public exprimait vraiment, et comment le prochain événement pouvait être meilleur. L'engagement était un moyen. Comprendre le public et s'améliorer d'un événement à l'autre, c'était la valeur qu'ils achetaient.",
         p2: "Cela a changé l'histoire du produit et la démo. Q&A, sondages et nuages de mots sont restés, mais comme intrants d'un rapport sur lequel un organisateur peut agir. Une démo qui s'arrête à « un participant peut soumettre une réponse » s'arrête désormais trop tôt ; elle doit montrer la relation entre l'interaction, l'interprétation et la prochaine décision. L'intérêt et les ventes ont augmenté substantiellement après ce recentrage. Je n'y rattache pas de pourcentage : la direction est ce que je peux défendre."
+      },
+      networking: {
+        h: "Le réseautage, dans l'événement qu'ils préparaient déjà",
+        note: "Une demande peut sembler petite, « les participants peuvent-ils se jumeler ? », et changer l'architecture de l'information.",
+        p1: "Les organisateurs d'événements récurrents revenaient sans cesse sur le réseautage : jumeler les participants, les mettre en contact avec des panélistes ou des commanditaires, comprendre les intérêts dans le temps. J'ai d'abord lu cela comme une demande pour créer plus vite un événement de réseautage dédié. La demande plus profonde : avoir le réseautage à l'intérieur des autres formats. Une conférence ou un panel peut aussi avoir besoin de jumelage.",
+        p2: "Cela a changé l'unité de conception, d'une catégorie d'événement à une capacité transversale aux flux d'événements. Nous avons rebâti l'accueil et le tableau de bord d'accueil autour d'une préparation plus rapide et d'un réseautage configurable dans tout type d'événement. Au moment d'écrire cette page, cette direction nous avait amené cinq nouveaux clients.",
+        p3: "Le second motif pointait dans la même direction. Les organisateurs voulaient comprendre leur public après l'événement, parce que les sondages de suivi récoltaient peu de réponses. Cela a poussé l'analyse sur tout le cycle de vie, tendances, comparaisons et tableaux de bord, et cela a façonné l'agent plus bas comme l'idée d'un essai qui s'étend sur plusieurs événements."
       },
       recurrence: {
         h: "La récurrence avant la taille",
@@ -560,12 +575,20 @@ export function render(p, L, t) {
         <p class="lede">${esc(tx.market.discovery.p1)}</p>
         <p>${esc(tx.market.discovery.p2)}</p>
       </div>
+      <aside class="margin"><p class="margin-note">${esc(tx.market.networking.note)}</p></aside>
+      <div class="body">
+        <h2>${esc(tx.market.networking.h)}</h2>
+        <p class="lede">${esc(tx.market.networking.p1)}</p>
+        <p>${esc(tx.market.networking.p2)}</p>
+        <p>${esc(tx.market.networking.p3)}</p>
+      </div>
       <aside class="margin"><p class="margin-note">${esc(tx.market.recurrence.note)}</p></aside>
       <div class="body">
         <h2>${esc(tx.market.recurrence.h)}</h2>
         <p class="lede">${esc(tx.market.recurrence.p1)}</p>
         <p>${esc(tx.market.recurrence.p2)}</p>
       </div>
+      ${wordsBlock("recurrence", L, t("words.note"))}
       <aside class="margin"><p class="margin-note">${esc(tx.market.lifecycle.note)}</p></aside>
       <div class="body"><h2>${esc(tx.market.lifecycle.h)}</h2></div>
       <div class="wide">${table(tx.market.lifecycle.head, tx.market.lifecycle.rows, "lifecycle")}</div>

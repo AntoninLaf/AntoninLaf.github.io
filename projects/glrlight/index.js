@@ -27,7 +27,7 @@ export default {
       small: "GLRlight",
       note: "Un risque de contrepartie explicable, à partir des dépôts d'entreprise.",
       lede: "Environ cinq millions d'entreprises figurent au registre britannique, et la plupart des décisions d'achat ou de vente se prennent sans aucune vérification : les agences de crédit sont tarifées pour les équipes d'approvisionnement, et le registre gratuit est illisible. GLRlight lit six registres de Companies House en une seconde, y applique seize règles et rend un verdict vert, ambre ou rouge, chaque constat daté et sourcé. Puis un agent IA retourne enquêter sur ce qui semblait inhabituel.",
-      tagline: "risque de contrepartie explicable, à partir des dépôts britanniques",
+      tagline: "risque de contrepartie explicable, dépôts du R.-U.",
     }
   },
   // Drawn in local coordinates: ground line at y=0, x from -90 to 90, up is negative.
