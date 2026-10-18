@@ -36,3 +36,6 @@ Copy any file under `stories/`, fill in the text, the tallies and the diagram, a
 ## Running locally
 
 Any static server works, for example `python3 -m http.server 8000`, then open `http://localhost:8000`.
+
+## The social preview card
+`assets/og.png` is rendered from `tools/og-card.html` (open it from the site root, e.g. `http://localhost:8123/tools/og-card.html`, and screenshot at 1200×630). It reuses the project landmarks, so it changes when the map does.

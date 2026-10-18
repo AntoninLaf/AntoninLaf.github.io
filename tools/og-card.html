@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <style>
+    html, body { margin: 0; }
+    body { width: 1200px; height: 630px; overflow: hidden; background: #ece8de; color: #1f2436; font-family: "Newsreader", Georgia, serif; position: relative; }
+    .grid { position: absolute; inset: 0; background-image: radial-gradient(#b8b3a6 1px, transparent 1.2px); background-size: 26px 26px; opacity: .55; }
+    .grain { position: absolute; inset: 0; opacity: .5; }
+    .name { position: absolute; left: 72px; top: 92px; margin: 0; font-weight: 400; font-size: 66px; line-height: 1.05; letter-spacing: -.01em; font-variation-settings: "opsz" 72; }
+    .under { position: absolute; left: 72px; top: 178px; width: 560px; height: 12px; }
+    .under path { fill: none; stroke: #1f2436; stroke-width: 2.2; stroke-linecap: round; }
+    .through { position: absolute; left: 72px; top: 214px; margin: 0; width: 620px; font-style: italic; font-size: 31px; line-height: 1.35; font-variation-settings: "opsz" 32; color: #2b3146; }
+    .foot { position: absolute; left: 72px; bottom: 64px; font-family: "Kalam", cursive; font-weight: 300; font-size: 23px; color: #7d7a70; }
+    .foot b { font-weight: 400; color: #9e2a2b; }
+    .map { position: absolute; right: 48px; top: 110px; width: 470px; height: 420px; overflow: visible; }
+    .map path, .map circle { fill: none; stroke: #1f2436; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+    .map .thin { stroke-width: 1; stroke: #4a5068; }
+    .map .route { stroke: #7d7a70; stroke-width: 1.3; stroke-dasharray: 6 7; }
+    .map text { fill: #1f2436; font-family: "Kalam", cursive; font-weight: 400; font-size: 21px; }
+    .map text.small { font-size: 15px; font-weight: 300; fill: #7d7a70; }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+  <svg class="grain" aria-hidden="true"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 0 0.06 0.08"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
+  <h1 class="name">Antonin Laferrière-Mailfait</h1>
+  <svg class="under" viewBox="0 0 560 12" preserveAspectRatio="none"><path d="M2 7 C120 3 260 9 400 5 C470 3 520 6 558 5"/></svg>
+  <p class="through">I frame the right problems, test the critical assumptions, and turn insight into measurable business value.</p>
+  <p class="foot"><b>antoninlaf.github.io</b> &nbsp;·&nbsp; a field notebook of products and decisions</p>
+  <svg class="map" id="map" viewBox="0 0 470 420"></svg>
+  <script type="module">
+    import { projects } from "../projects/index.js";
+    const S = 0.52;
+    const spots = [[120, 140], [340, 110], [140, 330], [360, 310]];
+    const svg = document.getElementById("map");
+    let route = "";
+    const parts = [];
+    projects.forEach((p, i) => {
+      const [x, y] = spots[i];
+      route += (i ? " L" : "M") + x + " " + (y + 40);
+      parts.push(`<g transform="translate(${x} ${y}) scale(${S})">${p.landmark()}</g>
+        <text x="${x}" y="${y + 24}" text-anchor="middle">${p.text.en.title}</text>`);
+    });
+    const r = `M120 186 C220 186 240 156 340 156 C450 156 430 356 360 356 C300 356 300 376 140 376`;
+    svg.innerHTML = `<path class="route" d="${r}"/>` + parts.join("");
+  </script>
+</body>
+</html>
