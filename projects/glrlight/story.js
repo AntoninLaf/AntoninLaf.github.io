@@ -40,6 +40,21 @@ export const text = {
         caption: "Two halves, kept apart on purpose. The verdict never depends on the model."
       }
     },
+    boundary: {
+      h: "How the line is enforced",
+      note: "Constraining capability beats constraining instruction.",
+      p1: "The agent has six tools, and none of them returns a score, a risk level or an opinion. Every tool returns facts from the register. Whatever the prompt says, the agent cannot produce a verdict, because nothing it can call will give it one. Prompts can be talked around, eroded by context or quietly ignored; a tool that does not exist cannot be called. When a client asks how you stop an AI system doing something, 'we told it not to' is a weak answer and 'it has no mechanism to' is a strong one.",
+      p2: "The same split decided the model. By the time it sees anything, the signals are found, weighted, scored and paired with their innocent explanations; what remains is turning structured findings into readable English, a writing task rather than a reasoning task. So a cheap, fast model is enough: about $0.003 a briefing, cached for a day, capped at CA$2 a month, which covers roughly six hundred assessments. Paying for a tier bought availability, not quality: latency fell from 42 seconds to 7 once free-tier contention disappeared. Worth knowing which problem money actually solves.",
+      p3: "Model availability at that tier is unstable: catalogue entries that return 404 at the generation endpoint, popular models returning 503 under load, reasoning models spending their whole budget thinking and returning nothing. Generation walks a fallback chain with backoff and reports which model served each request, so the app stays up while individual models come and go. That started as frustration and became the thing that separates a demo from something that could run in front of users.",
+      p4: "Where the agent earns its place: investigating Carillion, it noticed that five charges granted within two days to a security trustee coincided with emergency board appointments and followed the departures of the CEO and CFO. Three registers, drawn together by timing, which no rule firing on its own could have done. Run on Greggs, it takes four steps in a different order, traces nobody, and reads an empty PSC register as normal for a listed company. Different path, different length, different stated reason per step: that is what separates an agent from a pipeline with commentary, and it is the test I'd apply to any system claiming to be agentic."
+    },
+    falsePositives: {
+      h: "The first version flagged Greggs and Tesco",
+      note: "For a screening tool, false positives are more damaging than misses.",
+      p1: "Two of the healthiest companies in Britain came back amber. Four assumptions were wrong, every one a domain error rather than a coding bug. I counted dissolution as failure, when large groups strike off dormant subsidiaries as routine solvent housekeeping. I penalised listed companies for an empty PSC register, which they are exempt from. I counted director departures absolutely, when only the proportion of the board carries information. And my name-change rule had no recency window, so Tesco scored for rebrands from the 1980s.",
+      p2: "Insolvency is rare, around half a percent of companies a year, so almost every company checked is fine. Flag the healthy ones and users learn within a week that amber means nothing, at which point the tool buries the real warnings too. None of this was visible from reading the code; it appeared only by testing against companies whose answers I already knew. It is also why every finding ships with its innocent explanation, inline: presenting the benign reading first is what makes the alarming reading credible when it matters.",
+      p3: "That base rate is the number that matters most about any rare-event detector. A detector catching 70% of failures while flagging 10% of survivors looks strong on a balanced sample and would be wrong roughly 29 times out of 30 in production. That is Bayes' theorem, and volunteering it before a client is caught out by it is worth more than any accuracy figure."
+    },
     proof: {
       h: "The proof",
       note: "Same rules, three very different companies.",
@@ -77,6 +92,23 @@ export const text = {
         "It cannot see whether a company pays its invoices. That trade payment data belongs to the bureaus, and it is the reason a paid check still has a job.",
         "Filings can be perfectly punctual while the business underneath is struggling. A green verdict means nothing adverse was found, not that the company is sound.",
         "The accounts it reads can be 12 to 21 months old, by law. The register lags; the tool says so instead of hiding it."
+      ]
+    },
+    commercial: {
+      h: "Where this goes, if a client asked",
+      note: "The lookup is not the business. Monitoring is.",
+      p1: "The register is a stream, not a snapshot. 'Tell me when one of my forty suppliers files late, changes directors or has a charge registered' is a subscription; it is what Red Flag Alert and Creditsafe charge hundreds a year for. A one-off lookup is a feature; a watchlist is a product. From here to something sellable is four components: persistence, accounts, payments and a nightly job that re-checks watched companies. None exotic. A second jurisdiction, France through its free national registers, is the obvious next: the reading logic transfers and only the rules need re-grounding in local filing law.",
+      p2: "Two things were settled before any of that. Data ethics, decided at design time rather than after a complaint: the company is the subject and people appear only as properties of companies; there is no search by person and there never will be; no residential or service addresses are displayed; director history is reported as corporate outcomes, never as personal characterisation. And the evaluation, done properly on bulk data with stratified sampling, is what would let the product make a predictive claim and compete on the bureaus' ground rather than above it."
+    },
+    lines: {
+      h: "What I'd say in the room",
+      note: "Five lines, each with the reason behind it.",
+      items: [
+        ["The model does not compute the score. Rules do.", "Separating deterministic judgment from generated language is what makes an AI product auditable, and auditability is what makes it deployable."],
+        ["The agent chooses what to investigate and has no say in the verdict: none of its tools return a score, only facts.", "Constraining capability beats constraining instruction."],
+        ["The backtest found a defect, not a miscalibration.", "A test that only confirms what you believe isn't a test."],
+        ["I moved the judgment into rules, so the model only had to write, which is why a cheap, fast model was enough.", "Good architecture reduces what you have to buy."],
+        ["I couldn't establish predictive validity, and here is the document explaining why.", "The claim you can defend beats the claim that sounds better."]
       ]
     },
     tallies: [
@@ -140,6 +172,21 @@ export const text = {
         caption: "Deux moitiés, séparées exprès. Le verdict ne dépend jamais du modèle."
       }
     },
+    boundary: {
+      h: "Comment la ligne est tenue",
+      note: "Contraindre la capacité vaut mieux que contraindre la consigne.",
+      p1: "L'agent a six outils, et aucun ne renvoie une note, un niveau de risque ou une opinion. Chaque outil renvoie des faits du registre. Peu importe la consigne, l'agent ne peut pas produire de verdict, parce que rien de ce qu'il peut appeler ne lui en donnera un. Une consigne se contourne, s'érode avec le contexte ou s'ignore en silence ; un outil qui n'existe pas ne peut pas être appelé. Quand un client demande comment on empêche un système d'IA de faire quelque chose, « on lui a dit de ne pas le faire » est une réponse faible et « il n'a aucun mécanisme pour le faire » est une réponse forte.",
+      p2: "La même séparation a décidé du modèle. Quand il voit quelque chose, les signaux sont déjà trouvés, pondérés, notés et accompagnés de leur explication bénigne ; il reste à transformer des constats structurés en anglais lisible, une tâche d'écriture, pas de raisonnement. Un modèle bon marché et rapide suffit donc : environ 0,003 $ par compte rendu, mis en cache une journée, plafonné à 2 $ CA par mois, soit à peu près six cents évaluations. Payer un palier a acheté de la disponibilité, pas de la qualité : la latence est passée de 42 secondes à 7 quand la congestion du palier gratuit a disparu. Il vaut la peine de savoir quel problème l'argent règle vraiment.",
+      p3: "La disponibilité des modèles à ce palier est instable : des entrées du catalogue qui renvoient 404 à la génération, des modèles populaires qui renvoient 503 sous charge, des modèles de raisonnement qui dépensent tout leur budget à réfléchir et ne renvoient rien. La génération parcourt une chaîne de repli avec attente progressive et indique quel modèle a servi chaque requête ; l'application reste debout pendant que les modèles vont et viennent. Parti d'une frustration, c'est devenu ce qui sépare une démo de quelque chose qui pourrait tourner devant des utilisateurs.",
+      p4: "Là où l'agent mérite sa place : en enquêtant sur Carillion, il a remarqué que cinq sûretés accordées en deux jours à un fiduciaire coïncidaient avec des nominations d'urgence au conseil et suivaient les départs du PDG et du directeur financier. Trois registres, reliés par la chronologie, ce qu'aucune règle isolée n'aurait pu faire. Sur Greggs, il fait quatre étapes dans un autre ordre, ne trace personne, et lit un registre des bénéficiaires vide comme normal pour une société cotée. Un autre chemin, une autre longueur, une autre raison déclarée à chaque étape : c'est ce qui distingue un agent d'un pipeline avec des commentaires, et c'est le test que j'appliquerais à tout système qui se dit agentique."
+    },
+    falsePositives: {
+      h: "La première version a signalé Greggs et Tesco",
+      note: "Pour un outil de filtrage, les faux positifs font plus de dégâts que les ratés.",
+      p1: "Deux des entreprises les plus saines de Grande-Bretagne sont revenues ambre. Quatre hypothèses étaient fausses, chacune une erreur de domaine plutôt qu'un bogue. Je comptais la dissolution comme un échec, alors que les grands groupes radient des filiales dormantes par simple entretien solvable. Je pénalisais les sociétés cotées pour un registre des bénéficiaires vide, dont elles sont exemptées. Je comptais les départs d'administrateurs en absolu, alors que seule la proportion du conseil porte de l'information. Et ma règle de changement de nom n'avait pas de fenêtre de récence, alors Tesco écopait pour des rebaptêmes des années 1980.",
+      p2: "L'insolvabilité est rare, autour d'un demi pour cent des entreprises par année, donc presque toutes celles qu'on vérifie vont bien. Signalez les saines et les utilisateurs apprennent en une semaine qu'ambre ne veut rien dire ; l'outil enterre alors aussi les vrais avertissements. Rien de tout cela n'était visible en lisant le code ; c'est apparu seulement en testant contre des entreprises dont je connaissais déjà la réponse. C'est aussi pourquoi chaque constat s'affiche avec son explication bénigne, en ligne : présenter d'abord la lecture anodine est ce qui rend la lecture alarmante crédible quand ça compte.",
+      p3: "Ce taux de base est le chiffre qui compte le plus pour tout détecteur d'événements rares. Un détecteur qui attrape 70 % des faillites en signalant 10 % des survivantes paraît fort sur un échantillon équilibré et se tromperait à peu près 29 fois sur 30 en production. C'est le théorème de Bayes, et le dire avant qu'un client s'y fasse prendre vaut plus que n'importe quel chiffre de précision."
+    },
     proof: {
       h: "La preuve",
       note: "Mêmes règles, trois entreprises très différentes.",
@@ -177,6 +224,23 @@ export const text = {
         "Il ne peut pas voir si une entreprise paie ses factures. Ces données de paiement appartiennent aux agences, et c'est la raison pour laquelle une vérification payante garde sa place.",
         "Les dépôts peuvent être parfaitement ponctuels pendant que l'entreprise en dessous souffre. Un verdict vert veut dire que rien de défavorable n'a été trouvé, pas que l'entreprise est solide.",
         "Les comptes qu'il lit peuvent avoir 12 à 21 mois, légalement. Le registre est en retard ; l'outil le dit au lieu de le cacher."
+      ]
+    },
+    commercial: {
+      h: "Où ça mène, si un client demandait",
+      note: "La recherche n'est pas le modèle d'affaires. La surveillance, oui.",
+      p1: "Le registre est un flux, pas un instantané. « Dites-moi quand l'un de mes quarante fournisseurs dépose en retard, change d'administrateurs ou se voit inscrire une sûreté », c'est un abonnement ; c'est ce que Red Flag Alert et Creditsafe facturent des centaines par année. Une recherche ponctuelle est une fonctionnalité ; une liste de surveillance est un produit. D'ici à quelque chose de vendable, il y a quatre composants : la persistance, les comptes, les paiements et une tâche nocturne qui revérifie les entreprises surveillées. Rien d'exotique. Une deuxième juridiction, la France par ses registres nationaux gratuits, est la suite évidente : la logique de lecture se transfère et seules les règles doivent être réancrées dans le droit local des dépôts.",
+      p2: "Deux choses étaient réglées avant tout cela. L'éthique des données, décidée à la conception plutôt qu'après une plainte : l'entreprise est le sujet et les personnes n'apparaissent que comme propriétés d'entreprises ; il n'y a pas de recherche par personne et il n'y en aura jamais ; aucune adresse résidentielle ou de service n'est affichée ; l'historique des administrateurs est rapporté comme des résultats d'entreprises, jamais comme une caractérisation personnelle. Et l'évaluation, bien faite sur les données en vrac avec un échantillonnage stratifié, est ce qui permettrait au produit de faire une promesse prédictive et de rivaliser sur le terrain des agences plutôt qu'au-dessus."
+    },
+    lines: {
+      h: "Ce que je dirais dans la salle",
+      note: "Cinq phrases, chacune avec sa raison.",
+      items: [
+        ["Le modèle ne calcule pas la note. Les règles le font.", "Séparer le jugement déterministe du langage généré est ce qui rend un produit d'IA vérifiable, et la vérifiabilité est ce qui le rend déployable."],
+        ["L'agent choisit quoi examiner et n'a aucun mot sur le verdict : aucun de ses outils ne renvoie une note, seulement des faits.", "Contraindre la capacité vaut mieux que contraindre la consigne."],
+        ["Le test rétrospectif a trouvé un défaut, pas un mauvais calibrage.", "Un test qui ne fait que confirmer ce qu'on croit n'est pas un test."],
+        ["J'ai mis le jugement dans des règles, donc le modèle n'avait qu'à écrire, et c'est pourquoi un modèle bon marché et rapide a suffi.", "Une bonne architecture réduit ce qu'il faut acheter."],
+        ["Je n'ai pas pu établir la validité prédictive, et voici le document qui explique pourquoi.", "La promesse qu'on peut défendre vaut mieux que celle qui sonne mieux."]
       ]
     },
     tallies: [
@@ -383,11 +447,28 @@ export function render(p, L, t) {
       </div>
       ${inkFigure(halves(tx.decision.diagram), { viewBox: "0 0 900 300", caption: tx.decision.diagram.caption, cls: "wide" })}
 
+      <aside class="margin"><p class="margin-note red">${esc(tx.boundary.note)}</p></aside>
+      <div class="body">
+        <h2>${esc(tx.boundary.h)}</h2>
+        <p class="lede">${esc(tx.boundary.p1)}</p>
+        <p>${esc(tx.boundary.p2)}</p>
+        <p>${esc(tx.boundary.p3)}</p>
+        <p>${esc(tx.boundary.p4)}</p>
+      </div>
+
       <aside class="margin"><p class="margin-note">${esc(tx.proof.note)}</p></aside>
       <div class="body">
         <h2>${esc(tx.proof.h)}</h2>
       </div>
       <div class="wide">${filingCards(tx.proof.cards)}</div>
+
+      <aside class="margin"><p class="margin-note red">${esc(tx.falsePositives.note)}</p></aside>
+      <div class="body">
+        <h2>${esc(tx.falsePositives.h)}</h2>
+        <p class="lede">${esc(tx.falsePositives.p1)}</p>
+        <p>${esc(tx.falsePositives.p2)}</p>
+        <p>${esc(tx.falsePositives.p3)}</p>
+      </div>
 
       <aside class="margin"><p class="margin-note red">${esc(tx.evaluation.note)}</p></aside>
       <div class="body">
@@ -407,6 +488,19 @@ export function render(p, L, t) {
       <div class="body">
         <h2>${esc(tx.limits.h)}</h2>
         <ul class="limits">${tx.limits.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>
+      </div>
+
+      <aside class="margin"><p class="margin-note">${esc(tx.commercial.note)}</p></aside>
+      <div class="body">
+        <h2>${esc(tx.commercial.h)}</h2>
+        <p class="lede">${esc(tx.commercial.p1)}</p>
+        <p>${esc(tx.commercial.p2)}</p>
+      </div>
+
+      <aside class="margin"><p class="margin-note red">${esc(tx.lines.note)}</p></aside>
+      <div class="body">
+        <h2>${esc(tx.lines.h)}</h2>
+        <dl class="gaps room">${tx.lines.items.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
       </div>
 
       <aside class="margin"><p class="margin-note">${esc(t("story.changed.note"))}</p></aside>

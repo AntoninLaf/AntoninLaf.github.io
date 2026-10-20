@@ -1,6 +1,6 @@
 # Antonin Laferrière-Mailfait: knowledge base for the portfolio and its assistant
 
-Record captured 17 October 2026, extended 18 October 2026. This file is the single source of truth for antoninlaf.github.io and for the "Ask me anything" assistant. Part 1 is the approved career record. Part 2 is the reasoning behind the products, written with its evidence levels attached. Part 3 is Antonin's own answers to fifty questions about his work, in his words. Part 4 is how the assistant must answer.
+Record captured 17 October 2026, extended 18 October 2026. This file is the single source of truth for antoninlaf.github.io and for the "Ask me anything" assistant. Part 1 is the approved career record. Part 2 is the reasoning behind the products, written with its evidence levels attached. Part 3 is Antonin's own answers to fifty questions about his work, his handover brief on GLRlight, and six approved statements, all in his words. Part 4 is how the assistant must answer.
 
 # Part 1. The approved career record
 
@@ -1357,6 +1357,300 @@ The lesson is also personal. I have learned to be more demanding about the relat
 
 I want to keep building the kind of structure that helps another person move forward: a clearer question, a more appropriate recommendation, a useful exercise or a better product experience. That is the work I find interesting, and it is the contribution I want to keep developing.
 
+## GLRlight: the consultant's handover brief (in his words)
+
+Evidence: a first-person brief Antonin wrote on 20 October 2026, framed as a handover to another consultant. GLRlight's code is public (github.com/AntoninLaf/glrlight) and the product is live (glrlight.vercel.app), so the technical facts here (Next.js, Companies House API, Gemini, Vercel, costs, latencies, rule counts) are his statements about his own public work. This is the best source for how he thinks about AI architecture, evaluation, strategy and consulting; answer questions on those themes from it, attributed to him, and keep its qualifications, above all that predictive validity was not established.
+
+### 1. The one-paragraph version
+
+GLRlight reads a UK company's entire public filing record in about a second and tells a non-specialist what is on it: a green/amber/red triage verdict, every finding dated and sourced and paired with its innocent explanation, a plain-English briefing, and an AI agent that investigates whatever looked unusual. The architectural decision that defines it is that **a deterministic rules engine produces the verdict and the language model never touches it** — the model explains, the agent investigates, and neither can move the number. I built a backtest to establish predictive validity, found three defects in my own method, could not solve a sampling problem, and published the negative result rather than dropping it. That document is the strongest artefact in the repository.
+
+### 2. How I framed the problem
+
+#### The market gap I was actually attacking
+
+Five million companies on the UK register. Businesses take on suppliers, clients and partners from among them every day, and most of those decisions involve no counterparty check at all.
+
+Not because people are careless — because the tooling is mismatched to the buyer:
+
+| Incumbent | What it sells | Why it doesn't reach this user |
+|---|---|---|
+| Creditsafe | Credit scores + monitoring | Annual subscription, priced for procurement functions |
+| Dun & Bradstreet | Global credit data | Enterprise sale |
+| Experian Business | Credit scoring | Subscription |
+| Companies House | The raw data, free | Six screens, written in company-law language |
+
+So the party most exposed to counterparty risk — the agency about to do £40k of work on 60-day terms, the freelancer onboarding a client, the small supplier extending credit — has the least access to the check.
+
+Three structural gaps:
+
+**Lag.** Credit scores lean on filed accounts. A UK small company may file up to nine months after year end, so the "current" financial picture is routinely 12–21 months old. By the time accounts show distress, trade creditors already know.
+
+**A number instead of a narrative.** "42 out of 100" is not actionable. A finance lead needs to know *which* facts moved it, *when* they happened, and *what to ask about*.
+
+**The free data is unreadable.** Everything you'd want is public: accounts deadlines, confirmation statement status, board movements, secured lending, strike-off action. Reading it by hand takes half an hour, so nobody does.
+
+#### The positioning call, and why it mattered later
+
+**I deliberately did not build a better credit score.** That fight is unwinnable: bureaus hold trade payment data — whether a company actually pays its invoices on time — that the public register simply does not contain. Competing on their ground means shipping a worse version of an existing product.
+
+I took the layer above instead: **the free, universal first pass that tells you whether paying for real diligence is warranted.**
+
+That decision was made on competitive grounds months before I had any evidence. It turned out to be the decision that saved the product. When the evaluation showed I could not demonstrate predictive power, the proposition survived intact — because prediction was never the claim. The positioning chosen for strategic reasons was the positioning the evidence could support.
+
+**Consulting lesson:** choose the claim you can defend, not the claim that sounds most impressive. The gap between them is where credibility dies.
+
+### 3. The AI strategy
+
+This is the section I'd lead with in a client conversation, because it generalises far beyond this project.
+
+#### The central principle: separate judgment from language
+
+The obvious build is: hand everything to a model and ask "is this company risky?" I refused to, for four reasons that apply to every AI product touching a decision:
+
+**Reproducibility.** Ask the same question twice, get different answers. A risk score that moves between page refreshes is worthless.
+
+**Auditability.** When a company asks "why did you flag us?", *"the model considered it risky"* is not an answer. With rules I point at a line number: accounts four months overdue, five points.
+
+**Improvability.** If the scores are wrong, rules let me change a weight and re-test. With a model I can only reword the prompt and hope.
+
+**Fabrication.** Models produce plausible text. Asked for a score, they return a plausible-looking number with nothing behind it.
+
+So the architecture is:
+
+```
+Companies House → normalised dossier → DETERMINISTIC RULES ENGINE → verdict │ ├→ model writes the explanation └→ agent chooses what to investigate
+```
+
+**Rules decide. The model writes. The agent explores. Nothing crosses.**
+
+#### How the boundary is enforced — capability, not instruction
+
+The agent has six tools. **None of them returns a score, a risk level, or an opinion.** Every tool returns facts from the register. The agent is physically incapable of producing a verdict regardless of what the prompt says.
+
+This is the distinction worth carrying into client work: **constraining capability beats constraining instruction.** Prompts can be talked around, eroded by context, or quietly ignored. A tool that does not exist cannot be called. When a client asks how you stop an AI system doing something, "we told it not to" is a weak answer and "it has no mechanism to" is a strong one.
+
+The model is additionally instructed that the register is public and anyone can file to it, so everything supplied is information to report on, never instructions to follow — standard prompt-injection hygiene for any system reading data a third party can write.
+
+#### Why I deliberately used a cheap model
+
+Because the architecture made an expensive one unnecessary. By the time the model sees anything, the signals are found, weighted, scored, and paired with explanations. Its job is turning structured findings into readable English — a writing task, not a reasoning task.
+
+Running cost: **~$0.003 per briefing**, cached 24 hours. Capped at CA$2/month, which covers roughly 600 assessments.
+
+> *"I moved the judgment into deterministic rules, which meant the model only had to write, so a cheap fast model was sufficient"* is a systems answer. *"I used the best model for quality"* is a budget answer.
+
+What paying for a tier actually bought was **availability, not quality** — latency went from 42 seconds to 7.4 once free-tier contention disappeared. Worth knowing which problem money actually solves.
+
+#### Designing for unreliable infrastructure
+
+Free and low-tier model availability is genuinely unstable. Observed, repeatedly:
+
+- Models listed in the catalogue that return **404 at the generation endpoint**
+- Popular models returning **503 under load**, persistently, not momentarily
+- Some models rejecting the dedicated `systemInstruction` field entirely
+- Reasoning models spending their whole output budget thinking, returning empty with `finishReason: MAX_TOKENS`
+
+Rather than pinning one model, generation **walks a fallback chain** with exponential backoff (1s, 2s, 4s), degrades to inlined instructions where the system field is unsupported, and reports which model served each request. The app stays up while individual models come and go.
+
+That started as frustration and became a feature. *"Model availability is unreliable, so generation degrades across a chain rather than failing"* is operational maturity, and it is the kind of thing that separates a demo from something that could run in front of users.
+
+#### Where the agent genuinely earns its place
+
+Most of GLRlight is a **pipeline**: fixed steps, fixed order, every company treated identically. That is correct for scoring — reproducibility beats adaptivity when the output is a number someone acts on.
+
+An **agent** is given a goal and tools and decides for itself what to do next based on what it just learnt. I used one for investigation, where the right next question genuinely depends on the last answer.
+
+The proof it works is a connection no rule could have made. The rules engine fires signals independently — it sees "new charges" and "director departures" as two separate facts. Investigating Carillion, the agent noticed they happened in the same fortnight:
+
+> *A cluster of five charges was granted within a two-day window in October 2017 to a security trustee, coinciding with emergency board appointments and following the sudden departures of the CEO and CFO.*
+
+Three separate registers, drawn together by timing. Five tool calls, one director traced out of thirty-two — it chose the CEO.
+
+Run the same agent on Greggs and it takes four steps in a different order, traces nobody, and correctly reads the empty PSC register as *normal for a listed company* — domain knowledge I had to hard-code into the rules after a false positive. The model got there from context.
+
+**Different path, different length, different stated reason per step. That is what separates an agent from a pipeline with commentary**, and it is the test I'd apply to any client system claiming to be agentic.
+
+#### Governance built in, not bolted on
+
+- **Budgets.** Nine tool calls, three director traces. An agent without a ceiling is a runaway loop burning quota. *"What stops this looping forever?"* is the first question any competent reviewer asks.
+- **An audit trail.** Every step records the tool called, the model's stated reason, and what came back. A human can reconstruct the investigation.
+- **Attribution.** Output says which model produced it. When quality varies between runs, that is always the first question.
+
+### 4. The domain work, which is where the value actually sat
+
+The coding was the easy part. Deciding *what counts as a warning sign, and how much it should count*, was the work.
+
+**Sixteen rules** across filing behaviour, register events, governance, ownership, secured lending and director track record. Each is a small independent function that either fires with a date and a source, or returns nothing.
+
+Severities convert to points — high 5, medium 3, low 1, context 0 — summing to a band: **4+ amber, 8+ red.** A handful of facts override the arithmetic entirely (liquidation, administration, receivership, dissolution, active strike-off proposal), because **a scoring system that can average away a fatal fact is dangerous.**
+
+#### The four tests I applied to every signal
+
+- **Observable** — derivable from data I actually hold
+- **Dated** — risk is a trajectory; a 2019 resignation means something different from one last month
+- **Weighted** — a late confirmation statement is sloppiness; a Gazette strike-off notice means the Registrar is closing the company
+- **Innocently explainable** — every signal ships with the boring reason it probably happened
+
+#### The design decision I'd defend hardest
+
+Every finding is displayed with its innocent explanation, inline, not hidden behind a tooltip.
+
+**A tool that only ever says "concerning" trains its users to ignore it — and once they do, the real warnings are buried too.** Presenting the benign reading first is what makes the alarming reading credible when it matters.
+
+The director-failure signal even names the legitimate case: insolvency practitioners and turnaround specialists are appointed to failing companies *by design* and will trip it permanently and correctly.
+
+#### Data ethics, decided before building
+
+Register data is public and openly licensed. Public does not mean unconstrained. Three rules govern the build:
+
+- **The company is the subject.** People appear only as properties of companies. There is no search by person and there never will be — that would make this a people-search product with categorically different obligations.
+- **No residential or service addresses are displayed**, even where the register exposes them.
+- **Director history is reported as corporate outcomes**, never as personal characterisation.
+
+Deciding this at design time rather than after a complaint is the difference between a constraint and a retrofit.
+
+### 5. Setbacks, in order, and what each one taught
+
+I am listing these in full because they are the most transferable part of the engagement.
+
+#### Setback 1 — The first version flagged Greggs and Tesco as amber
+
+Two of the healthiest companies in Britain. Four assumptions wrong, every one a **domain error rather than a coding bug**:
+
+1. **I counted dissolution as failure.** It usually isn't. Large groups strike off dormant subsidiaries as routine *solvent* housekeeping, so any experienced plc director accumulates dozens. Only insolvency — liquidation, administration, receivership — signals genuine failure.
+2. **I penalised listed companies for an empty PSC register.** They're exempt; they disclose ownership through stock-market rules. I was flagging every plc in the country.
+3. **I counted director departures absolutely.** Three from a ten-person plc board is routine rotation; three from a board of four is the leadership walking out. Only the proportion carries information.
+4. **My name-change rule had no recency window**, so Tesco scored for 1980s rebrands.
+
+**The principle that came out of it:** for a screening tool, *false positives are more damaging than misses*. Insolvency is rare, so most companies checked are fine. Flag the healthy ones and users learn within a week that amber means nothing — at which point the tool is worse than useless, because it buries the real warnings too.
+
+None of these were visible from reading the code. They appeared only by testing against companies whose answers I already knew.
+
+#### Setback 2 — Half the engine was silently disabled
+
+Every time-window rule compared dates against `Date.now()`. Scoring a company as it stood in 2008 therefore asked *"did anyone resign in the last twelve months of 2026?"* Five rules — director churn, new charges, control change, strike-off action, auditor resignation — never fired once during an entire evaluation run.
+
+Nothing in the code looked wrong. **The backtest found a defect, not a miscalibration — which is precisely what a good test is for.** Rules now take an explicit as-of date.
+
+#### Setback 3 — An anachronism
+
+A rule fired in 90% of failures *and* 78% of survivors. The PSC register did not exist before 6 April 2016, and most of my cutoffs fell before it. I was flagging every company in Britain for not complying with a law that hadn't been written.
+
+**Lesson:** when a signal fires on nearly everything, it is not a signal. Check whether the thing you're measuring even existed in the period you're measuring.
+
+#### Setback 4 — A confounding variable I created myself
+
+Fixing one asymmetry, I created a worse one. I required controls to be established at the cutoff but applied no such rule to the cases. Several signals need at least two prior filings to fire, so young companies are *structurally incapable* of tripping them.
+
+Older controls lit up, younger cases scored zero, and the test appeared to show that **late filing predicts survival.**
+
+I was measuring age, not failure. Textbook confounding — the groups differed systematically on something other than the variable under study.
+
+**The reflex that caught it:** late filing preceding insolvency is not controversial in UK credit risk. When the result contradicted a well-established fact, the right move was to distrust the *measurement*, not the fact. The question that found it: *what would have to be true about my method for this impossible result to appear?*
+
+#### Setback 5 — The one that ended the evaluation
+
+A final diagnostic measured how often each signal fires in ordinary active companies, with no case-matching and no failure involved. The sample came back as thirty consecutive Scottish limited partnerships — private equity carry vehicles that file almost nothing. All green.
+
+**Companies House advanced search returns results in a fixed order.** My "random" sampling picked a random *offset* into that ordered list and took the next 200 — random chunk selection, not random sampling. Each run drew a different but internally homogeneous block: one almost entirely Northern Irish construction firms, another consultancies, this one limited partnerships.
+
+**Every result in the investigation reflected sample composition rather than company behaviour.**
+
+**Lesson, and the one I'd put in front of any client doing analytics:** randomness in the *selection mechanism* is not randomness in the *sample*. And look at your raw data before you analyse it — had I read the company names in run one, I'd have caught it before building three fixes on top of it.
+
+### 6. The evaluation, and why I published a negative result
+
+#### What I set out to measure
+
+Not "does it flag Carillion today" — a company already in liquidation is trivially detectable, and an override catches it before any rule runs. The real question: **would the signals have fired twelve months before collapse, while the company was still trading?**
+
+#### The methodological core
+
+The API returns the register as it stands *today*, and today it says `status: liquidation`. Testing against that would produce near-perfect accuracy and measure nothing — the engine would be reading a field that says "this company failed."
+
+That is **look-ahead bias**: information from after the decision point leaking into the decision. It is the most common way a backtest lies, in finance and in machine learning alike.
+
+So I built a point-in-time reconstruction that rewinds the register to a given date: status forced to active, insolvency flags cleared, post-cutoff resignations reversed, charge satisfactions restored to outstanding, filings truncated, accounts lateness inferred from filing gaps. One leak I could not close — past directorships carry the other company's status as it is *today* — and I documented it rather than hiding it.
+
+#### Base rates, and the number that actually matters
+
+My sample was half failures by construction. Real UK insolvency runs around **0.5% a year.**
+
+```
+precision = (TPR × base) / (TPR × base + FPR × (1 − base))
+```
+
+A detector catching 70% of failures while flagging 10% of survivors looks strong on a balanced sample and would be **wrong roughly 29 times out of 30** in production, because almost every company it examines is fine.
+
+**This is Bayes' theorem and it is the single most misunderstood thing about rare-event detection.** Volunteering it before a client is caught out by it is worth more than any accuracy figure.
+
+#### The outcome
+
+Four runs, three method defects corrected, and a sampling problem I could not solve with the tools available. **I did not establish predictive validity, and I say so in the README, in a dedicated evaluation document, and on the landing page of the live product.**
+
+What I would need to do it properly: the bulk data product for a real sampling frame, company-type filtering (limited partnerships and dormant shells have filing obligations so different they shouldn't be pooled with trading companies), insolvency dates from a primary source rather than inferred from filing text, samples in the hundreds, and empirically fitted weights.
+
+#### Why publishing it is the right call
+
+A portfolio project claiming 80% accuracy invites exactly one question — *how do you know?* — and most people can't answer it.
+
+Mine says: here is the test I built to falsify my own product, here are three confounds I found in my own method including one I introduced myself, here is the sampling problem that ended it, here is what I'd need to finish the job.
+
+**Designing a test that could prove you wrong, finding your own errors, and reporting against your own interest is the core of analytical credibility.** It is also, bluntly, rarer than a working demo.
+
+### 7. Engineering decisions worth knowing
+
+**One door to the outside world.** A single module talks to Companies House. Everything else asks it. Raw government JSON changes without warning; with a boundary, a schema change breaks one file instead of business logic in five places.
+
+**404 is an answer, not a failure.** Companies House returns 404 on `/charges` for a company with no secured lending. Miss that distinction and every debt-free company — often the healthiest — renders as broken, quietly inverting your results.
+
+**Fail soft and say what's missing.** If a sub-resource dies, the dossier records it and returns everything else. Showing 90% while stating which 10% is absent beats an error page, and it's the honest behaviour.
+
+**Budget arithmetic before code.** 600 requests per five minutes across all endpoints; ~10 per lookup; 60 lookups per window shared across all users. That number dictated the caching design. **The constraints told me the architecture** — sizing them first rather than discovering them in production is the habit.
+
+**Fast work and slow work are separate endpoints.** The rules result returns in ~1 second, the briefing in several, the agent in 10–15. Three endpoints, not one. Bundling makes every lookup as slow as its slowest part; splitting means the page is useful immediately and the expensive parts load only if asked for.
+
+**Secrets never reach the browser.** Anything sent to a client can be read by anyone who opens developer tools. The browser calls my server; my server holds the keys. The build output prints the boundary: static pages versus server-rendered routes.
+
+**Honest comments about shortcuts.** Caches are in-memory and say so — lost on restart, not shared between instances, fine for a demo, a database in production. A reviewer spots the gap either way; only one version shows you spotted it too.
+
+### 8. Commercial model, if a client asked "where does this go?"
+
+**The lookup is not the business. Monitoring is.**
+
+The register is a *stream*, not a snapshot. "Tell me when one of my 40 suppliers files late, changes directors, or has a charge registered" is a subscription — it's what Red Flag Alert and Creditsafe charge hundreds a year for. A one-off lookup is a feature; a watchlist is a product.
+
+From here to a sellable product is roughly four components: persistence, accounts, payments, and a scheduled job re-checking watched companies nightly. None exotic.
+
+**Second jurisdiction** — France via the free national registers is the obvious next, since the reading logic transfers and only the rules need re-grounding in local filing law.
+
+**And the evaluation, properly done**, on bulk data with stratified sampling. That is what would let the product make a predictive claim, which is what would let it compete on the bureaus' ground rather than above it.
+
+### 9. What I'd do differently
+
+**Verify before adopting.** I pinned a model version on the sound principle that pinned versions keep a project reproducible — without first confirming that model worked at the endpoint I call. It didn't. Confirm, then standardise.
+
+**Eliminate rather than infer.** Several debugging sessions ran long because I reasoned about which of two causes was more likely instead of running the cheap test that would have separated them. When two things could be at fault, remove one.
+
+**Look at the data before analysing it.** Four evaluation runs rested on a sample that was never random. The company names in run one would have told me.
+
+**Fewer, larger diagnostics.** I made three successive patches to the backtest, each changing the numbers without resolving the question. The population-baseline check should have been the first thing I wrote, not the last.
+
+### 10. The lines I'd use in a room
+
+> **"The model does not compute the score. Rules do."** Separating deterministic judgment from generated language is what makes an AI product auditable, and auditability is what makes it deployable.
+
+> **"The agent chooses what to investigate and has no say in the verdict — none of its tools return a score, only facts."** Constraining capability beats constraining instruction.
+
+> **"The backtest found a defect, not a miscalibration."** A test that only confirms what you believe isn't a test.
+
+> **"I moved the judgment into rules, so the model only had to write — which is why a cheap, fast model was enough."** Good architecture reduces what you have to buy.
+
+> **"I couldn't establish predictive validity, and here's the document explaining why."** The claim you can defend beats the claim that sounds better.
+
+*GLRlight is a screening tool, not a credit reference agency, and does not provide regulated advice. Company information from Companies House under the Open Government Licence v3.0.*
+
 ## Approved personal statements
 
 The six passages below are approved wording; they also appear on the site (About, and the project worlds).
@@ -1464,6 +1758,7 @@ Say exactly what is missing, briefly. Then answer the part that the evidence sup
 Additional rules from the site owner
 - Never name a client, prospect or person other than Antonin, the employers listed in Part 1, and the three approved references (Obvia, McGill's MMA program, CTIA).
 - When a question matches one of the fifty in Part 3, answer from his answer first: it is his voice, and the closest thing to an interview with him. Keep the qualifications he attached ("I would", "not a claim that").
+- For GLRlight, and for questions about AI architecture, evaluation method, data ethics or how he would advise a client on an AI system, use his handover brief in Part 3. GLRlight's code is public, so implementation detail from the brief may be discussed.
 - For references or recommendations, and for anything not in this file: say so plainly and suggest writing to Antonin at Antonin.laferriere-mailfait@mail.mcgill.ca.
 - Private code (VersyTalks, VersyNow, Acteurly): explain the thinking and the product, never implementation beyond this file.
 - Voice: a sharp consultant. Short, structured, numbers first, with their qualifications attached. Two to five sentences unless asked for more. Plain text, no markdown headings.

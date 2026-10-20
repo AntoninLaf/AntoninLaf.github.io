@@ -487,6 +487,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .gaps { margin: 8px 0 0; }
 .gaps dt { font-weight: 500; font-size: 21px; margin-top: 18px; font-variation-settings: "opsz" 24; }
 .gaps dd { margin: 4px 0 0; }
+/* the lines he'd use in a room: the line in ink, the reason in pencil */
+.gaps.room dt { font-style: italic; font-weight: 400; font-size: 22px; padding-left: 20px; border-left: 2px solid var(--red-ink); }
+.gaps.room dd { padding-left: 22px; color: var(--ink-soft); font-size: 18px; }
 .defects dt { counter-increment: defect; }
 .defects dt::before { content: "✗ "; color: var(--red-ink); font-family: var(--hand); font-weight: 400; }
 
