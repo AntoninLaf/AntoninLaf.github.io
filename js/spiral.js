@@ -42,7 +42,7 @@ function head() {
       </svg>
       <p class="throughline">${esc(t("hero.throughline"))}</p>
       <nav class="spiral-nav">
-        <a class="spiral-about" href="#/about"><b>${esc(t("about.title"))} →</b><span>${esc(t("about.tagline"))}</span></a>
+        <a class="spiral-about" href="#/about"><b>${esc(t("about.title"))} →</b></a>
         <a href="#/map">${esc(t("work.map"))}</a>
         <a href="mailto:${esc(t("ask.email"))}">${esc(t("about.contact"))}</a>
       </nav>

@@ -7,6 +7,7 @@ export default {
   spot: { en: "Phone & data, B2B", fr: "Téléphonie et données, B2B" },
   kind: { en: "Engagement · Marketing Manager", fr: "Mandat · Gestionnaire marketing" },
   tags: ["marketing"],
+  headline: 1,   // the tally the About card leads with
   // A telecom mast beside a storefront: phone and data for 900 businesses, many of them shops.
   landmark: () => `
     <path d="M-92 0 H92"/>

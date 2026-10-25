@@ -88,6 +88,7 @@ function render(first) {
   armInk(host);
   const sheet = host.querySelector(".sheet:not(.leaving)");
   if (r.name === "project") { const p = findProject(r.slug); if (p && p.mount) p.mount(sheet, lang()); }
+  if (r.name === "about") { const rd = sheet.querySelector(".road"); if (rd && rd.scrollWidth > rd.clientWidth) rd.scrollLeft = rd.scrollWidth; }   // phones: open the road on the recent years
   if (r.name === "home") cleanup = mountSpiral(sheet, { intro, focus: lastSeen, rerender: () => render(true) });
   if (r.name === "project" || r.name === "story") lastSeen = r.slug;
   prevRoute = r;
@@ -132,6 +133,7 @@ document.addEventListener("keydown", (e) => {
 });
 // Any "question I'm happy to take" asks the notebook.
 document.addEventListener("click", (e) => {
+  if (e.target.closest("[data-open-ask]")) { openAsk(); return; }
   const li = e.target.closest(".questions li");
   if (!li) return;
   openAsk();

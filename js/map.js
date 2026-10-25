@@ -89,7 +89,7 @@ export function renderMap(projects, stacked = false) {
   const step = 0.55;
   const places = [];
   places.push(place(ABOUT, {
-    label: t("about.title"), small: t("about.tagline"), note: t("about.note"),
+    label: t("about.title"), small: "", note: t("about.note"),
     href: "#/about", delay, landmark: inkable(deskLandmark())
   }));
   for (const p of projects) {
@@ -138,7 +138,7 @@ function renderStacked(projects) {
     const delay = 1.2 + i * 0.4;
     if (e.about) {
       return place({ x, y, noteSide: "right" }, {
-        label: t("about.title"), small: t("about.tagline"), note: t("about.note"),
+        label: t("about.title"), small: "", note: t("about.note"),
         href: "#/about", delay, landmark: inkable(deskLandmark())
       });
     }

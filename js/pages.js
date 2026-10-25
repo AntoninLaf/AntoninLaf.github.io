@@ -2,7 +2,8 @@ import { t, lang } from "./i18n.js";
 import { renderMap } from "./map.js";
 import { esc, inkFigure, tally } from "./ink.js";
 import { projects } from "../projects/index.js";
-import { stories, career } from "../stories/index.js";
+import { stories, road, findStory } from "../stories/index.js";
+import { findProject } from "../projects/index.js";
 import { WORDS } from "../stories/words.js";
 
 
@@ -21,40 +22,6 @@ export function renderHome({ intro, stacked }) {
   </section>`;
 }
 
-// The career route: a pencil road with a stop per chapter.
-function renderCareer() {
-  const L = lang();
-  const W = 1000, n = career.length;
-  const x0 = 110, x1 = W - 110;   // room for the end labels inside the viewBox
-  const step = (x1 - x0) / (n - 1);
-  const road = `M${x0} 150 C${x0 + step * 0.6} 120 ${x0 + step * 1.2} 170 ${x0 + step * 2} 150 S${x0 + step * 3.4} 150 ${x0 + step * 4} 150 S${x0 + step * 5.6} 120 ${x0 + step * 6} 150`;
-  const stops = career.map((c, i) => {
-    const x = x0 + step * i;
-    const up = i % 2 === 0;
-    const label = c[L] || c.en;
-    const [org, role] = label.split(" | ");
-    const y = up ? 92 : 212;
-    const href = c.story ? `#/story/${c.story}` : "";
-    const inner = `
-      <circle cx="${x}" cy="150" r="${c.story ? 7 : 5}" class="${c.story ? "" : "thin"}"/>
-      <path class="thin" d="M${x} ${up ? 143 : 157} V${up ? y + 26 : y - 36}"/>
-      <text x="${x}" y="${y - 18}" class="hand small" text-anchor="middle">${esc(c.year)}</text>
-      <text x="${x}" y="${y + 4}" class="hand" text-anchor="middle">${esc(org)}</text>
-      <text x="${x}" y="${y + 22}" class="hand small" text-anchor="middle">${esc(role || "")}</text>`;
-    return href
-      ? `<a class="stop" href="${href}"><rect class="hit" x="${x - 70}" y="${y - 34}" width="140" height="70" rx="6"/>${inner}</a>`
-      : `<g class="stop quiet">${inner}</g>`;
-  }).join("");
-  return `
-  <figure class="ink-fig wide ink-on-view career">
-    <svg viewBox="0 0 ${W} 280" role="img" aria-label="${esc(t("about.route"))}">
-      <path pathLength="1" class="inks route" d="${road}"/>
-      ${stops.replace(/<(path|circle) /g, '<$1 pathLength="1" class="inks" ').replace(/class="inks" class="/g, 'class="inks ')}
-    </svg>
-    <figcaption>${esc(t("about.route.note"))}</figcaption>
-  </figure>`;
-}
-
 const BACKGROUND = {
   en: {
     education: ["McGill University, Desautels Faculty of Management: Master of Management in Analytics, 2026–2027", "Université de Montréal: Bachelor of Communication Sciences, concentration in Marketing, 2019–2022"],
@@ -70,96 +37,207 @@ const BACKGROUND = {
   }
 };
 
-const INDEPENDENT = {
+// ---------- About: a consultant's one-pager, drawn in the notebook ----------
+
+const FACTS = {
   en: [
-    { slug: "glrlight", title: "GLRlight: a one-second check for warning signs before you sign with a UK company", paras: [
-      "The signs that a company is in trouble are often public: accounts filed late, directors leaving, new loans secured against the business. One at a time they are easy to miss. GLRlight reads them together, in order, and tells you whether a closer look is worth paying for.",
-      "Sixteen plain rules, written in ordinary code with no AI, look at how the company files its paperwork, who runs it, who owns it, what it has borrowed against and what the registry has noted about it. They add up to a green, amber or red answer, with the evidence shown. An AI-written note then explains what changed, why it might matter, the innocent explanations, and the questions to ask the company before signing.",
-      "The principle behind it: show the evidence, say what is uncertain, and end with the next question to ask. GLRlight supports a person's judgment; its colours are not credit ratings."
-    ] },
-    { slug: "acteurly", title: "Acteurly: an accessible AI agency for small businesses", paras: [
-      "Marketing is often the capability gap that limits a small business's growth. Acteurly learns the business, interprets its marketing data and turns that understanding into priorities suited to the owner's budget, capacity and objectives. I supplied the marketing judgment behind it: the playbooks its AI consults, the evaluation rubrics, and the review of its recommendations as the human in the loop."
-    ] }
+    ["Based", "Montréal · remote welcome"],
+    ["Looking for", "Full-time roles from January 2027 · internships considered"],
+    ["Focus", "AI product · product management · growth · consulting"],
+    ["Studying", "Master of Management in Analytics, McGill Desautels, 2026–2027"],
+    ["Languages", "French · English · Spanish · German"]
   ],
   fr: [
-    { slug: "glrlight", title: "GLRlight : en une seconde, les signaux d'alerte d'une entreprise britannique avant de signer", paras: [
-      "Les signes qu'une entreprise est en difficulté sont souvent publics : des comptes déposés en retard, des administrateurs qui partent, de nouveaux prêts garantis sur l'entreprise. Un à la fois, ils passent facilement inaperçus. GLRlight les lit ensemble, dans l'ordre, et vous dit si un examen plus poussé vaut la peine d'être payé.",
-      "Seize règles simples, écrites en code ordinaire sans IA, regardent comment l'entreprise dépose ses documents, qui la dirige, qui la possède, ce qu'elle a donné en garantie et ce que le registre a noté à son sujet. Elles donnent une réponse verte, ambre ou rouge, preuves à l'appui. Une note rédigée par IA explique ensuite ce qui a changé, pourquoi cela peut compter, les explications innocentes et les questions à poser à l'entreprise avant de signer.",
-      "Le principe : montrer les preuves, dire ce qui est incertain, et finir par la prochaine question à poser. GLRlight appuie le jugement d'une personne ; ses couleurs ne sont pas des cotes de crédit."
-    ] },
-    { slug: "acteurly", title: "Acteurly : une agence IA accessible pour les petites entreprises", paras: [
-      "Le marketing est souvent le manque de capacité qui freine la croissance d'une petite entreprise. Acteurly apprend l'entreprise, interprète ses données marketing et transforme cette compréhension en priorités adaptées au budget, à la capacité et aux objectifs du propriétaire. J'ai fourni le jugement marketing derrière : les playbooks que son IA consulte, les grilles d'évaluation et la révision de ses recommandations comme humain dans la boucle."
-    ] }
+    ["Basé à", "Montréal · télétravail bienvenu"],
+    ["Je cherche", "Un poste à temps plein dès janvier 2027 · stages considérés"],
+    ["Axes", "Produit IA · gestion de produit · croissance · conseil"],
+    ["Études", "Maîtrise en gestion analytique, McGill Desautels, 2026–2027"],
+    ["Langues", "français · anglais · espagnol · allemand"]
   ]
 };
+
+// Four principles, each in my own words (from my answers and the GLRlight brief).
+const HOW = {
+  en: [
+    ["Frame the problem", "I want a causal explanation that suggests a different action, rather than a more elaborate description of the symptom.", "on VersyTalks"],
+    ["Test the mechanism", "If every possible result leaves us doing the same thing, the test is probably poorly designed.", "on running tests"],
+    ["Defend the claim", "Choose the claim you can defend, not the claim that sounds most impressive.", "on GLRlight"],
+    ["Value is the next step", "A response, a report or an AI answer is a beginning. I care about the next step it makes possible.", "on the work as a whole"]
+  ],
+  fr: [
+    ["Cadrer le problème", "Je veux une explication causale qui suggère une autre action, plutôt qu'une description plus élaborée du symptôme.", "sur VersyTalks"],
+    ["Tester le mécanisme", "Si chaque résultat possible nous laisse faire la même chose, le test est probablement mal conçu.", "sur la conduite des tests"],
+    ["Défendre l'affirmation", "Choisir l'affirmation qu'on peut défendre, pas celle qui impressionne le plus.", "sur GLRlight"],
+    ["La valeur, c'est la suite", "Une réponse, un rapport ou une réponse d'IA est un début. Ce qui m'importe, c'est la prochaine étape qu'il rend possible.", "sur l'ensemble du travail"]
+  ]
+};
+
+const TOOLS = "Python · SQL · PyTorch · Databricks · PySpark · Anthropic and OpenAI APIs · Claude Code · Git · GA4";
+
+// Which pages appear as work cards, in order.
+const WORK = {
+  engagements: [{ story: "versynow", project: "versynow" }, { story: "versytalks", project: "versytalks" }, { story: "stekar" }, { story: "goco" }],
+  ventures: [{ story: "acteurly", project: "acteurly" }, { project: "glrlight" }]
+};
+const GLR_CARD = {
+  en: { where: "GLRlight · Independent build", title: "A one-second check for warning signs before you sign with a UK company", headline: { value: "16", label: "plain rules, no AI in the verdict" } },
+  fr: { where: "GLRlight · Projet indépendant", title: "En une seconde, les signaux d'alerte d'une entreprise britannique avant de signer", headline: { value: "16", label: "règles simples, aucune IA dans le verdict" } }
+};
+
+function workCard(item, L) {
+  const s = item.story ? findStory(item.story) : null;
+  const p = item.project ? findProject(item.project) : null;
+  let where, years, title, head, note;
+  if (s) {
+    const tx = s.text[L] || s.text.en;
+    where = tx.where; years = s.years; title = tx.title; note = tx.note;
+    head = tx.tallies[s.headline || 0];
+  } else {
+    const g = GLR_CARD[L] || GLR_CARD.en, px = p.text[L] || p.text.en;
+    where = g.where; years = "2026"; title = g.title; head = g.headline; note = px.note;
+  }
+  const links = [];
+  if (s) links.push(`<a href="#/story/${s.slug}">${esc(t("about.case"))}</a>`);
+  if (p) links.push(`<a href="#/p/${p.slug}">${esc(t("about.product"))}</a>`);
+  if (p && p.links && p.links.code) links.push(`<a href="${esc(p.links.code)}" target="_blank" rel="noopener">${esc(t("about.code"))}</a>`);
+  const main = s ? `#/story/${s.slug}` : `#/p/${p.slug}`;
+  return `
+        <article class="work-card ink-on-view">
+          <p class="wc-where">${esc(where)}<span>${esc(years)}</span></p>
+          <h3><a href="${main}">${esc(title)}</a></h3>
+          <p class="wc-head"><b>${esc(head.value)}</b><span>${esc(head.label)}</span></p>
+          <p class="wc-note">${esc(note)}</p>
+          <p class="wc-links">${links.join("")}</p>
+        </article>`;
+}
+
+// The road: a hand-drawn chart in three lanes, years along the bottom.
+function renderRoad(L) {
+  const X0 = 2019.5, X1 = 2027.8, LEFT = 150, RIGHT = 990, TODAY = 2026.8;
+  const x = (yr) => LEFT + (yr - X0) / (X1 - X0) * (RIGHT - LEFT);
+  const lanes = [["edu", 1], ["roles", 4], ["ventures", 2]];
+  const ROW = 48, GAP = 20, TOP = 34;
+  const laneTop = {}; let y = TOP;
+  for (const [k, n] of lanes) { laneTop[k] = y; y += n * ROW + GAP; }
+  const axisY = y - GAP + 10;
+  const H = axisY + 34;
+  const lanesSvg = lanes.map(([k, n], i) => {
+    const y0 = laneTop[k], mid = y0 + n * ROW / 2 - 4;
+    return `
+      <text x="0" y="${mid}" class="hand lane">${esc(t("about.lane." + k))}</text>
+      ${i ? `<path class="pencil sep" d="M0 ${y0 - GAP / 2} H${RIGHT}"/>` : ""}`;
+  }).join("");
+  const bars = road.map((b, i) => {
+    const [org, role] = b[L] || b.en;
+    const name = (b.short || org) + (b.href ? " →" : "");          // the bar carries a short name; the tooltip the full one
+    const bx = x(b.start), ex = x(b.end == null ? TODAY : b.end), w = Math.max(ex - bx, 10);
+    const by = laneTop[b.lane] + b.row * ROW + 4, h = 24;
+    const inside = name.length * 7.4 + 16 < w;
+    const lx = inside ? bx + 9 : (b.end == null ? ex + 30 : ex + 8);
+    const roleW = role.length * 6.1;
+    const roleAt = bx + roleW > 996 ? `x="${Math.min(ex, 996)}" text-anchor="end"` : `x="${bx}"`;
+    const box = `M${bx - 2} ${by} H${ex + 1} M${ex} ${by - 1.5} V${by + h + 1} M${ex + 2} ${by + h} H${bx} M${bx} ${by + h + 1.5} V${by - 1}`;
+    const arrow = b.end == null ? `<path class="pencil" d="M${ex + 4} ${by + h / 2} H${ex + 24} M${ex + 18} ${by + h / 2 - 5} L${ex + 24} ${by + h / 2} L${ex + 18} ${by + h / 2 + 5}"/>` : "";
+    const fill = b.href ? `<rect class="hatch" x="${bx}" y="${by}" width="${w}" height="${h}"/>` : "";
+    const inner = `
+        <title>${esc(org)}, ${esc(role)}</title>
+        ${fill}<path d="${box}"/>${arrow}
+        <text x="${lx}" y="${by + 17}" class="hand org">${esc(name)}</text>
+        <text ${roleAt} y="${by + h + 14}" class="hand small role">${esc(role)}</text>`;
+    return b.href ? `<a class="bar link" href="${b.href}">${inner}</a>` : `<g class="bar">${inner}</g>`;
+  }).join("");
+  let ticks = "";
+  for (let yr = 2020; yr <= 2027; yr++) ticks += `<path class="thin" d="M${x(yr)} ${axisY - 4} V${axisY + 4}"/><text x="${x(yr)}" y="${axisY + 22}" class="hand small" text-anchor="middle">${yr}</text>`;
+  return `
+  <figure class="ink-fig wide ink-on-view road">
+    <svg viewBox="0 0 1000 ${H}" role="img" aria-label="${esc(t("about.s.road"))}">
+      <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V7" class="hatch-line"/></pattern></defs>
+      ${lanesSvg}
+      <path class="thin" d="M${LEFT - 10} ${axisY} H${RIGHT}"/>
+      ${ticks}
+      <path class="today" d="M${x(TODAY)} ${TOP - 18} V${axisY}"/>
+      <text x="${x(TODAY)}" y="${TOP - 22}" class="hand small today-label" text-anchor="middle">${esc(t("about.today"))}</text>
+      ${bars}
+    </svg>
+    <figcaption>${esc(t("about.road.note"))}</figcaption>
+  </figure>`;
+}
+
+const section = (n, title, note = "") => `
+      <header class="ab-head"><span class="ab-n">${n}</span><h2>${esc(title)}</h2>${note ? `<p class="ab-note">${esc(note)}</p>` : ""}</header>`;
 
 export function renderAbout() {
   const L = lang();
   const bg = BACKGROUND[L] || BACKGROUND.en;
-  const ind = INDEPENDENT[L] || INDEPENDENT.en;
-  const toc = stories.map((s, i) => {
-    const tx = s.text[L] || s.text.en;
-    return `
-      <li>
-        <a href="#/story/${s.slug}">
-          <span class="toc-n">${i + 1}.</span>
-          <span class="toc-title">${esc(tx.title)}</span>
-          <span class="toc-where">${esc(tx.where)}</span>
-          <span class="toc-go">${esc(t("about.explore"))}</span>
-        </a>
-      </li>`;
-  }).join("");
-  const projects = ind.map((p) => `
-      <li>
-        <a href="#/p/${p.slug}">
-          <span class="toc-title">${esc(p.title)}</span>
-          ${p.paras.map((x) => `<span class="toc-para">${esc(x)}</span>`).join("")}
-          <span class="toc-go">${esc(t("about.explore.project"))}</span>
-        </a>
-      </li>`).join("");
+  const facts = FACTS[L] || FACTS.en;
+  const how = HOW[L] || HOW.en;
+  const words = WORDS[L] || WORDS.en;
   return `
-  <section class="sheet">
-    <div class="page">
-      <aside class="margin"></aside>
-      <div class="body">
+  <section class="sheet about">
+    <div class="ab-hero">
+      <div class="ab-intro">
         <h1>${esc(t("about.title"))}</h1>
         <p class="place-line">${esc(t("about.place"))}</p>
         <p class="lede">${esc(t("about.lede"))}</p>
         <div class="actions">
           <a class="btn" href="mailto:${esc(t("ask.email"))}">${esc(t("about.contact"))}</a>
+          <button type="button" class="btn quiet" data-open-ask>${esc(t("about.ask"))}</button>
+          <a class="btn quiet" href="https://www.linkedin.com/in/antonin-laferriere" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
-      ${renderCareer()}
-      <aside class="margin"></aside>
-      <div class="body">
-        <h2>${esc(t("about.stories"))}</h2>
-        <ol class="toc cases">${toc}</ol>
-      </div>
-      <aside class="margin"></aside>
-      <div class="body">
-        <h2>${esc(t("about.projects"))}</h2>
-        <ul class="toc cases projects">${projects}</ul>
-      </div>
-      <aside class="margin"><p class="margin-note sticky">${esc(t("about.words.note"))}</p></aside>
-      <div class="body words">
-        <h2>${esc(t("about.words"))}</h2>
-        ${(WORDS[L] || WORDS.en).map((w) => `
-        <section class="words-note">
-          <h3>${esc(w.title)}</h3>
-          ${w.paras.map((p) => `<p>${esc(p)}</p>`).join("")}
-        </section>`).join("")}
-      </div>
-      <aside class="margin"></aside>
-      <div class="body">
-        <h2>${esc(t("about.background"))}</h2>
-        <dl class="background">
-          <dt>${esc(t("about.education"))}</dt>${bg.education.map((e) => `<dd>${esc(e)}</dd>`).join("")}
-          <dt>${esc(t("about.certifications"))}</dt><dd>${esc(bg.certifications.join(" · "))}</dd>
-          <dt>${esc(t("about.languages"))}</dt><dd>${esc(bg.languages)}</dd>
-          <dt>${esc(t("about.interests"))}</dt><dd>${esc(bg.interests)}</dd>
-        </dl>
-      </div>
+      <aside class="fact-card">
+        <p class="fact-title">${esc(t("about.facts"))}</p>
+        <dl>${facts.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+      </aside>
     </div>
+
+    <section class="ab-sec">
+      ${section("01", t("about.s.road"))}
+      ${renderRoad(L)}
+    </section>
+
+    <section class="ab-sec">
+      ${section("02", t("about.s.work"), t("about.s.work.note"))}
+      <h3 class="ab-group">${esc(t("about.engagements"))}</h3>
+      <div class="work-grid">${WORK.engagements.map((w) => workCard(w, L)).join("")}</div>
+      <h3 class="ab-group">${esc(t("about.ventures"))}</h3>
+      <div class="work-grid">${WORK.ventures.map((w) => workCard(w, L)).join("")}</div>
+    </section>
+
+    <section class="ab-sec">
+      ${section("03", t("about.s.how"), t("hero.throughline"))}
+      <div class="how-grid">${how.map(([h, q, src], i) => `
+        <figure class="how ink-on-view">
+          <figcaption><span>${i + 1}</span>${esc(h)}</figcaption>
+          <blockquote>${esc(q)}</blockquote>
+          <p class="how-src">${esc(src)}</p>
+        </figure>`).join("")}
+      </div>
+    </section>
+
+    <section class="ab-sec">
+      ${section("04", t("about.words"), t("about.words.note"))}
+      <div class="words-grid">${words.map((w) => `
+        <details class="word">
+          <summary><span class="word-title">${esc(w.title)}</span><span class="word-first">${esc(w.paras[0].split(". ")[0])}.</span><span class="word-open">${esc(t("about.read"))}</span></summary>
+          ${w.paras.map((p) => `<p>${esc(p)}</p>`).join("")}
+        </details>`).join("")}
+      </div>
+    </section>
+
+    <section class="ab-sec">
+      ${section("05", t("about.background"))}
+      <div class="bg-grid">
+        <div class="bg-card"><p class="bg-k">${esc(t("about.education"))}</p>${bg.education.map((e) => `<p>${esc(e)}</p>`).join("")}</div>
+        <div class="bg-card"><p class="bg-k">${esc(t("about.certifications"))}</p>${bg.certifications.map((e) => `<p>${esc(e)}</p>`).join("")}</div>
+        <div class="bg-card"><p class="bg-k">${esc(t("about.tools"))}</p><p>${esc(TOOLS)}</p></div>
+        <div class="bg-card"><p class="bg-k">${esc(t("about.languages"))}</p><p>${esc(bg.languages)}</p><p class="bg-k">${esc(t("about.interests"))}</p><p>${esc(bg.interests)}</p></div>
+      </div>
+      <nav class="turn">
+        <a class="btn" href="mailto:${esc(t("ask.email"))}">${esc(t("about.contact"))}</a>
+        <a class="btn quiet" href="#/">${esc(t("nav.back"))}</a>
+      </nav>
+    </section>
   </section>`;
 }
 
