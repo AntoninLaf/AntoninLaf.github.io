@@ -72,20 +72,20 @@ const BACKGROUND = {
 
 const INDEPENDENT = {
   en: [
-    { slug: "glrlight", title: "GLRlight: turning corporate filings into explainable counterparty risk signals", paras: [
-      "Corporate filings contain signals that are easy to overlook in isolation. GLRlight examines their timing, sequence and concentration to help people decide where further diligence is warranted.",
-      "A rules engine evaluates sixteen signals across filing behaviour, governance, director history, ownership, security interests and register events. It aggregates them into a green, amber or red screening band, with the underlying evidence visible. An AI-generated memo explains what changed, why it may matter, plausible benign explanations and specific questions to ask the counterparty.",
-      "The core design principle: make the evidence inspectable, the uncertainty explicit and the next questions actionable. GLRlight supports human judgment; its screening bands are not credit ratings."
+    { slug: "glrlight", title: "GLRlight: a one-second check for warning signs before you sign with a UK company", paras: [
+      "The signs that a company is in trouble are often public: accounts filed late, directors leaving, new loans secured against the business. One at a time they are easy to miss. GLRlight reads them together, in order, and tells you whether a closer look is worth paying for.",
+      "Sixteen plain rules, written in ordinary code with no AI, look at how the company files its paperwork, who runs it, who owns it, what it has borrowed against and what the registry has noted about it. They add up to a green, amber or red answer, with the evidence shown. An AI-written note then explains what changed, why it might matter, the innocent explanations, and the questions to ask the company before signing.",
+      "The principle behind it: show the evidence, say what is uncertain, and end with the next question to ask. GLRlight supports a person's judgment; its colours are not credit ratings."
     ] },
     { slug: "acteurly", title: "Acteurly: an accessible AI agency for small businesses", paras: [
       "Marketing is often the capability gap that limits a small business's growth. Acteurly learns the business, interprets its marketing data and turns that understanding into priorities suited to the owner's budget, capacity and objectives. I supplied the marketing judgment behind it: the playbooks its AI consults, the evaluation rubrics, and the review of its recommendations as the human in the loop."
     ] }
   ],
   fr: [
-    { slug: "glrlight", title: "GLRlight : transformer les dépôts d'entreprise en signaux de risque de contrepartie explicables", paras: [
-      "Les dépôts d'entreprise contiennent des signaux faciles à négliger isolément. GLRlight examine leur chronologie, leur séquence et leur concentration pour aider à décider où une vérification plus poussée est justifiée.",
-      "Un moteur de règles évalue seize signaux couvrant le comportement de dépôt, la gouvernance, l'historique des administrateurs, l'actionnariat, les sûretés et les événements du registre. Il les agrège en une bande de filtrage verte, ambre ou rouge, avec les preuves sous-jacentes visibles. Un mémo généré par IA explique ce qui a changé, pourquoi cela peut compter, les explications bénignes plausibles et les questions précises à poser à la contrepartie.",
-      "Le principe de conception central : rendre les preuves inspectables, l'incertitude explicite et les prochaines questions actionnables. GLRlight appuie le jugement humain ; ses bandes de filtrage ne sont pas des cotes de crédit."
+    { slug: "glrlight", title: "GLRlight : en une seconde, les signaux d'alerte d'une entreprise britannique avant de signer", paras: [
+      "Les signes qu'une entreprise est en difficulté sont souvent publics : des comptes déposés en retard, des administrateurs qui partent, de nouveaux prêts garantis sur l'entreprise. Un à la fois, ils passent facilement inaperçus. GLRlight les lit ensemble, dans l'ordre, et vous dit si un examen plus poussé vaut la peine d'être payé.",
+      "Seize règles simples, écrites en code ordinaire sans IA, regardent comment l'entreprise dépose ses documents, qui la dirige, qui la possède, ce qu'elle a donné en garantie et ce que le registre a noté à son sujet. Elles donnent une réponse verte, ambre ou rouge, preuves à l'appui. Une note rédigée par IA explique ensuite ce qui a changé, pourquoi cela peut compter, les explications innocentes et les questions à poser à l'entreprise avant de signer.",
+      "Le principe : montrer les preuves, dire ce qui est incertain, et finir par la prochaine question à poser. GLRlight appuie le jugement d'une personne ; ses couleurs ne sont pas des cotes de crédit."
     ] },
     { slug: "acteurly", title: "Acteurly : une agence IA accessible pour les petites entreprises", paras: [
       "Le marketing est souvent le manque de capacité qui freine la croissance d'une petite entreprise. Acteurly apprend l'entreprise, interprète ses données marketing et transforme cette compréhension en priorités adaptées au budget, à la capacité et aux objectifs du propriétaire. J'ai fourni le jugement marketing derrière : les playbooks que son IA consulte, les grilles d'évaluation et la révision de ses recommandations comme humain dans la boucle."
@@ -176,7 +176,7 @@ export function renderStory(s) {
         <p class="margin-note sticky">${esc(tx.note)}</p>
       </aside>
       <div class="body">
-        <p class="chapter">${esc(t("about.page"))} ${idx + 1} ${esc(t("story.of"))} ${stories.length}</p>
+        <p class="chapter">${esc(t("story.label"))}</p>
         <h1>${esc(tx.title)}</h1>
         <p class="place-line">${esc(tx.where)}<br>${esc(tx.place)}<span class="years">${esc(s.years)}</span></p>
       </div>

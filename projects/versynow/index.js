@@ -19,8 +19,8 @@ export default {
       label: "The event hall",
       small: "VersyNow",
       note: "No number on screen is model-generated.",
-      lede: "VersyNow is a Québec-built platform for professional event engagement and audience analysis: the period before an event, live participation, and the analysis and follow-up afterwards. Organizers told us what they were really buying: who was in the room and why, which themes kept coming back, and how to make the next event better. So the product became an engagement-and-report platform, with Q&A and polls serving the report.\n\nI own the roadmap and lead its AI features. The deepest one is the post-event brief: an agent that reads the event's data, finds the weak session, reads what attendees wrote there, compares with the organizer's own past events, and writes what happened and what to change, with every number re-checked against the database before an organizer sees it, at about eight cents a brief.",
-      tagline: "live Q&A and audience insight for events",
+      lede: "VersyNow is a Québec-built B2B AI event analytics platform. It covers the period before an event, live participation, and the analysis and follow-up afterwards. Organizers told us what they were really buying: who was in the room and why, which themes kept coming back, and how to make the next event better. So the product became an engagement-and-report platform, with Q&A and polls serving the report.\n\nI own the roadmap and lead its AI features. The deepest one is the post-event brief: an agent that reads the event's data, finds the weak session, reads what attendees wrote there, compares with the organizer's own past events, and writes what happened and what to change, with every number re-checked against the database before an organizer sees it, at about eight cents a brief.",
+      tagline: "a B2B AI event analytics platform",
     },
     fr: {
       title: "VersyNow",
@@ -28,8 +28,8 @@ export default {
       label: "La salle d'événement",
       small: "VersyNow",
       note: "Aucun chiffre à l'écran ne vient du modèle.",
-      lede: "VersyNow est une plateforme québécoise d'engagement et d'analyse du public pour les événements professionnels : la période avant l'événement, la participation en direct, puis l'analyse et le suivi. Les organisateurs nous ont dit ce qu'ils achetaient vraiment : qui était dans la salle et pourquoi, quels thèmes revenaient, et comment rendre le prochain événement meilleur. Le produit est donc devenu une plateforme d'engagement et de rapport, où le Q&A et les sondages servent le rapport.\n\nJ'en tiens la feuille de route et je mène ses fonctions d'IA. La plus profonde est le compte rendu post-événement : un agent qui lit les données de l'événement, trouve la séance faible, lit ce que les participants y ont écrit, compare avec les événements passés de l'organisateur et écrit ce qui s'est passé et quoi changer, chaque chiffre revérifié contre la base de données avant qu'un organisateur le voie, pour environ huit cents par compte rendu.",
-      tagline: "Q&A en direct et compréhension du public",
+      lede: "VersyNow est une plateforme québécoise B2B d'analytique d'événements par IA. Elle couvre la période avant l'événement, la participation en direct, puis l'analyse et le suivi. Les organisateurs nous ont dit ce qu'ils achetaient vraiment : qui était dans la salle et pourquoi, quels thèmes revenaient, et comment rendre le prochain événement meilleur. Le produit est donc devenu une plateforme d'engagement et de rapport, où le Q&A et les sondages servent le rapport.\n\nJ'en tiens la feuille de route et je mène ses fonctions d'IA. La plus profonde est le compte rendu post-événement : un agent qui lit les données de l'événement, trouve la séance faible, lit ce que les participants y ont écrit, compare avec les événements passés de l'organisateur et écrit ce qui s'est passé et quoi changer, chaque chiffre revérifié contre la base de données avant qu'un organisateur le voie, pour environ huit cents par compte rendu.",
+      tagline: "plateforme B2B d'analytique d'événements par IA",
     }
   },
   landmark: () => `

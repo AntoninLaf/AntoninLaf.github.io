@@ -5,7 +5,7 @@ export default {
   // On the spiral: the case gets a page of its own.
   org: { en: "STEKAR & Vitralum", fr: "STEKAR & Vitralum" },
   spot: { en: "Industrial B2B", fr: "B2B industriel" },
-  kind: { en: "Engagement · Marketing Director", fr: "Mandat · Directeur marketing" },
+  kind: { en: "Marketing & sales support · Marketing Director", fr: "Marketing et soutien aux ventes · Directeur marketing" },
   tags: ["marketing"],
   // A glass curtain wall going up, and the crane that lifts it.
   landmark: () => `
@@ -32,7 +32,8 @@ export default {
         "Built the inbound system from zero: conversion paths on the website, a content strategy, paid campaigns, and tradeshows chosen for who walks the floor rather than for the size of the hall.",
         "Opened an online Lunch & Learn booking flow for architects and specifiers, so the sales conversation starts with an education session they asked for.",
         "Grew website traffic about 1,000% with AI-assisted SEO and content, earning visibility in AI search answers.",
-        "Measured brand recognition two ways, branded search and a survey, so the result couldn't be argued with."
+        "Measured brand recognition two ways, branded search and a survey, so the result couldn't be argued with.",
+        "Spent a large part of the role supporting sales directly. Sales and marketing worked as one team, closely and constantly, so what marketing built was what sales could use the same week."
       ],
       changed: "Three to four qualified inquiries a week, by phone and through the website. Cost per lead down 15 percent. Brand recognition up 57 percent year over year. The Lunch & Learn flow brought in leads from the United States and opened that market.",
       judgment: "Lowering the cost of a lead wasn't enough. The real job was creating a system that keeps producing them without me in the room.",
@@ -64,7 +65,8 @@ export default {
         "Bâti le système inbound à partir de zéro : parcours de conversion sur le site, stratégie de contenu, campagnes payantes et salons choisis pour qui arpente les allées plutôt que pour la taille de la salle.",
         "Ouvert une réservation en ligne de Lunch & Learn pour architectes et prescripteurs : la conversation de vente commence par une séance de formation qu'ils ont demandée.",
         "Fait croître le trafic du site d'environ 1 000 % grâce au SEO et au contenu assistés par l'IA, avec une visibilité dans les réponses des moteurs d'IA.",
-        "Mesuré la notoriété de deux façons, recherches de marque et sondage, pour que le résultat soit incontestable."
+        "Mesuré la notoriété de deux façons, recherches de marque et sondage, pour que le résultat soit incontestable.",
+        "Consacré une grande part du rôle au soutien direct des ventes. Ventes et marketing travaillaient comme une seule équipe, de près et en continu, alors ce que le marketing bâtissait servait aux ventes dès la même semaine."
       ],
       changed: "Trois à quatre demandes qualifiées par semaine, par téléphone et par le site. Coût par lead en baisse de 15 pour cent. Notoriété en hausse de 57 pour cent d'une année à l'autre. Les Lunch & Learn ont amené des leads des États-Unis et ouvert ce marché.",
       judgment: "Faire baisser le coût d'un lead ne suffisait pas. Le vrai travail, c'était un système qui continue d'en produire sans moi dans la pièce.",

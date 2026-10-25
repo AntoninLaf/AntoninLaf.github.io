@@ -18,7 +18,7 @@ export const text = {
         ["Companies House itself", "The raw data, free", "Six separate screens, written in company-law language"]
       ],
       tableHead: ["Who", "What it does", "Why it doesn't reach this user"],
-      p2: "So the person most exposed to counterparty risk, the agency owner about to do £40,000 of work on 60-day terms, the freelancer taking a new client, the small supplier extending credit, has the least access to the check.",
+      p2: "So the person most exposed to a client or supplier going under, the agency owner about to do £40,000 of work on 60-day terms, the freelancer taking a new client, the small supplier extending credit, has the least access to the check.",
       gaps: [
         ["They lag.", "A UK small company can file accounts up to nine months after its year end, so the 'current' financial picture is routinely 12 to 21 months old. By the time accounts show distress, trade creditors already know."],
         ["A number, not a narrative.", "'42 out of 100' tells a finance manager nothing actionable. They need which facts moved it, when, and what to ask about."],
@@ -150,7 +150,7 @@ export const text = {
         ["Companies House lui-même", "Les données brutes, gratuites", "Six écrans distincts, écrits dans la langue du droit des sociétés"]
       ],
       tableHead: ["Qui", "Ce qu'il fait", "Pourquoi il n'atteint pas cet utilisateur"],
-      p2: "Donc la personne la plus exposée au risque de contrepartie, la propriétaire d'agence sur le point de faire 40 000 £ de travail à 60 jours, le pigiste qui prend un nouveau client, le petit fournisseur qui accorde du crédit, est celle qui a le moins accès à la vérification.",
+      p2: "Donc la personne la plus exposée à la faillite d'un client ou d'un fournisseur, la propriétaire d'agence sur le point de faire 40 000 £ de travail à 60 jours, le pigiste qui prend un nouveau client, le petit fournisseur qui accorde du crédit, est celle qui a le moins accès à la vérification.",
       gaps: [
         ["Elles sont en retard.", "Une petite entreprise britannique peut déposer ses comptes jusqu'à neuf mois après sa fin d'exercice : le portrait financier « actuel » a souvent 12 à 21 mois. Quand les comptes montrent la détresse, les créanciers commerciaux le savent déjà."],
         ["Un chiffre, pas un récit.", "« 42 sur 100 » ne dit rien d'utile à un directeur financier. Il lui faut quels faits ont bougé la note, quand, et quoi demander."],

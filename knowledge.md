@@ -28,9 +28,9 @@ Projects, never jobs: Acteurly (acteurly.ai), GLRlight, and the Rio Tinto MMA ca
 
 ### Resume bullets (approved wording)
 - VersyNow: owned the roadmap and PRDs for VersyNow and VersyTalks; anchored VersyTalks on two metrics, time on platform and arguments written, the second doubling as training data for the team's own language model. Specified an agentic post-event brief on Claude Haiku 4.5 with six read-only tools and eight rules that re-check every number against the database before organizers see it, at about $0.08 per brief. Specified an AI debate grader calibrated on 42 real submissions with a rubric from coaches' own framework, launched as a capped free beta with go/stop targets and user corrections captured as training labels. Grew VersyTalks from 40 to 10,000 monthly active users and took VersyNow to market in Québec, from positioning and pricing to a free-trial-to-paid funnel that signed paying organizations, including an annual licence.
-- STEKAR & Vitralum: built inbound from zero for two brands in Canada and the U.S., leading agencies and freelancers: 3–4 qualified inquiries a week, cost per lead down 15%, brand recognition up 57% and a U.S. pipeline opened. Grew website traffic about 1,000% with AI-assisted SEO and content, earning visibility in AI search answers.
+- STEKAR & Vitralum: built inbound from zero for two brands in Canada and the U.S., leading agencies and freelancers: 3–4 qualified inquiries a week, cost per lead down 15%, brand recognition up 57% and a U.S. pipeline opened. Grew website traffic about 1,000% with AI-assisted SEO and content, earning visibility in AI search answers. A large part of the role was sales support; the sales and marketing teams worked very closely together (stated by Antonin, 25 October 2026).
 - Acteur Social: advised small businesses on positioning, digital strategy, analytics, media buying and website conversion. No client names.
-- GoCo (a TELUS company): led marketing for the migration of 900+ B2B voice accounts, using usage and engagement signals to target at-risk accounts with segmented Salesforce/Pardot campaigns, contributing to a 30% churn reduction.
+- GoCo (a TELUS company): led marketing for the migration of 900+ B2B telephony and data accounts (often brick-and-mortar stores), using usage and engagement signals to target at-risk accounts with segmented Salesforce/Pardot campaigns, contributing to a 30% churn reduction.
 - Groupe EGS: grew organic search traffic 20%, lead quality 8% and ad ROI 10% through a creator-led content strategy.
 - Acteurly: wrote the 24 expert playbooks and the rubrics that grade recommendations for an AI analyst turning small businesses' Google and Meta data into a weekly action plan; code computes every figure, the model only explains. He did not write the code.
 - GLRlight: built 16 deterministic rules on Companies House data with an LLM that only explains the verdict, cutting a 30-minute manual screen to seconds; published that it does not predict insolvency. Code is public at github.com/AntoninLaf/glrlight; live at glrlight.vercel.app.
@@ -43,6 +43,8 @@ Projects, never jobs: Acteurly (acteurly.ai), GLRlight, and the Rio Tinto MMA ca
 - Interests: Quebec U23 100 m champion (track and field); language learning and travel; personal AI projects.
 
 ## GLRlight, in Antonin's words
+
+In plain words (use this first with a non-specialist): GLRlight checks a UK company for warning signs before you sign with it. It reads the company's public record in about a second, answers green, amber or red with each warning sign dated and paired with its innocent explanation, and tells you whether paying for a proper credit check is worth it. It does not predict bankruptcy.
 Corporate filings contain signals that are easy to overlook in isolation. GLRlight examines their timing, sequence and concentration to help people decide where further diligence is warranted. A rules engine evaluates sixteen signals across filing behaviour, governance, director history, ownership, security interests and register events, and aggregates them into a green, amber or red screening band with the underlying evidence visible. An AI-generated memo explains what changed, why it may matter, plausible benign explanations and specific questions to ask the counterparty. The core design principle: make the evidence inspectable, the uncertainty explicit and the next questions actionable. GLRlight supports human judgment; its screening bands are not credit ratings. He tried to test whether it predicts insolvency; the backtest failed for instructive reasons (look-ahead bias, an anachronistic rule, an age confound, and a sample that was not random), and he published that it does not predict insolvency.
 
 # Part 2. The reasoning behind the products
@@ -378,7 +380,7 @@ The existence of a marketplace and credit mechanism does not establish liquidity
 
 Evidence: owner_reported positioning and capabilities.
 
-VersyNow is a Quebec-built platform for professional event engagement and audience analysis. It supports the period before an event, live participation and the analysis and follow-up afterward. Its positioning emphasizes helping organizers understand their audience and improve successive events.
+VersyNow is a Quebec-built B2B AI event analytics platform (Antonin's own one-line description, 25 October 2026), for professional event engagement and audience analysis. It supports the period before an event, live participation and the analysis and follow-up afterward. Its positioning emphasizes helping organizers understand their audience and improve successive events.
 
 Polls, word clouds, questions and other activities give attendees ways to participate. For organizers, those interactions also become inputs into reporting, theme analysis, audience understanding and planning. The platform's purpose is broader than displaying interaction during a presentation.
 

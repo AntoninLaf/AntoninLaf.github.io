@@ -42,7 +42,7 @@ function head() {
       </svg>
       <p class="throughline">${esc(t("hero.throughline"))}</p>
       <nav class="spiral-nav">
-        <a href="#/about">${esc(t("about.title"))}</a>
+        <a class="spiral-about" href="#/about"><b>${esc(t("about.title"))} →</b><span>${esc(t("about.tagline"))}</span></a>
         <a href="#/map">${esc(t("work.map"))}</a>
         <a href="mailto:${esc(t("ask.email"))}">${esc(t("about.contact"))}</a>
       </nav>
@@ -112,7 +112,7 @@ export function renderSpiral({ intro, flat }) {
         <div class="spiral-body">
           <div class="spiral-left">
             <p class="margin-note spiral-hint">${esc(t("work.hint"))}</p>
-            <p class="wc"><span class="wc-label">${esc(t("work.selected"))}</span><span class="wc-n">01</span><span class="wc-of">/${two(list.length)}</span></p>
+            <p class="wc"><span class="wc-label">${esc(t("work.selected"))}</span><span class="wc-n">01</span><span class="wc-of">${esc(t("work.of"))} ${list.length}</span></p>
           </div>
           <div class="spiral-view">
             <div class="ring">${pages}</div>

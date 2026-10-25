@@ -684,10 +684,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   overflow: hidden;
 }
 .spiral-head, .spiral-right, .spiral-filters, .spiral-left { position: relative; z-index: 2; }   /* words stay above the far pages */
-.spiral-head .name { font-size: clamp(30px, 3.3vw, 48px); }
-.spiral-head .name-underline { width: min(100%, 420px); }
-.spiral-head .throughline { max-width: 62ch; font-size: clamp(17px, 1.45vw, 21px); margin-top: 8px; }
-.spiral-nav { display: flex; flex-wrap: wrap; gap: 6px 26px; margin-top: 10px; font-family: var(--hand); font-size: 17px; }
+.spiral-head .name { font-size: clamp(36px, 4.6vw, 68px); }
+.spiral-head .name-underline { width: min(100%, 560px); height: 12px; }
+.spiral-head .name-underline path { stroke-width: 2; }
+.spiral-head .throughline { max-width: 52ch; font-size: clamp(19px, 1.75vw, 25px); margin-top: 10px; color: var(--ink); }
+.spiral-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 26px; margin-top: 16px; font-family: var(--hand); font-size: 17px; }
+/* About: the first stop, so it looks like one — a note card pinned to the page */
+.spiral-nav a.spiral-about {
+  display: inline-flex; align-items: baseline; gap: 12px;
+  padding: 7px 16px 8px; border: 1.5px solid var(--ink); border-radius: 3px; border-bottom-width: 1.5px;
+  background: #f4f0e7; box-shadow: 3px 3px 0 var(--paper-shadow); transform: rotate(-1deg);
+  transition: transform .2s var(--ease-ink), box-shadow .2s var(--ease-ink);
+}
+.spiral-nav a.spiral-about b { font-weight: 400; font-size: 21px; color: var(--ink); }
+.spiral-nav a.spiral-about span { font-weight: 300; font-size: 15px; color: var(--pencil); }
+.spiral-nav a.spiral-about:hover { transform: rotate(0deg) translateY(-1px); box-shadow: 4px 5px 0 var(--paper-shadow); border-color: var(--red-ink); }
+.spiral-nav a.spiral-about:hover b { color: var(--red-ink); }
 .spiral-nav a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--pencil-light); }
 .spiral-nav a:hover { color: var(--red-ink); border-bottom-color: var(--red-ink); }
 
@@ -697,7 +709,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .wc { display: flex; align-items: flex-end; gap: 8px; margin: 0; font-family: var(--hand); }
 .wc-label { font-weight: 300; font-size: 16px; color: var(--pencil); padding-bottom: 14px; max-width: 6ch; line-height: 1.1; }
 .wc-n { font-size: clamp(76px, 8vw, 116px); line-height: .78; color: transparent; -webkit-text-stroke: 1.3px var(--pencil); font-weight: 400; }
-.wc-of { font-size: 21px; color: var(--red-ink); padding-bottom: 10px; }
+.wc-of { font-size: 22px; color: var(--ink-soft); padding-bottom: 10px; white-space: nowrap; }
 
 .spiral-view { position: relative; perspective: 1600px; perspective-origin: 50% 40%; min-width: 0; }
 .ring { position: absolute; left: 50%; top: 40%; width: 0; height: 0; transform-style: preserve-3d; will-change: transform; }

@@ -19,6 +19,7 @@ const still = window.matchMedia("(prefers-reduced-motion: reduce)");
 let cleanup = () => {};      // the spiral's listeners, removed when the page changes
 let lastSeen = null;          // the last project opened, so the spiral turns back to it
 let prevRoute = null;
+let backToAbout = false;
 let introPlayed = false;
 try { introPlayed = sessionStorage.getItem("intro") === "1"; } catch (_) {}
 
@@ -78,7 +79,9 @@ function render(first) {
   window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
 
   // A case opened from the spiral goes back to the spiral; opened from About, back to About.
-  const fromAbout = r.name === "story" && !(prevRoute && (prevRoute.name === "home" || prevRoute.name === "map"));
+  const same = prevRoute && prevRoute.name === r.name && prevRoute.slug === r.slug;   // a language switch re-renders the same page
+  const fromAbout = same ? backToAbout : r.name === "story" && !(prevRoute && (prevRoute.name === "home" || prevRoute.name === "map"));
+  backToAbout = fromAbout;
   backLink.hidden = r.name === "home";
   backLink.textContent = fromAbout ? t("story.index") : t("nav.back");
   backLink.setAttribute("href", fromAbout ? "#/about" : "#/");
@@ -87,7 +90,7 @@ function render(first) {
   if (r.name === "project") { const p = findProject(r.slug); if (p && p.mount) p.mount(sheet, lang()); }
   if (r.name === "home") cleanup = mountSpiral(sheet, { intro, focus: lastSeen, rerender: () => render(true) });
   if (r.name === "project" || r.name === "story") lastSeen = r.slug;
-  if (r.name !== "home" || !first) prevRoute = r;
+  prevRoute = r;
   document.title = pageTitle(r);
 }
 
