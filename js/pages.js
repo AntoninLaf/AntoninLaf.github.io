@@ -244,7 +244,7 @@ export function renderAbout() {
     </section>
 
     <section class="ab-sec" id="ab-5">
-      ${section("05", t("about.s.vocab"), t("about.s.vocab.note"))}
+      ${section("05", t("about.s.vocab"))}
       ${renderVocab(L)}
     </section>
 
