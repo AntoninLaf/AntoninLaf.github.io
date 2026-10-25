@@ -5,6 +5,7 @@ import { projects } from "../projects/index.js";
 import { stories, road, findStory } from "../stories/index.js";
 import { findProject } from "../projects/index.js";
 import { WORDS } from "../stories/words.js";
+import { FACTS, TOOLS, WORK, GLR_CARD, CAPS, CAP_COLS, FLOW, VOCAB } from "./about-data.js";
 
 
 export function renderHome({ intro, stacked }) {
@@ -38,51 +39,7 @@ const BACKGROUND = {
 };
 
 // ---------- About: a consultant's one-pager, drawn in the notebook ----------
-
-const FACTS = {
-  en: [
-    ["Based", "Montréal · remote welcome"],
-    ["Looking for", "Full-time roles from January 2027 · internships considered"],
-    ["Focus", "AI product · product management · growth · consulting"],
-    ["Studying", "Master of Management in Analytics, McGill Desautels, 2026–2027"],
-    ["Languages", "French · English · Spanish · German"]
-  ],
-  fr: [
-    ["Basé à", "Montréal · télétravail bienvenu"],
-    ["Je cherche", "Un poste à temps plein dès janvier 2027 · stages considérés"],
-    ["Axes", "Produit IA · gestion de produit · croissance · conseil"],
-    ["Études", "Maîtrise en gestion analytique, McGill Desautels, 2026–2027"],
-    ["Langues", "français · anglais · espagnol · allemand"]
-  ]
-};
-
-// Four principles, each in my own words (from my answers and the GLRlight brief).
-const HOW = {
-  en: [
-    ["Frame the problem", "I want a causal explanation that suggests a different action, rather than a more elaborate description of the symptom.", "on VersyTalks"],
-    ["Test the mechanism", "If every possible result leaves us doing the same thing, the test is probably poorly designed.", "on running tests"],
-    ["Defend the claim", "Choose the claim you can defend, not the claim that sounds most impressive.", "on GLRlight"],
-    ["Value is the next step", "A response, a report or an AI answer is a beginning. I care about the next step it makes possible.", "on the work as a whole"]
-  ],
-  fr: [
-    ["Cadrer le problème", "Je veux une explication causale qui suggère une autre action, plutôt qu'une description plus élaborée du symptôme.", "sur VersyTalks"],
-    ["Tester le mécanisme", "Si chaque résultat possible nous laisse faire la même chose, le test est probablement mal conçu.", "sur la conduite des tests"],
-    ["Défendre l'affirmation", "Choisir l'affirmation qu'on peut défendre, pas celle qui impressionne le plus.", "sur GLRlight"],
-    ["La valeur, c'est la suite", "Une réponse, un rapport ou une réponse d'IA est un début. Ce qui m'importe, c'est la prochaine étape qu'il rend possible.", "sur l'ensemble du travail"]
-  ]
-};
-
-const TOOLS = "Python · SQL · PyTorch · Databricks · PySpark · Anthropic and OpenAI APIs · Claude Code · Git · GA4";
-
-// Which pages appear as work cards, in order.
-const WORK = {
-  engagements: [{ story: "versynow", project: "versynow" }, { story: "versytalks", project: "versytalks" }, { story: "stekar" }, { story: "goco" }],
-  ventures: [{ story: "acteurly", project: "acteurly" }, { project: "glrlight" }]
-};
-const GLR_CARD = {
-  en: { where: "GLRlight · Independent build", title: "A one-second check for warning signs before you sign with a UK company", headline: { value: "16", label: "plain rules, no AI in the verdict" } },
-  fr: { where: "GLRlight · Projet indépendant", title: "En une seconde, les signaux d'alerte d'une entreprise britannique avant de signer", headline: { value: "16", label: "règles simples, aucune IA dans le verdict" } }
-};
+// The content lives in about-data.js; this file only draws it.
 
 function workCard(item, L) {
   const s = item.story ? findStory(item.story) : null;
@@ -96,6 +53,8 @@ function workCard(item, L) {
     const g = GLR_CARD[L] || GLR_CARD.en, px = p.text[L] || p.text.en;
     where = g.where; years = "2026"; title = g.title; head = g.headline; note = px.note;
   }
+  if (item.where) where = item.where[L] || item.where.en;
+  const tools = item.tools ? (item.tools[L] || item.tools.en) : [];
   const links = [];
   if (s) links.push(`<a href="#/story/${s.slug}">${esc(t("about.case"))}</a>`);
   if (p) links.push(`<a href="#/p/${p.slug}">${esc(t("about.product"))}</a>`);
@@ -107,60 +66,129 @@ function workCard(item, L) {
           <h3><a href="${main}">${esc(title)}</a></h3>
           <p class="wc-head"><b>${esc(head.value)}</b><span>${esc(head.label)}</span></p>
           <p class="wc-note">${esc(note)}</p>
+          ${tools.length ? `<p class="wc-tools"><span class="wc-tools-k">${esc(t("about.toolkit"))}</span>${tools.map((x) => `<span class="chip">${esc(x)}</span>`).join("")}</p>` : ""}
           <p class="wc-links">${links.join("")}</p>
         </article>`;
 }
 
-// The road: a hand-drawn chart in three lanes, years along the bottom.
+// The road: a Gantt chart drawn by hand. Thin bars; the name sits on top of its bar, the role under it.
 function renderRoad(L) {
-  const X0 = 2019.5, X1 = 2027.8, LEFT = 150, RIGHT = 990, TODAY = 2026.8;
+  const X0 = 2019.5, X1 = 2027.8, LEFT = 160, RIGHT = 990, TODAY = 2026.8;
   const x = (yr) => LEFT + (yr - X0) / (X1 - X0) * (RIGHT - LEFT);
-  const lanes = [["edu", 1], ["roles", 4], ["ventures", 2]];
-  const ROW = 48, GAP = 20, TOP = 34;
-  const laneTop = {}; let y = TOP;
-  for (const [k, n] of lanes) { laneTop[k] = y; y += n * ROW + GAP; }
-  const axisY = y - GAP + 10;
-  const H = axisY + 34;
-  const lanesSvg = lanes.map(([k, n], i) => {
-    const y0 = laneTop[k], mid = y0 + n * ROW / 2 - 4;
-    return `
-      <text x="0" y="${mid}" class="hand lane">${esc(t("about.lane." + k))}</text>
-      ${i ? `<path class="pencil sep" d="M0 ${y0 - GAP / 2} H${RIGHT}"/>` : ""}`;
-  }).join("");
-  const bars = road.map((b, i) => {
+  const laneOrder = ["edu", "roles", "ventures"];
+  const GAP = 18, TOP = 38, BAR = 11;
+  // each row is as tall as its contents: name, bar, role, and product links when there are some
+  const rowH = {};
+  for (const b of road) { const k = `${b.lane}:${b.row}`; rowH[k] = Math.max(rowH[k] || 0, b.links ? 70 : 54); }
+  const rowTop = {}, laneTop = {}, laneH = {};
+  let y = TOP;
+  for (const lane of laneOrder) {
+    laneTop[lane] = y;
+    const rows = [...new Set(road.filter((b) => b.lane === lane).map((b) => b.row))].sort((a, b) => a - b);
+    for (const r of rows) { rowTop[`${lane}:${r}`] = y; y += rowH[`${lane}:${r}`]; }
+    laneH[lane] = y - laneTop[lane];
+    y += GAP;
+  }
+  const axisY = y - GAP + 8, H = axisY + 34;
+  const lanesSvg = laneOrder.map((k, i) => `
+      <text x="0" y="${laneTop[k] + laneH[k] / 2 + 4}" class="hand lane">${esc(t("about.lane." + k))}</text>
+      ${i ? `<path class="pencil sep" d="M0 ${laneTop[k] - GAP / 2} H${RIGHT}"/>` : ""}`).join("");
+  const bars = road.map((b) => {
     const [org, role] = b[L] || b.en;
-    const name = (b.short || org) + (b.href ? " →" : "");          // the bar carries a short name; the tooltip the full one
-    const bx = x(b.start), ex = x(b.end == null ? TODAY : b.end), w = Math.max(ex - bx, 10);
-    const by = laneTop[b.lane] + b.row * ROW + 4, h = 24;
-    const inside = name.length * 7.4 + 16 < w;
-    const lx = inside ? bx + 9 : (b.end == null ? ex + 30 : ex + 8);
-    const roleW = role.length * 6.1;
+    const name = (b.short || org) + (b.href ? " →" : "");
+    const bx = x(b.start), ex = x(b.end == null ? TODAY : b.end);
+    const top = rowTop[`${b.lane}:${b.row}`];
+    const by = top + 22;
+    const box = `M${bx - 2} ${by} H${ex + 1} M${ex} ${by - 1.5} V${by + BAR + 1} M${ex + 2} ${by + BAR} H${bx} M${bx} ${by + BAR + 1.5} V${by - 1}`;
+    const arrow = b.end == null ? `<path class="pencil" d="M${ex + 4} ${by + BAR / 2} H${ex + 22} M${ex + 16} ${by + BAR / 2 - 4.5} L${ex + 22} ${by + BAR / 2} L${ex + 16} ${by + BAR / 2 + 4.5}"/>` : "";
+    const fill = b.href || b.links ? `<rect class="hatch" x="${bx}" y="${by}" width="${Math.max(ex - bx, 4)}" height="${BAR}"/>` : "";
+    const nameW = name.length * 7.4, roleW = role.length * 6.1;
+    const nameAt = bx + nameW > 996 ? `x="${Math.min(ex, 996)}" text-anchor="end"` : `x="${bx}"`;
     const roleAt = bx + roleW > 996 ? `x="${Math.min(ex, 996)}" text-anchor="end"` : `x="${bx}"`;
-    const box = `M${bx - 2} ${by} H${ex + 1} M${ex} ${by - 1.5} V${by + h + 1} M${ex + 2} ${by + h} H${bx} M${bx} ${by + h + 1.5} V${by - 1}`;
-    const arrow = b.end == null ? `<path class="pencil" d="M${ex + 4} ${by + h / 2} H${ex + 24} M${ex + 18} ${by + h / 2 - 5} L${ex + 24} ${by + h / 2} L${ex + 18} ${by + h / 2 + 5}"/>` : "";
-    const fill = b.href ? `<rect class="hatch" x="${bx}" y="${by}" width="${w}" height="${h}"/>` : "";
+    const prodLinks = b.links ? b.links.map(([label, href], i) => `<a class="bar-link" href="${href}"><text x="${bx + i * 108}" y="${by + BAR + 32}" class="hand prod">${esc(label)} →</text></a>`).join("") : "";
     const inner = `
         <title>${esc(org)}, ${esc(role)}</title>
+        <text ${nameAt} y="${by - 6}" class="hand org">${esc(name)}</text>
         ${fill}<path d="${box}"/>${arrow}
-        <text x="${lx}" y="${by + 17}" class="hand org">${esc(name)}</text>
-        <text ${roleAt} y="${by + h + 14}" class="hand small role">${esc(role)}</text>`;
-    return b.href ? `<a class="bar link" href="${b.href}">${inner}</a>` : `<g class="bar">${inner}</g>`;
+        <text ${roleAt} y="${by + BAR + 14}" class="hand small role">${esc(role)}</text>`;
+    return (b.href ? `<a class="bar link" href="${b.href}">${inner}</a>` : `<g class="bar${b.links ? " has-links" : ""}">${inner}</g>`) + prodLinks;
   }).join("");
   let ticks = "";
   for (let yr = 2020; yr <= 2027; yr++) ticks += `<path class="thin" d="M${x(yr)} ${axisY - 4} V${axisY + 4}"/><text x="${x(yr)}" y="${axisY + 22}" class="hand small" text-anchor="middle">${yr}</text>`;
   return `
   <figure class="ink-fig wide ink-on-view road">
     <svg viewBox="0 0 1000 ${H}" role="img" aria-label="${esc(t("about.s.road"))}">
-      <defs><pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V7" class="hatch-line"/></pattern></defs>
+      <defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V6" class="hatch-line"/></pattern></defs>
       ${lanesSvg}
       <path class="thin" d="M${LEFT - 10} ${axisY} H${RIGHT}"/>
       ${ticks}
-      <path class="today" d="M${x(TODAY)} ${TOP - 18} V${axisY}"/>
-      <text x="${x(TODAY)}" y="${TOP - 22}" class="hand small today-label" text-anchor="middle">${esc(t("about.today"))}</text>
+      <path class="today" d="M${x(TODAY)} ${TOP - 16} V${axisY}"/>
+      <text x="${x(TODAY)}" y="${TOP - 21}" class="hand small today-label" text-anchor="middle">${esc(t("about.today"))}</text>
       ${bars}
     </svg>
     <figcaption>${esc(t("about.road.note"))}</figcaption>
   </figure>`;
+}
+
+// Harvey balls, drawn in ink: 0 empty, 1 half, 2 full.
+const ball = (v) => `<svg class="hb" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/>${v === 2 ? `<circle cx="12" cy="12" r="9" class="hb-fill"/>` : v === 1 ? `<path class="hb-fill" d="M12 3 A9 9 0 0 1 12 21 Z"/>` : ""}</svg>`;
+
+function renderCaps(L) {
+  const rows = CAPS[L] || CAPS.en;
+  const label = (v) => t(v === 2 ? "about.cap.core" : v === 1 ? "about.cap.part" : "about.cap.none");
+  return `
+      <div class="caps-wrap">
+        <table class="caps">
+          <thead><tr><th></th>${CAP_COLS.map((c) => `<th scope="col">${esc(c)}</th>`).join("")}</tr></thead>
+          <tbody>${rows.map(([cap, vals]) => `
+            <tr><th scope="row">${esc(cap)}</th>${vals.map((v, i) => `<td title="${esc(CAP_COLS[i])}: ${esc(label(v))}">${ball(v)}<span class="sr">${esc(label(v))}</span></td>`).join("")}</tr>`).join("")}
+          </tbody>
+        </table>
+      </div>
+      <p class="caps-legend">${ball(2)} ${esc(t("about.cap.core"))} <span>·</span> ${ball(1)} ${esc(t("about.cap.part"))} <span>·</span> ${ball(0)} ${esc(t("about.cap.none"))}</p>`;
+}
+
+// The workflow: five phases drawn as one line with a loop back from Test, then the detail of each.
+function renderFlow(L) {
+  const flow = FLOW[L] || FLOW.en;
+  const w = 900, n = flow.length, bw = 150, gap = (w - n * bw) / (n - 1);
+  const boxes = flow.map((f, i) => {
+    const x0 = i * (bw + gap);
+    return `
+      <path d="M${x0 - 2} 40 H${x0 + bw + 1} M${x0 + bw} 38.5 V97 M${x0 + bw + 2} 96 H${x0} M${x0} 97.5 V39"/>
+      <text x="${x0 + 14}" y="62" class="hand small">${String(i + 1).padStart(2, "0")}</text>
+      <text x="${x0 + bw / 2}" y="82" class="hand" text-anchor="middle">${esc(f.phase)}</text>
+      ${i < n - 1 ? `<path class="thin" d="M${x0 + bw + 4} 68 H${x0 + bw + gap - 4} M${x0 + bw + gap - 10} 63 L${x0 + bw + gap - 4} 68 L${x0 + bw + gap - 10} 73"/>` : ""}`;
+  }).join("");
+  const xt = 2 * (bw + gap) + bw / 2, xh = 1 * (bw + gap) + bw / 2;
+  const loop = `<path class="pencil" d="M${xt} 100 C${xt} 136 ${xh} 136 ${xh} 102"/><path class="pencil" d="M${xh - 5} 110 L${xh} 101 L${xh + 5} 110"/><text x="${(xt + xh) / 2}" y="140" class="hand small" text-anchor="middle">${esc(t("about.flow.loop"))}</text>`;
+  return `
+      ${inkFigure(boxes + loop, { viewBox: "0 0 900 150", caption: t("about.flow.caption"), cls: "wide flow-fig" })}
+      <div class="flow-grid">${flow.map((f, i) => `
+        <div class="flow-col ink-on-view">
+          <p class="flow-ask">${esc(f.ask)}</p>
+          <ul class="flow-tools">${f.tools.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
+          <blockquote>${esc(f.quote)}<span>${esc(f.src)}</span></blockquote>
+          <a class="flow-seen" href="${f.href}">${esc(f.seen)} →</a>
+        </div>`).join("")}
+      </div>`;
+}
+
+function renderVocab(L) {
+  const groups = VOCAB[L] || VOCAB.en;
+  return `
+      <div class="vocab">${groups.map((g) => `
+        <section class="vocab-group">
+          <h3>${esc(g.group)}</h3>
+          <dl>${g.terms.map(([term, origin, def, seen, href]) => `
+            <div class="term">
+              <dt>${esc(term)}<span>${esc(origin)}</span></dt>
+              <dd>${esc(def)}</dd>
+              <dd class="term-seen"><a href="${href}">${esc(seen)}</a></dd>
+            </div>`).join("")}
+          </dl>
+        </section>`).join("")}
+      </div>`;
 }
 
 const section = (n, title, note = "") => `
@@ -170,7 +198,6 @@ export function renderAbout() {
   const L = lang();
   const bg = BACKGROUND[L] || BACKGROUND.en;
   const facts = FACTS[L] || FACTS.en;
-  const how = HOW[L] || HOW.en;
   const words = WORDS[L] || WORDS.en;
   return `
   <section class="sheet about">
@@ -191,12 +218,14 @@ export function renderAbout() {
       </aside>
     </div>
 
-    <section class="ab-sec">
+    <nav class="ab-toc">${["about.s.road", "about.s.work", "about.s.caps", "about.s.how", "about.s.vocab", "about.words", "about.background"].map((k, i) => `<a href="#/about" data-jump="ab-${i + 1}"><span>${String(i + 1).padStart(2, "0")}</span>${esc(t(k))}</a>`).join("")}</nav>
+
+    <section class="ab-sec" id="ab-1">
       ${section("01", t("about.s.road"))}
       ${renderRoad(L)}
     </section>
 
-    <section class="ab-sec">
+    <section class="ab-sec" id="ab-2">
       ${section("02", t("about.s.work"), t("about.s.work.note"))}
       <h3 class="ab-group">${esc(t("about.engagements"))}</h3>
       <div class="work-grid">${WORK.engagements.map((w) => workCard(w, L)).join("")}</div>
@@ -204,19 +233,23 @@ export function renderAbout() {
       <div class="work-grid">${WORK.ventures.map((w) => workCard(w, L)).join("")}</div>
     </section>
 
-    <section class="ab-sec">
-      ${section("03", t("about.s.how"), t("hero.throughline"))}
-      <div class="how-grid">${how.map(([h, q, src], i) => `
-        <figure class="how ink-on-view">
-          <figcaption><span>${i + 1}</span>${esc(h)}</figcaption>
-          <blockquote>${esc(q)}</blockquote>
-          <p class="how-src">${esc(src)}</p>
-        </figure>`).join("")}
-      </div>
+    <section class="ab-sec" id="ab-3">
+      ${section("03", t("about.s.caps"), t("about.s.caps.note"))}
+      ${renderCaps(L)}
     </section>
 
-    <section class="ab-sec">
-      ${section("04", t("about.words"), t("about.words.note"))}
+    <section class="ab-sec" id="ab-4">
+      ${section("04", t("about.s.how"), t("about.s.how.note"))}
+      ${renderFlow(L)}
+    </section>
+
+    <section class="ab-sec" id="ab-5">
+      ${section("05", t("about.s.vocab"), t("about.s.vocab.note"))}
+      ${renderVocab(L)}
+    </section>
+
+    <section class="ab-sec" id="ab-6">
+      ${section("06", t("about.words"), t("about.words.note"))}
       <div class="words-grid">${words.map((w) => `
         <details class="word">
           <summary><span class="word-title">${esc(w.title)}</span><span class="word-first">${esc(w.paras[0].split(". ")[0])}.</span><span class="word-open">${esc(t("about.read"))}</span></summary>
@@ -225,8 +258,8 @@ export function renderAbout() {
       </div>
     </section>
 
-    <section class="ab-sec">
-      ${section("05", t("about.background"))}
+    <section class="ab-sec" id="ab-7">
+      ${section("07", t("about.background"))}
       <div class="bg-grid">
         <div class="bg-card"><p class="bg-k">${esc(t("about.education"))}</p>${bg.education.map((e) => `<p>${esc(e)}</p>`).join("")}</div>
         <div class="bg-card"><p class="bg-k">${esc(t("about.certifications"))}</p>${bg.certifications.map((e) => `<p>${esc(e)}</p>`).join("")}</div>

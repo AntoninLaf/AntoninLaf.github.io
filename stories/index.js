@@ -20,8 +20,7 @@ export const road = [
   { lane: "roles", row: 0, start: 2023.75, end: 2025.17, en: ["Acteur Social", "Marketing Consultant"], fr: ["Acteur Social", "Consultant marketing"] },
   { lane: "roles", row: 1, start: 2022.42, end: 2023.67, short: "GoCo · TELUS", en: ["GoCo, a TELUS company", "Marketing Manager"], fr: ["GoCo, une entreprise de TELUS", "Gestionnaire marketing"], href: "#/story/goco" },
   { lane: "roles", row: 1, start: 2024.17, end: 2026.5, en: ["STEKAR & Vitralum", "Marketing Director"], fr: ["STEKAR & Vitralum", "Directeur marketing"], href: "#/story/stekar" },
-  { lane: "roles", row: 2, start: 2024.92, end: null, en: ["VersyNow", "Product Manager, AI & Growth"], fr: ["VersyNow", "Chef de produit, IA et croissance"], href: "#/p/versynow" },
-  { lane: "roles", row: 3, start: 2024.92, end: null, en: ["VersyTalks", "Product Manager, AI & Growth"], fr: ["VersyTalks", "Chef de produit, IA et croissance"], href: "#/p/versytalks" },
+  { lane: "roles", row: 2, start: 2024.92, end: null, en: ["Versy Technologies", "Product Manager, AI & Growth"], fr: ["Versy Technologies", "Chef de produit, IA et croissance"], links: [["VersyNow", "#/p/versynow"], ["VersyTalks", "#/p/versytalks"]] },
   { lane: "ventures", row: 0, start: 2026.0, end: null, en: ["Acteurly", "Marketing expert & reviewer"], fr: ["Acteurly", "Expert marketing et réviseur"], href: "#/p/acteurly" },
   { lane: "ventures", row: 1, start: 2026.5, end: 2026.8, en: ["GLRlight", "Independent build"], fr: ["GLRlight", "Projet indépendant"], href: "#/p/glrlight" }
 ];

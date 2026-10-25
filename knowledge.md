@@ -18,7 +18,7 @@ Record captured 17 October 2026, extended 18 October 2026. This file is the sing
 ## Experience (employer, title and dates are fixed; from the approved resume)
 | Employer | Title | Dates |
 |---|---|---|
-| VersyNow (live Q&A and audience insight for events; also behind VersyTalks) | Product Manager, AI & Growth (part-time) | Dec 2024 – Present |
+| Versy Technologies (the company behind VersyNow, a B2B AI event analytics platform, and VersyTalks) | Product Manager, AI & Growth (part-time) | Dec 2024 – Present |
 | STEKAR & Vitralum (architectural glass and aluminum facade manufacturer, Canada and U.S.) | Marketing Director | Mar 2024 – Jul 2026 |
 | Acteur Social | Marketing Consultant (freelance) | Oct 2023 – Mar 2025 |
 | GoCo (a TELUS company) | Marketing Manager | Jun 2022 – Sep 2023 |
@@ -1712,6 +1712,72 @@ E1. Slack describes its origin as an internal collaboration tool at a games comp
 E2. Amazon explains its Working Backwards press release and FAQ process in its 2024 Letter to Shareholders. The comparison in answer 20 concerns clarifying customer value, not a claim that I formally implemented Amazon's process. https://www.aboutamazon.com/news/company-news/amazon-ceo-andy-jassy-2024-letter-to-shareholders
 
 E3. Toyota describes jidoka as detecting abnormalities and stopping the process. The comparison in answer 37 is an analogy for AI workflow design, not a claim of Toyota experience or an incident in my products. https://global.toyota/en/company/vision-and-philosophy/production-system/
+
+## Frameworks and vocabulary, mapped to his work (About page, 25 October 2026)
+
+Evidence: a mapping prepared with Antonin for the About page. Each term is tied to a place where his own record shows the practice; the terms are the standard vocabulary of consulting firms and agencies, used as labels for his practice. It does not mean he has worked at those firms, and it does not upgrade any 'I would' statement in Part 3 into something already done.
+
+How he runs a piece of work (five phases):
+- Frame: What decision are we really trying to make? Tools: Situation, complication, question, Issue tree, The decision behind the request. In his words: "What would you do differently if you had this information?" Where it shows up: Networking requests turned out to be a capability inside every event type.
+- Hypothesize: What would have to be true? Tools: Day-one hypothesis, MECE branches, Jobs to be done. In his words: "I want the competing explanations visible." Where it shows up: Requests, usage and revenue disagreed; the job was serious practice, not a forum.
+- Test: What is the smallest test that could change the decision? Tools: Behavioural outcome, Stop condition, Value of information, Base rates. In his words: "If every possible result leaves us doing the same thing, the test is probably poorly designed." Where it shows up: A backtest built to falsify my own product found three defects in the method.
+- Synthesize: So what? Tools: Pyramid Principle: the answer first, The claim you can defend, Evidence attached to every figure. In his words: "Choose the claim you can defend, not the claim that sounds most impressive." Where it shows up: Published that it cannot predict insolvency; the positioning survived.
+- Deliver value: What happens after it works? Tools: Value realization, Activation and time to first value, Guardrails and human in the loop. In his words: "A response, a report or an AI answer is a beginning. I care about the next step it makes possible." Where it shows up: Aly's advice is judged by whether the owner can act on it this week.
+
+Problem solving:
+- Issue tree and MECE (McKinsey): Break a question into branches that don't overlap and leave nothing out. In his work: VersyTalks: why requests, usage and revenue disagreed.
+- Hypothesis-driven problem solving (McKinsey): Start from a testable answer, then try hard to break it. In his work: GLRlight: a backtest built to falsify my own product.
+- Pyramid Principle (SCQ) (Barbara Minto, McKinsey): Situation, complication, question; then the answer first, with the support beneath it. In his work: The GLRlight handover brief opens with the one-paragraph answer.
+
+Strategy:
+- Where to play, how to win (Lafley & Martin, Monitor Deloitte): Strategy as a few connected choices: which arena, and why you win there. In his work: GLRlight took the free first-pass layer above the credit bureaus instead of a better credit score.
+- Jobs to be done (Clayton Christensen): Customers hire a product to make progress on something; design for that progress. In his work: VersyTalks moved from a forum to serious practice and credible coaching.
+- Ideal customer profile and cost to serve (B2B go-to-market): Prioritize the customers who get the most value at a cost you can sustain. In his work: VersyNow chose recurrence over size.
+- Defensibility (moat) (Strategy): What a competitor could not copy quickly, and why. In his work: VersyNow: the moat is each organizer's history. Acteurly: four assets that compound with use.
+
+Product and AI:
+- Stated vs revealed preference (Economics): What people say they want versus what they actually do. In his work: VersyTalks: following and peer feedback were requested, then barely used.
+- Activation and time to first value (Product management): The first moment a user gets real value, and how fast they reach it. In his work: VersyNow: a trial that runs across consecutive events, so the comparison is felt.
+- Progressive disclosure (Interaction design): Show what the current decision needs; keep depth one step away. In his work: VersyNow: networking configured inside the event, not as a separate product.
+- Human in the loop and decision rights (AI governance): Who approves what, with what information, before anything acts. In his work: Acteurly: I review recommendations before they reach owners.
+- Capability over instruction (AI guardrails): Stop a system doing something by not giving it the means, not by asking it nicely. In his work: GLRlight: the agent's tools return facts, never a score. VersyNow: eight rules re-check every number.
+- Responsible AI (Accenture, Deloitte): Design for safety, privacy and fairness from the start, not after a complaint. In his work: GLRlight: no search by person, no addresses, director history reported as company outcomes.
+
+Evidence and analytics:
+- Base rates (Bayes) (Statistics): How rare an event is decides how often an alarm is wrong. In his work: GLRlight: at 0.5% insolvency a year, a good-looking detector is wrong 29 times in 30.
+- Look-ahead bias and confounding (Statistics): Information from the future leaking into a test; a hidden difference faking a result. In his work: GLRlight: a rewind of the register, and an age confound I created myself.
+- Value of information (Decision analysis): Ask a question only when the answer could change the decision. In his work: Acteurly: Aly asks only when the missing detail changes the advice.
+- Sunk-cost fallacy (Behavioural economics): Past effort is no argument for future effort. In his work: VersyTalks: we stopped polishing peer feedback.
+- Calibration and inter-rater agreement (Evaluation): Check a scorer against expert judgment before trusting it. In his work: VersyTalks: the AI grader was calibrated on 42 real submissions against coaches.
+
+Value and operating model:
+- Value realization (Accenture, Deloitte): The customer actually experiences the benefit they paid for. In his work: VersyNow: the trial redesigned so the comparative value shows up.
+- Unit economics (Finance): What one unit costs and earns. In his work: VersyNow: about eight cents a brief. VersyTalks: how one credit splits.
+- North Star metric (Product management): The one number closest to the value customers come for. In his work: VersyTalks ran on two: time on the platform and arguments written.
+
+Brand and go-to-market (agency craft):
+- Positioning and single-minded proposition (Agency briefs): One thing the brand stands for, said one way. In his work: VersyNow sold the event report, not the live tools.
+- Full-funnel demand generation (Marketing): From first awareness to a qualified inquiry, built as one system. In his work: STEKAR: website, content, paid, trade shows and Lunch & Learns from zero.
+- Sales enablement (B2B marketing): Give sales what it needs to win, when it needs it. In his work: STEKAR: a large part of the role, with sales and marketing as one team.
+- Brand lift (Agency measurement): Measured change in how many people know and pick the brand. In his work: STEKAR: recognition up 57%, measured by branded search and a survey.
+- Churn-risk segmentation (Lifecycle marketing): Find the customers most likely to leave and speak to them first. In his work: GoCo: usage signals pointed the migration campaigns at at-risk accounts.
+
+Toolkit per piece of work:
+- versynow: Ideal customer profile, Value realization, Guardrails, Unit economics
+- versytalks: Jobs to be done, Issue tree, Stated vs revealed preference, North Star metrics
+- stekar: Full-funnel demand generation, Sales enablement, Brand lift
+- goco: Churn-risk segmentation, Customer lifecycle, Sales and marketing alignment
+- acteurly: Human in the loop, Evaluation rubrics, Value of information, Defensibility
+- glrlight: Where to play, Base rates, Look-ahead bias, Capability over instruction
+
+Capability map (his own reading of the record; core = core of the work, part = part of it):
+- Strategy & positioning: VersyNow core; VersyTalks core; STEKAR part; GoCo not part; Acteurly part; GLRlight core
+- Product discovery & management: VersyNow core; VersyTalks core; STEKAR not part; GoCo not part; Acteurly part; GLRlight core
+- AI product, evaluation & guardrails: VersyNow core; VersyTalks core; STEKAR part; GoCo not part; Acteurly core; GLRlight core
+- Growth & go-to-market: VersyNow core; VersyTalks core; STEKAR core; GoCo part; Acteurly not part; GLRlight not part
+- Analytics & experimentation: VersyNow part; VersyTalks core; STEKAR part; GoCo part; Acteurly part; GLRlight core
+- Retention & customer lifecycle: VersyNow part; VersyTalks part; STEKAR not part; GoCo core; Acteurly not part; GLRlight not part
+- Brand & demand generation: VersyNow part; VersyTalks part; STEKAR core; GoCo part; Acteurly part; GLRlight not part
 
 # Part 4. How the assistant answers
 

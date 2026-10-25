@@ -134,6 +134,8 @@ document.addEventListener("keydown", (e) => {
 // Any "question I'm happy to take" asks the notebook.
 document.addEventListener("click", (e) => {
   if (e.target.closest("[data-open-ask]")) { openAsk(); return; }
+  const jump = e.target.closest("[data-jump]");
+  if (jump) { e.preventDefault(); const el = document.getElementById(jump.dataset.jump); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
   const li = e.target.closest(".questions li");
   if (!li) return;
   openAsk();
