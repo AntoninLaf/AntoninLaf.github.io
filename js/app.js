@@ -3,6 +3,7 @@ import { renderHome, renderAbout, renderProject, renderStory, renderNotFound } f
 import { findProject } from "../projects/index.js";
 import { findStory } from "../stories/index.js";
 import { armInk } from "./ink.js";
+import { renderSpiral, mountSpiral } from "./spiral.js";
 import { renderAsk, askFromPage } from "./ask.js";
 
 const host = document.getElementById("sheet-host");
@@ -14,6 +15,10 @@ const askClose = document.getElementById("ask-close");
 const askBody = document.getElementById("ask-body");
 
 const narrow = window.matchMedia("(max-width: 760px)");
+const still = window.matchMedia("(prefers-reduced-motion: reduce)");
+let cleanup = () => {};      // the spiral's listeners, removed when the page changes
+let lastSeen = null;          // the last project opened, so the spiral turns back to it
+let prevRoute = null;
 let introPlayed = false;
 try { introPlayed = sessionStorage.getItem("intro") === "1"; } catch (_) {}
 
@@ -21,6 +26,7 @@ function route() {
   const h = location.hash.replace(/^#\/?/, "");
   if (h === "" ) return { name: "home" };
   if (h === "about") return { name: "about" };
+  if (h === "map") return { name: "map" };
   const m = h.match(/^p\/([a-z0-9-]+)$/);
   if (m) return { name: "project", slug: m[1] };
   const st = h.match(/^story\/([a-z0-9-]+)$/);
@@ -31,6 +37,7 @@ function route() {
 function pageTitle(r) {
   const base = "Antonin Laferrière-Mailfait";
   if (r.name === "about") return `${t("about.title")}, ${base}`;
+  if (r.name === "map") return `${t("work.map")}, ${base}`;
   if (r.name === "project") { const p = findProject(r.slug); if (p) return `${p.text.en.title}, ${base}`; }
   if (r.name === "story") { const s = findStory(r.slug); if (s) return `${(s.text[lang()] || s.text.en).title}, ${base}`; }
   return base;
@@ -39,10 +46,14 @@ function pageTitle(r) {
 function render(first) {
   const r = route();
   let html;
+  cleanup(); cleanup = () => {};
+  let intro = false;
   if (r.name === "home") {
-    const intro = !introPlayed;
-    html = renderHome({ intro, stacked: narrow.matches });
+    intro = !introPlayed;
+    html = renderSpiral({ intro, flat: narrow.matches || still.matches });
     if (intro) { introPlayed = true; try { sessionStorage.setItem("intro", "1"); } catch (_) {} }
+  } else if (r.name === "map") {
+    html = renderHome({ intro: false, stacked: narrow.matches });
   } else if (r.name === "about") {
     html = renderAbout();
   } else if (r.name === "project") {
@@ -66,11 +77,17 @@ function render(first) {
   host.insertAdjacentHTML("beforeend", html);
   window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
 
+  // A case opened from the spiral goes back to the spiral; opened from About, back to About.
+  const fromAbout = r.name === "story" && !(prevRoute && (prevRoute.name === "home" || prevRoute.name === "map"));
   backLink.hidden = r.name === "home";
-  backLink.textContent = r.name === "story" ? t("story.index") : t("nav.back");
-  backLink.setAttribute("href", r.name === "story" ? "#/about" : "#/");
+  backLink.textContent = fromAbout ? t("story.index") : t("nav.back");
+  backLink.setAttribute("href", fromAbout ? "#/about" : "#/");
   armInk(host);
-  if (r.name === "project") { const p = findProject(r.slug); if (p && p.mount) p.mount(host.querySelector(".sheet:not(.leaving)"), lang()); }
+  const sheet = host.querySelector(".sheet:not(.leaving)");
+  if (r.name === "project") { const p = findProject(r.slug); if (p && p.mount) p.mount(sheet, lang()); }
+  if (r.name === "home") cleanup = mountSpiral(sheet, { intro, focus: lastSeen, rerender: () => render(true) });
+  if (r.name === "project" || r.name === "story") lastSeen = r.slug;
+  if (r.name !== "home" || !first) prevRoute = r;
   document.title = pageTitle(r);
 }
 
@@ -131,7 +148,7 @@ if (!nudged) {
 }
 
 window.addEventListener("hashchange", () => render(false));
-narrow.addEventListener("change", () => { if (route().name === "home") render(true); });
+narrow.addEventListener("change", () => { if (["home", "map"].includes(route().name)) render(true); });
 
 setLang(detectLang());
 paintChrome();

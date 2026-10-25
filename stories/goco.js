@@ -2,6 +2,22 @@ export default {
   slug: "goco",
   order: 5,
   years: "2022 – 2023",
+  // On the spiral: the case gets a page of its own.
+  org: { en: "GoCo, a TELUS company", fr: "GoCo, une entreprise de TELUS" },
+  spot: { en: "Telecom, B2B", fr: "Télécom, B2B" },
+  kind: { en: "Engagement · Marketing Manager", fr: "Mandat · Gestionnaire marketing" },
+  tags: ["marketing"],
+  // A telecom mast beside a small office: 900 accounts moving at once.
+  landmark: () => `
+    <path d="M-92 0 H92"/>
+    <path d="M-50 0 L-32 -100 L-14 0"/>
+    <path class="thin" d="M-46 -24 H-18 M-45 -24 L-21 -48 M-19 -24 L-43 -48 M-41 -48 H-23 M-40 -48 L-25 -72 M-24 -48 L-39 -72 M-37 -72 H-27"/>
+    <path d="M-32 -100 V-112 M-38 -94 H-26"/>
+    <path class="thin" d="M-20 -114 C-14 -108 -14 -98 -20 -92 M-44 -114 C-50 -108 -50 -98 -44 -92 M-12 -120 C-2 -110 -2 -96 -12 -86 M-52 -120 C-62 -110 -62 -96 -52 -86"/>
+    <path d="M6 0 V-58 H82 V0"/>
+    <path class="thin" d="M16 -46 H30 V-34 H16 Z M40 -46 H54 V-34 H40 Z M64 -46 H76 V-34 H64 Z M16 -24 H30 V-12 H16 Z M40 -24 H54 V-12 H40 Z"/>
+    <path d="M62 0 V-22 H76 V0"/>
+  `,
   text: {
     en: {
       title: "Protecting customer retention through a business migration",

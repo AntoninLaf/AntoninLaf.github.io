@@ -672,3 +672,117 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .ruled.lifecycle td, .ruled.lifecycle th { width: 33%; white-space: normal; font-size: 16px; }
 .ruled.lifecycle td:first-child { font-weight: 400; }
+
+/* ---------- the opening: work on a spiral binding ---------- */
+.sheet.spiralhome { padding: 0; }
+.spiral-scroller { position: relative; }
+.spiral-stage {
+  position: sticky; top: 0;
+  height: 100vh; min-height: 620px;
+  padding: 54px var(--sheet-pad) 20px;
+  display: grid; grid-template-rows: auto minmax(0, 1fr) auto;
+  overflow: hidden;
+}
+.spiral-head, .spiral-right, .spiral-filters, .spiral-left { position: relative; z-index: 2; }   /* words stay above the far pages */
+.spiral-head .name { font-size: clamp(30px, 3.3vw, 48px); }
+.spiral-head .name-underline { width: min(100%, 420px); }
+.spiral-head .throughline { max-width: 62ch; font-size: clamp(17px, 1.45vw, 21px); margin-top: 8px; }
+.spiral-nav { display: flex; flex-wrap: wrap; gap: 6px 26px; margin-top: 10px; font-family: var(--hand); font-size: 17px; }
+.spiral-nav a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--pencil-light); }
+.spiral-nav a:hover { color: var(--red-ink); border-bottom-color: var(--red-ink); }
+
+.spiral-body { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(480px, 1.7fr) minmax(300px, 1fr); min-height: 0; }
+.spiral-left { display: flex; flex-direction: column; justify-content: space-between; padding: 26px 0 6px; min-width: 0; }
+.spiral-hint { max-width: 17ch; transform: rotate(-1.5deg); }
+.wc { display: flex; align-items: flex-end; gap: 8px; margin: 0; font-family: var(--hand); }
+.wc-label { font-weight: 300; font-size: 16px; color: var(--pencil); padding-bottom: 14px; max-width: 6ch; line-height: 1.1; }
+.wc-n { font-size: clamp(76px, 8vw, 116px); line-height: .78; color: transparent; -webkit-text-stroke: 1.3px var(--pencil); font-weight: 400; }
+.wc-of { font-size: 21px; color: var(--red-ink); padding-bottom: 10px; }
+
+.spiral-view { position: relative; perspective: 1600px; perspective-origin: 50% 40%; min-width: 0; }
+.ring { position: absolute; left: 50%; top: 40%; width: 0; height: 0; transform-style: preserve-3d; will-change: transform; }
+.page3d {
+  position: absolute; left: -142px; top: -102px; width: 284px; height: 204px;
+  transform-style: preserve-3d; text-decoration: none; color: var(--ink);
+  pointer-events: none;
+}
+.page3d.front { pointer-events: auto; cursor: pointer; }
+.page3d .face {
+  position: absolute; inset: 0; display: block;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  opacity: var(--o, 1);
+  border: 1.4px solid var(--ink); border-radius: 3px;
+  background-color: #f4f0e7;
+  background-image: repeating-linear-gradient(transparent 0 23px, rgba(31,36,54,.06) 23px 24px);
+  box-shadow: 0 12px 26px rgba(31,36,54,.10);
+}
+/* the punched holes of a spiral-bound page */
+.page3d .face::before {
+  content: ""; position: absolute; top: 7px; left: 16px; right: 16px; height: 8px;
+  background: radial-gradient(circle, var(--paper-shadow) 2.4px, transparent 2.9px) 0 0 / 15px 8px repeat-x;
+}
+.page3d .face.back { transform: rotateY(180deg); background-color: #e7e2d6; border-color: var(--pencil-light); box-shadow: none; }
+.pg-n { position: absolute; left: 14px; top: 20px; font-family: var(--hand); font-size: 17px; color: var(--pencil); }
+.pg-place { position: absolute; right: 14px; top: 22px; max-width: 62%; font-family: var(--hand); font-weight: 300; font-size: 14px; color: var(--pencil); text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pg-lm { position: absolute; left: 13%; top: 42px; width: 74%; height: 112px; overflow: visible; }
+/* the back of a page: its drawing, seen faintly through the paper */
+.face.back .pg-lm { transform: scaleX(-1); opacity: .28; }
+.face.back .pg-lm path, .face.back .pg-lm circle { stroke: var(--pencil); }
+.pg-lm path, .pg-lm circle { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.pg-lm .thin { stroke-width: 1; stroke: var(--ink-soft); }
+.pg-lm .pencil { stroke: var(--pencil); stroke-width: 1.1; }
+.pg-lm .fill-red { fill: var(--red-ink); stroke: none; }
+.pg-lm text { fill: var(--ink); font-family: var(--hand); }
+.pg-title { position: absolute; left: 8px; right: 8px; bottom: 12px; text-align: center; font-size: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; font-variation-settings: "opsz" 24; }
+.pg-back { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-family: var(--hand); font-weight: 300; font-size: 15px; color: var(--pencil-light); transform: scaleX(-1); }
+.page3d.front:hover .face.front, .page3d:focus-visible .face.front { border-color: var(--red-ink); }
+.page3d.front:hover .pg-title { color: var(--red-ink); }
+.page3d:focus-visible { outline: none; }
+.dash { position: absolute; left: -5px; top: 0; width: 10px; height: 1.6px; background: var(--pencil); opacity: .75; backface-visibility: visible; }
+
+.spiral-right { min-width: 0; }
+.wt { position: absolute; left: 12%; right: 0; top: 44%; display: flex; flex-direction: column; text-decoration: none; color: var(--ink); transform-origin: left center; pointer-events: none; will-change: transform, opacity; }
+.wt.on { pointer-events: auto; }
+.wt-kind { font-family: var(--hand); font-weight: 300; font-size: 16px; color: var(--pencil); }
+.wt-title { font-size: clamp(36px, 3.6vw, 54px); font-weight: 500; line-height: 1.02; letter-spacing: -.01em; margin-top: 4px; font-variation-settings: "opsz" 60; }
+.wt-rule { width: 30px; height: 1.6px; background: var(--ink); margin: 14px 0 12px; }
+.wt-line { font-size: 19px; line-height: 1.4; color: var(--ink-soft); max-width: 30ch; }
+.wt-go { font-family: var(--hand); font-size: 17px; color: var(--red-ink); margin-top: 12px; }
+.wt.on:hover .wt-title { color: var(--red-ink); }
+.wt-title.long { font-size: clamp(30px, 2.7vw, 40px); }
+
+.spiral-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px; padding-top: 6px; }
+.wf { background: none; border: 0; padding: 4px 0; cursor: pointer; font-family: var(--hand); font-size: 17px; color: var(--ink-soft); border-bottom: 1.5px solid transparent; }
+.wf span { font-size: 13px; color: var(--pencil); margin-left: 5px; vertical-align: super; }
+.wf.on { color: var(--ink); border-bottom-color: var(--red-ink); }
+.wf:hover { color: var(--red-ink); }
+
+/* entrance: the name writes itself, the pages ink in as the spiral unwinds */
+.spiralhome.intro .name { animation: write-in 1.4s var(--ease-ink) .15s both; }
+.spiralhome.intro .name-underline path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .7s var(--ease-ink) 1.4s forwards; }
+.spiralhome.intro .throughline { animation: write-in 1.5s var(--ease-ink) 1.8s both; }
+.spiralhome.intro .spiral-nav, .spiralhome.intro .spiral-filters, .spiralhome.intro .spiral-left { opacity: 0; animation: fade .6s ease 3.1s forwards; }
+.spiralhome.intro .pg-lm .inks { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.2s var(--ease-ink) calc(.9s + var(--k, 0) * .14s) forwards; }
+
+/* the flat version: phones and reduced motion */
+.spiralhome.flat { padding: 72px var(--sheet-pad) 110px; }
+.spiralhome.flat .spiral-filters { justify-content: flex-start; margin: 26px 0 8px; }
+.work-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.work-list a {
+  position: relative; display: flex; flex-direction: column; text-decoration: none; color: var(--ink);
+  padding: 18px 18px 16px; border: 1.4px solid var(--ink); border-radius: 3px;
+  background-color: #f4f0e7; background-image: repeating-linear-gradient(transparent 0 23px, rgba(31,36,54,.06) 23px 24px);
+}
+.work-list .pg-n { top: 12px; }
+.work-list .pg-lm { position: static; width: 100%; height: 110px; margin: 12px 0 10px; }
+.work-list .wt-title { font-size: 28px; }
+.work-list .wt-line { font-size: 17px; margin-top: 4px; }
+.work-list a:hover .wt-title { color: var(--red-ink); }
+
+@media (max-width: 1100px) and (min-width: 761px) {
+  .spiral-body { grid-template-columns: 0 minmax(420px, 1.3fr) minmax(260px, 1fr); }
+  .spiral-left { visibility: hidden; }
+}
+@media (max-height: 700px) {
+  .spiral-head .throughline { display: none; }
+}

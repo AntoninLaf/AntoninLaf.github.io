@@ -6,6 +6,8 @@ export default {
   mount,
   slug: "acteurly",
   order: 1,
+  kind: { en: "AI product · Marketing judgment", fr: "Produit IA · Jugement marketing" },
+  tags: ["ai", "marketing"],
   map: { x: 420, y: 200, noteSide: "right" },
   links: {
     live: "https://acteurly.ai/"

@@ -2,6 +2,25 @@ export default {
   slug: "stekar",
   order: 1,
   years: "2024 – 2026",
+  // On the spiral: the case gets a page of its own.
+  org: { en: "STEKAR & Vitralum", fr: "STEKAR & Vitralum" },
+  spot: { en: "Industrial B2B", fr: "B2B industriel" },
+  kind: { en: "Engagement · Marketing Director", fr: "Mandat · Directeur marketing" },
+  tags: ["marketing"],
+  // A glass curtain wall going up, and the crane that lifts it.
+  landmark: () => `
+    <path d="M-92 0 H92"/>
+    <path d="M-64 0 V-92 H8 V0"/>
+    <path class="thin" d="M-46 -92 V0 M-28 -92 V0 M-10 -92 V0 M-64 -23 H8 M-64 -46 H8 M-64 -69 H8"/>
+    <path class="thin" d="M-58 -78 L-52 -86 M-40 -54 L-34 -62 M-22 -30 L-16 -38"/>
+    <path d="M38 0 V-100 M50 0 V-100"/>
+    <path class="thin" d="M38 -8 L50 -20 L38 -32 L50 -44 L38 -56 L50 -68 L38 -80 L50 -92"/>
+    <path d="M18 -100 H90"/>
+    <path class="thin" d="M44 -100 V-114 M44 -114 L20 -100 M44 -114 L88 -100"/>
+    <path d="M18 -106 H28 V-100 H18 Z"/>
+    <path class="thin" d="M76 -100 V-64"/>
+    <path d="M71 -64 H81 V-55 H71 Z"/>
+  `,
   text: {
     en: {
       title: "Building an inbound acquisition engine from the ground up",

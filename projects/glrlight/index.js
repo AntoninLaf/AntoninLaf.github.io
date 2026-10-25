@@ -5,6 +5,8 @@ export default {
   story,
   slug: "glrlight",
   order: 4,
+  kind: { en: "Independent build · Analytics & AI", fr: "Projet indépendant · Analytique et IA" },
+  tags: ["ai"],
   map: { x: 1020, y: 190, noteSide: "left" },
   links: {
     live: "https://glrlight.vercel.app/",

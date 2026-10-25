@@ -6,6 +6,8 @@ export default {
   mount,
   slug: "versytalks",
   order: 2,
+  kind: { en: "Product & growth · Product Manager", fr: "Produit et croissance · Chef de produit" },
+  tags: ["product", "ai"],
   map: { x: 660, y: 470, noteSide: "right" },
   links: {
     live: "https://versytalks.com/"
