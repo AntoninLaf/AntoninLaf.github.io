@@ -16,6 +16,7 @@ const askBody = document.getElementById("ask-body");
 
 const narrow = window.matchMedia("(max-width: 760px)");
 const still = window.matchMedia("(prefers-reduced-motion: reduce)");
+const has3d = typeof CSS !== "undefined" && CSS.supports && CSS.supports("transform-style", "preserve-3d");
 let cleanup = () => {};      // the spiral's listeners, removed when the page changes
 let lastSeen = null;          // the last project opened, so the spiral turns back to it
 let prevRoute = null;
@@ -50,9 +51,9 @@ function render(first) {
   cleanup(); cleanup = () => {};
   let intro = false;
   if (r.name === "home") {
-    intro = !introPlayed;
-    html = renderSpiral({ intro, flat: narrow.matches || still.matches });
-    if (intro) { introPlayed = true; try { sessionStorage.setItem("intro", "1"); } catch (_) {} }
+    intro = !introPlayed && !still.matches;
+    html = renderSpiral({ intro, flat: !has3d, compact: narrow.matches });
+    introPlayed = true; try { sessionStorage.setItem("intro", "1"); } catch (_) {}
   } else if (r.name === "map") {
     html = renderHome({ intro: false, stacked: narrow.matches });
   } else if (r.name === "about") {
@@ -89,7 +90,7 @@ function render(first) {
   const sheet = host.querySelector(".sheet:not(.leaving)");
   if (r.name === "project") { const p = findProject(r.slug); if (p && p.mount) p.mount(sheet, lang()); }
   if (r.name === "about") { const rd = sheet.querySelector(".road"); if (rd && rd.scrollWidth > rd.clientWidth) rd.scrollLeft = rd.scrollWidth; }   // phones: open the road on the recent years
-  if (r.name === "home") cleanup = mountSpiral(sheet, { intro, focus: lastSeen, rerender: () => render(true) });
+  if (r.name === "home") cleanup = mountSpiral(sheet, { intro, focus: lastSeen, still: still.matches, compact: narrow.matches, rerender: () => render(true) });
   if (r.name === "project" || r.name === "story") lastSeen = r.slug;
   prevRoute = r;
   document.title = pageTitle(r);
@@ -156,6 +157,7 @@ if (!nudged) {
 
 window.addEventListener("hashchange", () => render(false));
 narrow.addEventListener("change", () => { if (["home", "map"].includes(route().name)) render(true); });
+still.addEventListener("change", () => { if (route().name === "home") render(true); });
 
 setLang(detectLang());
 paintChrome();

@@ -984,3 +984,58 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .flow-fig svg { min-width: 640px; }
   .vocab { columns: 1; }
 }
+
+/* ---------- the spiral on a phone (compact): spiral on top, the page's words under it ---------- */
+.spiralhome.compact .spiral-stage {
+  height: 100vh; height: 100svh; min-height: 540px;
+  padding: 60px 20px 80px;
+}
+.spiralhome.compact .spiral-head .name { font-size: clamp(28px, 8vw, 34px); }
+.spiralhome.compact .spiral-head .name-underline { width: min(100%, 300px); height: 9px; }
+.spiralhome.compact .spiral-head .throughline { font-size: 16px; line-height: 1.3; margin-top: 6px; }
+.spiralhome.compact .spiral-nav { margin-top: 10px; gap: 6px 16px; font-size: 15px; }
+.spiralhome.compact .spiral-nav a.spiral-about { padding: 4px 12px 5px; }
+.spiralhome.compact .spiral-nav a.spiral-about b { font-size: 17px; }
+.spiralhome.compact .spiral-body { position: relative; grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) 132px; }
+.wt-n { display: none; }
+.spiralhome.compact .spiral-left { display: none; }   /* on a phone the counter moves into the line above the title */
+.spiralhome.compact .wt-n { display: inline; color: var(--red-ink); }
+.spiralhome.compact .spiral-view { perspective: 1300px; }
+.spiralhome.compact .ring { top: 46%; }
+.spiralhome.compact .spiral-right { position: relative; overflow: hidden; }
+.spiralhome.compact .wt { left: 0; top: 50%; }
+.spiralhome.compact .wt-kind { font-size: 14px; }
+.spiralhome.compact .wt-title { font-size: 30px; margin-top: 2px; }
+.spiralhome.compact .wt-title.long { font-size: 24px; }
+.spiralhome.compact .wt-rule { margin: 8px 0 6px; width: 24px; }
+.spiralhome.compact .wt-line { font-size: 15.5px; max-width: none; }
+.spiralhome.compact .wt-go { font-size: 15px; margin-top: 6px; }
+.spiralhome.compact .spiral-filters {
+  flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; gap: 16px; padding: 6px 2px 0;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.spiralhome.compact .spiral-filters::-webkit-scrollbar { display: none; }
+.spiralhome.compact .wf { font-size: 15px; white-space: nowrap; }
+@media (max-height: 760px) {
+  .spiralhome.compact .spiral-head .throughline { display: none; }
+}
+
+/* a phone held sideways, or any very short window: the desktop spiral, pared down to fit */
+@media (max-height: 520px) and (min-width: 761px) {
+  .spiral-stage { min-height: 0; padding-top: 50px; padding-bottom: 8px; }
+  .spiral-head .name { font-size: 30px; }
+  .spiral-head .name-underline { display: none; }
+  .spiral-nav { margin-top: 6px; font-size: 15px; gap: 4px 18px; }
+  .spiral-nav a.spiral-about { padding: 3px 10px 4px; }
+  .spiral-nav a.spiral-about b { font-size: 16px; }
+  .spiral-left { display: none; }
+  .spiral-body { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+  .wt-n { display: inline; color: var(--red-ink); }
+  .wt-kind { font-size: 13px; }
+  .wt-title { font-size: 30px; }
+  .wt-title.long { font-size: 24px; }
+  .wt-line { font-size: 15px; }
+  .wt-rule { margin: 8px 0 6px; }
+  .spiral-filters { padding-top: 0; }
+  .wf { font-size: 14px; }
+}

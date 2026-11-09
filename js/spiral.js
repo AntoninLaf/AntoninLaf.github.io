@@ -60,10 +60,10 @@ function filterBar() {
 
 const landmarkSvg = (e) => `<svg class="pg-lm" viewBox="-112 -130 224 142" aria-hidden="true">${inkable(e.landmark())}</svg>`;
 
-export function renderSpiral({ intro, flat }) {
+export function renderSpiral({ intro, flat, compact }) {
   const list = visible();
 
-  // Phones and reduced motion: the same pages, as a plain list.
+  // Only for a browser without 3D transforms: the same pages, as a plain list.
   if (flat) {
     return `
     <section class="sheet spiralhome flat ${intro ? "intro" : ""}">
@@ -97,7 +97,7 @@ export function renderSpiral({ intro, flat }) {
 
   const texts = list.map((e, i) => `
         <a class="wt" href="${esc(e.href)}" data-i="${i}" tabindex="-1" aria-hidden="true">
-          <span class="wt-kind">${esc(e.kind)}</span>
+          <span class="wt-kind"><span class="wt-n">${two(i + 1)} ${esc(t("work.of"))} ${list.length} · </span>${esc(e.kind)}</span>
           <span class="wt-title${e.title.length > 16 ? " long" : ""}">${esc(e.title)}</span>
           <span class="wt-rule"></span>
           <span class="wt-line">${esc(e.line)}</span>
@@ -105,7 +105,7 @@ export function renderSpiral({ intro, flat }) {
         </a>`).join("");
 
   return `
-  <section class="sheet spiralhome ${intro ? "intro" : ""}">
+  <section class="sheet spiralhome${compact ? " compact" : ""} ${intro ? "intro" : ""}">
     <div class="spiral-scroller">
       <div class="spiral-stage">
         ${head()}
@@ -126,7 +126,9 @@ export function renderSpiral({ intro, flat }) {
 }
 
 // Bring the spiral to life. Returns a cleanup function for when the page changes.
-export function mountSpiral(root, { intro = false, focus = null, rerender } = {}) {
+// still: the visitor asked for reduced motion, so the spiral turns page by page, without spinning or easing.
+// compact: a phone or a narrow window, where the spiral sits above the text instead of beside it.
+export function mountSpiral(root, { intro = false, focus = null, still = false, compact = false, rerender } = {}) {
   root.querySelectorAll(".wf").forEach((b) => b.addEventListener("click", () => {
     if (b.dataset.filter === filter) return;
     filter = b.dataset.filter;
@@ -155,26 +157,28 @@ export function mountSpiral(root, { intro = false, focus = null, rerender } = {}
   ring.insertAdjacentHTML("afterbegin", dashes.join(""));
 
   const view = root.querySelector(".spiral-view");
-  let step = 0, top = 0, p = 0, target = 0, raf = 0, last = -1, snapTimer = 0, fit = 1;
+  let step = 0, top = 0, p = 0, target = 0, raf = 0, last = -1, snapTimer = 0, fit = 1, lastW = 0, lastH = 0;
   const t0 = performance.now();
   const INTRO_MS = 2000;
 
   const layout = () => {
+    lastW = window.innerWidth; lastH = window.innerHeight;
     step = Math.max(300, Math.round(window.innerHeight * 0.5));
     scroller.style.height = `${window.innerHeight + Math.max(0, N - 1) * step}px`;
     top = scroller.getBoundingClientRect().top + window.scrollY;
     const v = view.getBoundingClientRect();          // the spiral scales to the room it has
-    fit = Math.max(0.6, Math.min(1.25, v.width / 620, v.height / 520));
+    // on a phone the side pages may run off the edges; the front page is what has to be legible
+    fit = compact ? Math.max(0.5, Math.min(1, v.width / 470, v.height / 430)) : Math.max(0.4, Math.min(1.25, v.width / 620, v.height / 520));
     last = -1;
   };
   const clamp = (v) => Math.max(0, Math.min(N - 1, v));
   const read = () => { target = step ? clamp((window.scrollY - top) / step) : 0; };
-  const go = (i, smooth = true) => window.scrollTo({ top: top + clamp(i) * step, behavior: smooth ? "smooth" : "instant" });
+  const go = (i, smooth = true) => window.scrollTo({ top: top + clamp(i) * step, behavior: smooth && !still ? "smooth" : "instant" });
 
   const frame = (now) => {
     raf = requestAnimationFrame(frame);
-    const d = target - p;
-    p = Math.abs(d) < 0.0005 ? target : p + d * 0.13;
+    if (still) p = Math.round(target);
+    else { const d = target - p; p = Math.abs(d) < 0.0005 ? target : p + d * 0.13; }
     let spin = 0, drop = 0;
     const el = now - t0;
     if (intro && el < INTRO_MS) {
@@ -196,9 +200,9 @@ export function mountSpiral(root, { intro = false, focus = null, rerender } = {}
     });
     texts.forEach((tx, i) => {
       const rel = i - p;
-      const o = Math.max(0, 1 - Math.abs(rel) * 0.84);
+      const o = Math.max(0, 1 - Math.abs(rel) * (compact ? 1.6 : 0.84));
       const s = 1 - Math.min(Math.abs(rel), 1) * 0.16;
-      tx.style.transform = `translateY(calc(-50% + ${(rel * 250).toFixed(1)}px)) scale(${s.toFixed(3)})`;
+      tx.style.transform = `translateY(calc(-50% + ${(rel * (compact ? 120 : 250)).toFixed(1)}px)) scale(${s.toFixed(3)})`;
       tx.style.opacity = o.toFixed(3);
       tx.classList.toggle("on", Math.abs(rel) < 0.5);
     });
@@ -213,7 +217,11 @@ export function mountSpiral(root, { intro = false, focus = null, rerender } = {}
       if (Math.abs(target - n) > 0.02 && window.scrollY < top + (N - 1) * step + 2) go(n);
     }, 170);
   };
-  const onResize = () => { layout(); read(); };
+  // phones resize as the address bar shows and hides; only a real change of size relays the spiral out
+  const onResize = () => {
+    if (window.innerWidth === lastW && Math.abs(window.innerHeight - lastH) < 150) return;
+    layout(); read();
+  };
   const onKey = (e) => {
     if (document.querySelector(".ask-panel.open")) return;
     if (/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName)) return;
