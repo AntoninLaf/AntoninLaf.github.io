@@ -51,7 +51,7 @@ function render(first) {
   cleanup(); cleanup = () => {};
   let intro = false;
   if (r.name === "home") {
-    intro = !introPlayed && !still.matches;
+    intro = !introPlayed;
     html = renderSpiral({ intro, flat: !has3d, compact: narrow.matches });
     introPlayed = true; try { sessionStorage.setItem("intro", "1"); } catch (_) {}
   } else if (r.name === "map") {

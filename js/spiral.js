@@ -126,7 +126,7 @@ export function renderSpiral({ intro, flat, compact }) {
 }
 
 // Bring the spiral to life. Returns a cleanup function for when the page changes.
-// still: the visitor asked for reduced motion, so the spiral turns page by page, without spinning or easing.
+// still: the visitor asked for reduced motion; the spiral keeps its easing, and its opening turn is a gentler one.
 // compact: a phone or a narrow window, where the spiral sits above the text instead of beside it.
 export function mountSpiral(root, { intro = false, focus = null, still = false, compact = false, rerender } = {}) {
   root.querySelectorAll(".wf").forEach((b) => b.addEventListener("click", () => {
@@ -173,18 +173,18 @@ export function mountSpiral(root, { intro = false, focus = null, still = false, 
   };
   const clamp = (v) => Math.max(0, Math.min(N - 1, v));
   const read = () => { target = step ? clamp((window.scrollY - top) / step) : 0; };
-  const go = (i, smooth = true) => window.scrollTo({ top: top + clamp(i) * step, behavior: smooth && !still ? "smooth" : "instant" });
+  const go = (i, smooth = true) => window.scrollTo({ top: top + clamp(i) * step, behavior: smooth ? "smooth" : "instant" });
 
   const frame = (now) => {
     raf = requestAnimationFrame(frame);
-    if (still) p = Math.round(target);
-    else { const d = target - p; p = Math.abs(d) < 0.0005 ? target : p + d * 0.13; }
+    const d = target - p;
+    p = Math.abs(d) < 0.0005 ? target : p + d * 0.13;
     let spin = 0, drop = 0;
     const el = now - t0;
     if (intro && el < INTRO_MS) {
       const e = 1 - Math.pow(1 - el / INTRO_MS, 3);
-      spin = (1 - e) * -160;
-      drop = (1 - e) * -140;
+      spin = (1 - e) * (still ? -60 : -160);
+      drop = (1 - e) * (still ? -50 : -140);
     } else if (p === last) return;
     last = p;
 
