@@ -17,6 +17,11 @@ const askBody = document.getElementById("ask-body");
 const narrow = window.matchMedia("(max-width: 760px)");
 const still = window.matchMedia("(prefers-reduced-motion: reduce)");
 const has3d = typeof CSS !== "undefined" && CSS.supports && CSS.supports("transform-style", "preserve-3d");
+const short = window.matchMedia("(max-height: 520px)");
+// The spiral opens the site only where it can be seen whole: a computer-sized window with 3D.
+// Phones, phones held sideways, very short windows and browsers without 3D open on the map instead.
+// (spiral.js still carries a phone layout, compact, in case the spiral should come back to phones.)
+const fullSpiral = () => has3d && !narrow.matches && !short.matches;
 let cleanup = () => {};      // the spiral's listeners, removed when the page changes
 let lastSeen = null;          // the last project opened, so the spiral turns back to it
 let prevRoute = null;
@@ -52,7 +57,7 @@ function render(first) {
   let intro = false;
   if (r.name === "home") {
     intro = !introPlayed;
-    html = renderSpiral({ intro, flat: !has3d, compact: narrow.matches });
+    html = fullSpiral() ? renderSpiral({ intro, flat: false, compact: false }) : renderHome({ intro, stacked: narrow.matches });
     introPlayed = true; try { sessionStorage.setItem("intro", "1"); } catch (_) {}
   } else if (r.name === "map") {
     html = renderHome({ intro: false, stacked: narrow.matches });
@@ -90,7 +95,7 @@ function render(first) {
   const sheet = host.querySelector(".sheet:not(.leaving)");
   if (r.name === "project") { const p = findProject(r.slug); if (p && p.mount) p.mount(sheet, lang()); }
   if (r.name === "about") { const rd = sheet.querySelector(".road"); if (rd && rd.scrollWidth > rd.clientWidth) rd.scrollLeft = rd.scrollWidth; }   // phones: open the road on the recent years
-  if (r.name === "home") cleanup = mountSpiral(sheet, { intro, focus: lastSeen, still: still.matches, compact: narrow.matches, rerender: () => render(true) });
+  if (r.name === "home" && fullSpiral()) cleanup = mountSpiral(sheet, { intro, focus: lastSeen, still: still.matches, compact: false, rerender: () => render(true) });
   if (r.name === "project" || r.name === "story") lastSeen = r.slug;
   prevRoute = r;
   document.title = pageTitle(r);
@@ -157,6 +162,7 @@ if (!nudged) {
 
 window.addEventListener("hashchange", () => render(false));
 narrow.addEventListener("change", () => { if (["home", "map"].includes(route().name)) render(true); });
+short.addEventListener("change", () => { if (route().name === "home") render(true); });
 still.addEventListener("change", () => { if (route().name === "home") render(true); });
 
 setLang(detectLang());
