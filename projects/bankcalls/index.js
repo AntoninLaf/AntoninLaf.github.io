@@ -16,7 +16,7 @@ export default {
       place: "The call centre",
       label: "The call centre",
       small: "Bank calls",
-      note: "A neural network is only worth it if it beats the simple model.",
+      note: "The limit was the information in the inputs, not the network.",
       lede: "A bank has a list of prospects and a budget for only so many calls. Which ones should it call first? I built a PyTorch neural network to rank prospects by how likely they are to subscribe, on the public UCI Bank Marketing dataset of 41,188 calls, and compared it with logistic regression, gradient boosted trees and a rule of thumb. Then I ran a targeting simulation and a profit analysis on the ranking.",
       tagline: "ranking a bank's prospects, best calls first",
     },
@@ -26,7 +26,7 @@ export default {
       place: "Le centre d'appels",
       label: "Le centre d'appels",
       small: "Appels bancaires",
-      note: "Un réseau de neurones ne vaut la peine que s'il bat le modèle simple.",
+      note: "La limite était l'information dans les données, pas le réseau.",
       lede: "Une banque a une liste de prospects et un budget pour un nombre limité d'appels. Lesquels appeler en premier ? J'ai bâti un réseau de neurones en PyTorch pour classer les prospects selon leur probabilité de souscrire, sur le jeu de données public UCI Bank Marketing de 41 188 appels, et je l'ai comparé à une régression logistique, à des arbres à gradient boosté et à une règle empirique. J'ai ensuite fait une simulation de ciblage et une analyse de profit à partir du classement.",
       tagline: "classer les prospects d'une banque, meilleurs appels d'abord",
     }

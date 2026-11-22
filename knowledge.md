@@ -49,14 +49,213 @@ Corporate filings contain signals that are easy to overlook in isolation. GLRlig
 
 ## Marketing analytics: "Who should the bank call first?" (added 22 November 2026)
 
-Evidence: stated by Antonin. This is everything on record about this project; for anything beyond it (architecture details, exact metrics, the profit figures, the grade), say it is not in the notes and suggest writing to him.
+Evidence: Antonin's own project report, reproduced below in his words. It is the complete record for this project: answer from it, attributed to him, and keep its qualifications (the network is not better than the baselines; scores are not probabilities; no causal claim; profit figures rest on assumed costs). On the site the project sits in the "Marketing analytics" section under the title "Who should the bank call first? Ranking marketing prospects with deep learning". It is his individual project for MGSC 673 at McGill, a project and not a job. The grade is not on record. The code is not public at this time. The figures the report mentions are not reproduced here.
 
-- Title: "Who should the bank call first? Ranking marketing prospects with deep learning". Section on the site: Marketing analytics.
-- His individual project for MGSC 673 at McGill (Master of Management in Analytics), fall 2026. A project, not a job.
-- What it is: a PyTorch neural network that ranks a bank's marketing prospects by how likely they are to subscribe, on the public UCI Bank Marketing dataset (41,188 calls).
-- Compared against logistic regression, gradient boosted trees and a rule of thumb, with a targeting simulation and a profit analysis.
-- Headline result: at a 20% call budget, 581 subscribers reached versus 389 for random calling. The neural network tied with the simpler models; it did not beat them. He reports the tie as the finding.
-- The code is not public at this time.
+```
+Predicting Marketing Campaign Responses with Deep
+Learning
+MGSC 673 – Individual Project Report | Antonin Laferrière-Mailfait | December 2026
+
+1. Problem and motivation
+A bank's telemarketing team can only call part of its customer list in each campaign, so the practical decision is who to call first. I investigated whether a deep neural network can rank customers
+by their likelihood of subscribing to a term deposit, using only information the bank has before it
+picks up the phone. Most people say no, so a good ranking lets a team reach the same buyers with
+fewer wasted calls.
+The task is binary classification, but I treat it as a ranking problem. The question I ask of every
+model is: if the team can only call 20% of the list, how many of the real subscribers does it reach?
+
+2. Data
+I used bank-additional-full.csv from the UCI Bank Marketing dataset (Moro, Rita and Cortez,
+2014; CC BY 4.0): 41,188 phone contacts made by a Portuguese bank between May 2008 and
+November 2010, with 20 inputs and a yes/no target. Each row is one contact, not necessarily a
+unique customer. Only 11.3% of contacts ended in a subscription, so accuracy is misleading: a
+model that always answers “no” would be 88.7% accurate and find nobody.
+Preparation. Missing information is coded as the word “unknown”. For default it covers 20.9% of
+rows, and those clients subscribe 5.2% of the time against 11.3% overall, so I kept “unknown” as
+its own category. Because the model must decide who to call before a campaign, I removed everything not known at that moment: duration (known only after the call) and campaign (calls made
+during the campaign itself). I also removed pdays, whose code 999 (“never contacted”) contradicts poutcome in 4,110 rows. I dropped 12 exact duplicates, leaving 41,176 rows and 17 inputs. The
+file has the month but not the year; since rows are in date order, I rebuilt the year by adding one
+each time the month goes backwards. Categorical inputs were one-hot encoded and numeric inputs standardized, with all statistics fitted on the training period only.
+Chronological split. I split by time at month boundaries, to copy real use: train on past campaigns, apply to later ones.
+
+ Set              Period                              Calls      Yes-rate          Previous success
+ Training         May 2008 – Apr 2009                30,421          6.3%                      0.3%
+ Validation       May – Jun 2009                      6,508        12.1%                       3.4%
+ Test             Jul 2009 – Nov 2010                 4,247        45.8%                      24.7%
+
+The periods are very different (Figure 1). The bank moved from mass calling in 2008 (thousands
+of calls a month, 3–6% success) to small campaigns from mid-2009 (a few hundred calls, 35–57%
+success), while interest rates fell from about 5% to under 1%. This distribution shift is the central
+difficulty of the project.
+
+                   Figure 1. Monthly success rate and the three periods of the chronological split.
+
+3. Approach
+Measuring the right thing. Each model produces a score, and the team calls the highest scores
+first, so I evaluate rankings with PR-AUC and with lift at 20% (how many times better than random the top fifth of the list converts). A sanity check changed the project. A logistic regression
+that only knew when a call was made (month, weekday, economic indicators) reached a validation lift of 1.92, close to the full model's 2.25. The two validation months have success rates of 9%
+and 37%, so a model can score well just by ranking one month above the other, which is useless to
+a team planning one campaign. I therefore added within-month versions of both measures: PR-
+AUC computed inside each month and averaged, and lift when the top 20% of each month's list is
+called. On these, the calendar-only model falls to random (lift 0.98). I selected models on within-
+month PR-AUC and report pooled values for reference.
+Baselines. Random ranking; a marketer's rule of thumb (previous subscribers first, then anyone
+contacted before, then the rest); logistic regression; gradient boosted trees.
+Network. A feedforward network in PyTorch (Figure 2). The final version takes 10 customer features (40 columns after one-hot encoding) through two hidden layers of 64 and 32 ReLU units,
+each followed by dropout, to one output passed through a sigmoid (4,737 parameters per
+network).
+
+                                     Figure 2. Architecture of the final network.
+
+ Choice                  Value and reason
+ Loss                    Binary cross-entropy on logits, positive class weighted by about 15 (only 6% of
+                         training calls are a yes)
+ Optimizer, learning     Adam, 0.001 (confirmed in Experiment 5)
+ rate
+ Batch size, epochs      256; up to 40 epochs with early stopping (patience 8) on validation within-
+                         month PR-AUC, restoring the best weights
+ Regularization          Dropout 0.2; early stopping does most of the work (Experiment 4)
+ Final model             Average of 5 networks trained with different seeds (Experiment 7), retrained
+                         on training + validation for a fixed 8 epochs (the average best epoch)
+
+After all choices were fixed on validation, every model was retrained on training plus validation,
+as a bank would before a new campaign, and evaluated once on the test period with the list of
+comparisons written down beforehand.
+
+4. Experiments and results
+The first network, trained on all 17 inputs, reached a within-month PR-AUC of 0.170 on validation, below logistic regression (0.178). I then ran eight experiments, changing one thing at a time.
+Each setting was trained with 3 seeds, and I only changed a setting when it beat the current one
+by clearly more than the seed-to-seed spread (about 0.001).
+ # Question                       Validation result (within-month PR-AUC)            Decision
+ 1 Customers or calendar?         0.164 with 17 inputs; 0.188 with 10 customer       Customer features
+   Remove calendar inputs step    features                                           only
+   by step
+ 2 Weighted or unweighted loss    0.188 vs 0.189                                     Tie; keep weighted,
+                                                                                     treat outputs as
+                                                                                     scores
+ 3 Network size                   No hidden layer 0.184; 16 units 0.187; 64-32       Keep 64-32
+                                  0.188; 256-128-64 0.189
+ 4 Regularization                 Large net without dropout or early stopping:       Dropout 0.2 + early
+                                  0.190 at epoch 3, 0.150 after 60. Dropout 0/0.5:   stopping
+                                  no change. Weight decay 0.01: 0.181
+ 5 Learning rate, optimizer,      lr 0.01: 0.186; lr 0.0001: 0.184; SGD: 0.188;      Adam, 0.001, 256
+   batch size                     batch 64 or 1,024: no change
+ 6 Learned embeddings vs one-     0.185, three times slower                          Keep one-hot
+   hot
+ 7 Seed variation, ensembling     5 seeds: 0.186–0.189; average of the 5: 0.189      5-network ensemble
+ 8 Same features and light        Logistic regression 0.184; boosted trees 0.183     Fair comparison set
+   tuning for baselines
+
+What worked. Experiment 1 was the only large effect (+0.024, Figure 3). Given calendar inputs,
+the network spent its capacity learning the timeline of 2008, which lowers training loss but says
+nothing about a later period. The pooled PR-AUC moved the other way (0.254 down to 0.223), so
+
+with the usual metric alone I would have kept the worse model. Early stopping was essential:
+without it, validation loss rose from 1.7 to 7.2 while training loss kept falling.
+What did not work. Bigger networks, more dropout, embeddings and a different optimizer
+changed nothing I could separate from noise. The limit was the information in the inputs, not the
+network.
+
+       Figure 3. Experiment 1: removing calendar inputs lowers the pooled score but raises the within-month score.
+
+Test results. All models retrained on training plus validation, evaluated once on the test period.
+
+ Model                                  PR-AUC within-month Lift@20% within-month PR-AUC pooled
+ Neural network, customer                                      0.608                          1.50                   0.623
+ features (final)
+ Logistic regression, customer                                 0.612                          1.50                   0.627
+ features
+ Gradient boosted trees, customer                              0.607                          1.47                   0.616
+ features
+ Neural network, 17 inputs                                     0.620                          1.52                   0.543
+ Logistic regression, 17 inputs                                0.626                          1.53                   0.551
+ Gradient boosted trees, 17 inputs                             0.622                          1.49                   0.619
+ Rule of thumb                                                 0.592                          1.50                   0.603
+ Calendar-only logistic regression                             0.495                          1.07                   0.447
+ Random ranking                                                0.467                          1.00                   0.458
+
+Conclusions, each checked with a bootstrap of the test calls (500 resamples within months):
+ 1. The network ranks usefully but is not better than the baselines. Its top 20% converts 1.5
+    times better than average, in all 15 test months (lift 1.24–1.71). The difference with logistic
+    regression is −0.004 in PR-AUC (95% interval −0.011 to +0.004), so I cannot claim the
+    network is better.
+ 2. Experiment 1 held only in part. Pooled, the 17-input network and logistic regression collapse
+    (0.543 and 0.551). Within months they are slightly better than my final model (by 0.011 and
+    0.018, intervals excluding zero), the opposite of validation. The validation-selected model was
+    more robust across months but not the best within them.
+
+ 3. A threshold chosen on validation is unusable. The best-F1 threshold flagged 25.5% of
+    validation calls but 62.3% of test calls. A monthly call budget (top 20%) is unaffected by the
+    shift.
+ 4. The scores are not probabilities. The average prediction is 0.69 where 45.8% subscribed,
+    because of the weighted loss and the shift.
+Retraining on the two most recent months helped the flexible models most (boosted trees from
+0.583 to 0.607 within-month PR-AUC), probably because clients with a previous success went
+from 102 to 325 examples.
+
+5. Using the model
+Targeting simulation. I replayed the 15 test months as if the model had been in use, with a budget of 20% of each month's list (849 calls). Random calling would reach about 389 subscribers; the
+network's list reaches 581, which is 192 more for the same number of calls, or 29.9% of all subscribers (a perfect ranking would reach 849). The rule of thumb reaches 584, so at this budget a
+marketer calling previous subscribers first does as well. The models pull ahead only at larger budgets: at 50% of the list the network reaches 60.6% of subscribers against 57.5% for the rule, because
+the rule's second step (clients whose previous campaign failed) targets a group that in fact subscribes less (34.0%) than clients never contacted (38.5%).
+
+                                                                    Figure 5. Permutation importance of each input
+    Figure 4. Share of subscribers reached by call budget (test).                       (test).
+
+Where the value comes from. Among the 3,199 test customers with no previous success (75% of
+the list), the network's lift at 20% is only 1.11 and its ROC-AUC 0.54; the other models do no better. Permutation importance (Figure 5) agrees: shuffling poutcome lowers within-month PR-AUC
+by 0.094, previous by 0.027 and contact by 0.009, and the other seven inputs by about zero. In
+practice the network is a three-input model, which explains why simple methods match it.
+Profit. Assuming €5 per call and €100 per subscription, calling everyone is profitable when 46%
+say yes, so the model's role is to set the order when capacity is limited: at a 20% budget its list
+earns €53.9k against €34.6k for random calling. The model changes who is called at all only when
+calls are expensive: at €50 per call, calling everyone loses €18k while calling the model's top 35%
+earns €18k.
+Who gets called, and errors. The model selects 71.9% of previous subscribers and 2.7% of clients
+never contacted. It selects 29.5% of customers aged 60 and over against 15.6% of those aged 30–44,
+
+although their test success rates are close (47.4% and 44.7%): it learned from 2008, when older
+customers subscribed far more often (23.8%). The 268 wasted calls look like the 581 hits (77% previous subscribers, average score 0.93 against 0.94): errors come from missing information, such as
+products already held, not from the architecture. The notebook also scores new customer profiles
+and saves the model for reuse. Throughout, the data shows who subscribes when called, not
+whether the call caused the subscription.
+
+6. Limitations
+Little signal beyond campaign history. For the three quarters of customers with no previous success, age, job, education and loans carry almost no information, and no architecture I tried
+changed that. A small, particular validation set. Two months, one campaign making up 89% of
+calls; model selection was noisy and my main choice was only partly confirmed on the test set.
+The exploratory analysis also looked at test-period summaries such as its success rate, so the test
+set was not completely unseen. With more time I would use several successive training and validation windows. A changing world. The success rate went from 6% to 46%; scores are not calibrated, a fixed threshold fails, and results from one Portuguese bank during the 2008–2010 crisis
+may not transfer. I would recalibrate on recent data and retrain before every campaign. No causal
+answer. The data contains only people the bank chose to call, so it cannot say whether a call
+caused a subscription; that needs an experiment with an uncalled control group. Other limits.
+There are no customer IDs, years were rebuilt from row order, and profit figures rest on assumed
+costs. With richer inputs (products held, account activity) and customer IDs, a recurrent network
+over each client's contact history would be the natural next model.
+
+7. Ethical considerations
+Sales pressure on older customers. The model selects people aged 60 and over about twice as often as people aged 30–44, though their test response was barely higher (47.4% against 44.7%).
+Directing more sales calls for a financial product at older people than their response justifies is a
+real concern, and age-based targeting may be legally restricted. Since age contributes almost nothing to the ranking, I would remove it, with marital, before any real use.
+Repeated contact and consent. Seven in ten previous subscribers are selected, and the most confident errors are clients already contacted 4 to 7 times. The data records no consent, opt-outs or
+complaints, so a deployment would need a contact cap per person and a do-not-call list applied
+before ranking.
+Penalising silence and feedback loops. Clients with an “unknown” credit-default status subscribed half as often (5.2% against 11.3%), so a model can learn to rank people lower for not sharing information; acceptable for a marketing call, not for decisions about access to credit. And because the model learns only from people who were called, using it to choose who is called narrows future data; reserving a random share of each campaign keeps the data honest and provides
+a control group.
+Misuse of scores and representation. Errors cost customers unwanted calls or leave them uninformed about a suitable product. The larger risk is presenting scores as probabilities: they overstate true rates by a wide margin. Finally, the data reflects whom one bank chose to call during a
+crisis, not customers in general.
+
+References
+Moro, S., Rita, P., and Cortez, P. (2014). Bank Marketing [Dataset]. UCI Machine Learning Repository.
+   https://doi.org/10.24432/C5K306
+Moro, S., Cortez, P., and Rita, P. (2014). A data-driven approach to predict the success of bank telemarketing. Decision Support Systems, 62, 22–31.
+
+Use of AI tools
+Following the professor’s recommendation to use AI tools to support our learning, I used Claude
+(Anthropic) and ChatGPT (OpenAI) as learning assistants throughout the project. They helped me
+challenge my assumptions, clarify concepts, organize my work, and debug Python code. I assessed their
+suggestions and remain responsible for the analytical choices, interpretation of results, and final report.
+```
 
 # Part 2. The reasoning behind the products
 
