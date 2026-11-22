@@ -50,14 +50,14 @@ function workCard(item, L) {
     where = tx.where; years = s.years; title = tx.title; note = tx.note;
     head = tx.tallies[s.headline || 0];
   } else {
-    const g = GLR_CARD[L] || GLR_CARD.en, px = p.text[L] || p.text.en;
+    const g = item.card ? (item.card[L] || item.card.en) : (GLR_CARD[L] || GLR_CARD.en), px = p.text[L] || p.text.en;
     where = g.where; years = "2026"; title = g.title; head = g.headline; note = px.note;
   }
   if (item.where) where = item.where[L] || item.where.en;
   const tools = item.tools ? (item.tools[L] || item.tools.en) : [];
   const links = [];
   if (s) links.push(`<a href="#/story/${s.slug}">${esc(t("about.case"))}</a>`);
-  if (p) links.push(`<a href="#/p/${p.slug}">${esc(t("about.product"))}</a>`);
+  if (p) links.push(`<a href="#/p/${p.slug}">${esc(t(item.card ? "about.explore.project" : "about.product"))}</a>`);
   if (p && p.links && p.links.code) links.push(`<a href="${esc(p.links.code)}" target="_blank" rel="noopener">${esc(t("about.code"))}</a>`);
   const main = s ? `#/story/${s.slug}` : `#/p/${p.slug}`;
   return `
@@ -231,6 +231,8 @@ export function renderAbout() {
       <div class="work-grid">${WORK.engagements.map((w) => workCard(w, L)).join("")}</div>
       <h3 class="ab-group">${esc(t("about.ventures"))}</h3>
       <div class="work-grid">${WORK.ventures.map((w) => workCard(w, L)).join("")}</div>
+      <h3 class="ab-group">${esc(t("about.analytics"))}</h3>
+      <div class="work-grid">${WORK.analytics.map((w) => workCard(w, L)).join("")}</div>
     </section>
 
     <section class="ab-sec" id="ab-3">

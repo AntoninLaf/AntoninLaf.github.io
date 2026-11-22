@@ -32,6 +32,14 @@ export const WORK = {
     { story: "goco",
       tools: { en: ["Churn-risk segmentation", "Customer lifecycle", "Sales and marketing alignment"], fr: ["Segmentation du risque d'attrition", "Cycle de vie client", "Alignement ventes et marketing"] } }
   ],
+  analytics: [
+    { project: "bankcalls",
+      card: {
+        en: { where: "MGSC 673, McGill · Individual project", title: "Who should the bank call first? Ranking marketing prospects with deep learning", headline: { value: "581 vs 389", label: "subscribers reached, model vs random calling, at a 20% call budget" } },
+        fr: { where: "MGSC 673, McGill · Projet individuel", title: "Qui la banque devrait-elle appeler en premier ? Classer des prospects par apprentissage profond", headline: { value: "581 vs 389", label: "souscripteurs rejoints, modèle vs appels au hasard, à 20 % des appels" } }
+      },
+      tools: { en: ["Lift at a call budget", "Baselines first", "Targeting simulation", "Profit analysis"], fr: ["Gain à budget d'appels fixe", "Les bases d'abord", "Simulation de ciblage", "Analyse de profit"] } }
+  ],
   ventures: [
     { story: "acteurly", project: "acteurly",
       tools: { en: ["Human in the loop", "Evaluation rubrics", "Value of information", "Defensibility"], fr: ["Humain dans la boucle", "Grilles d'évaluation", "Valeur de l'information", "Avantage défendable"] } },

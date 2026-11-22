@@ -4,8 +4,9 @@ import acteurly from "./acteurly/index.js";
 import versytalks from "./versytalks/index.js";
 import versynow from "./versynow/index.js";
 import glrlight from "./glrlight/index.js";
+import bankcalls from "./bankcalls/index.js";
 
-export const projects = [acteurly, versytalks, versynow, glrlight].sort((a, b) => a.order - b.order);
+export const projects = [acteurly, versytalks, versynow, glrlight, bankcalls].sort((a, b) => a.order - b.order);
 
 export function findProject(slug) {
   return projects.find((p) => p.slug === slug) || null;

@@ -5,7 +5,7 @@ import { esc, inkable } from "./ink.js";
 const W = 1200, H = 660;
 const ABOUT = { x: 150, y: 520, noteSide: "above" };
 const SCALE = 1.15;      // landmarks are drawn in a 180-wide box and scaled up a little
-const FOOT = 96;         // the route runs this far under each place, below its two label lines
+const FOOT = 114;        // the route runs this far under each place, below its two label lines
 
 const deskLandmark = () => `
   <path d="M-80 -30 H80"/>
@@ -96,7 +96,7 @@ export function renderMap(projects, stacked = false) {
     delay += step;
     const tx = p.text[L] || p.text.en;
     places.push(place(p.map, {
-      label: tx.title, small: tx.tagline || tx.label, note: tx.note,
+      label: tx.short || tx.title, small: tx.tagline || tx.label, note: tx.note,
       href: `#/p/${p.slug}`, delay, landmark: inkable(p.landmark())
     }));
   }
@@ -144,7 +144,7 @@ function renderStacked(projects) {
     }
     const tx = e.text[L] || e.text.en;
     return place({ x, y, noteSide: "right" }, {
-      label: tx.title, small: tx.tagline || tx.label, note: tx.note,
+      label: tx.short || tx.title, small: tx.tagline || tx.label, note: tx.note,
       href: `#/p/${e.slug}`, delay, landmark: inkable(e.landmark())
     });
   });

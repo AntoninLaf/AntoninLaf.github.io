@@ -5,7 +5,7 @@ import { esc, inkable } from "./ink.js";
 import { projects } from "../projects/index.js";
 import { stories } from "../stories/index.js";
 
-const FILTERS = ["all", "ai", "product", "marketing"];
+const FILTERS = ["all", "ai", "product", "marketing", "analytics"];
 let filter = "all";               // per page load; nothing is stored
 
 // The spiral's geometry. One page per STEP degrees, DY pixels lower each time.
@@ -17,7 +17,7 @@ export function workEntries() {
   const L = lang();
   const fromProjects = projects.map((p) => {
     const tx = p.text[L] || p.text.en;
-    return { slug: p.slug, href: `#/p/${p.slug}`, title: tx.title, place: tx.place, line: tx.tagline || tx.label, kind: pick(p.kind, L), tags: p.tags || [], landmark: p.landmark };
+    return { slug: p.slug, href: `#/p/${p.slug}`, title: tx.title, short: tx.short || tx.title, place: tx.place, line: tx.tagline || tx.label, kind: pick(p.kind, L), tags: p.tags || [], landmark: p.landmark };
   });
   const fromStories = stories.filter((s) => s.landmark).map((s) => {
     const tx = s.text[L] || s.text.en;
@@ -90,9 +90,9 @@ export function renderSpiral({ intro, flat, compact }) {
             <span class="pg-n">${two(i + 1)}</span>
             <span class="pg-place">${esc(e.place)}</span>
             ${landmarkSvg(e)}
-            <span class="pg-title">${esc(e.title)}</span>
+            <span class="pg-title">${esc(e.short || e.title)}</span>
           </span>
-          <span class="face back" aria-hidden="true">${landmarkSvg(e)}<span class="pg-back">${esc(e.title)}</span></span>
+          <span class="face back" aria-hidden="true">${landmarkSvg(e)}<span class="pg-back">${esc(e.short || e.title)}</span></span>
         </a>`).join("");
 
   const texts = list.map((e, i) => `

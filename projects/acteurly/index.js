@@ -8,7 +8,7 @@ export default {
   order: 1,
   kind: { en: "Product judgment & AI", fr: "Jugement produit et IA" },
   tags: ["ai", "product", "marketing"],
-  map: { x: 420, y: 200, noteSide: "right" },
+  map: { x: 420, y: 200, noteSide: "above" },
   links: {
     live: "https://acteurly.ai/"
   },

@@ -24,7 +24,7 @@ Record captured 17 October 2026, extended 18 October 2026. This file is the sing
 | GoCo (a TELUS company) | Marketing Manager | Jun 2022 – Sep 2023 |
 | Groupe EGS | Marketing Coordinator (part-time) | Dec 2021 – Sep 2022 |
 
-Projects, never jobs: Acteurly (acteurly.ai), GLRlight, and the Rio Tinto MMA capstone (not on the site). Acteur Social is an agency Antonin worked for as a consultant; he did not found it and does not own it.
+Projects, never jobs: Acteurly (acteurly.ai), GLRlight, the MGSC 673 bank-calls project (marketing analytics), and the Rio Tinto MMA capstone (not on the site). Acteur Social is an agency Antonin worked for as a consultant; he did not found it and does not own it.
 
 ### Resume bullets (approved wording)
 - VersyNow: owned the roadmap and PRDs for VersyNow and VersyTalks; anchored VersyTalks on two metrics, time on platform and arguments written, the second doubling as training data for the team's own language model. Specified an agentic post-event brief on Claude Haiku 4.5 with six read-only tools and eight rules that re-check every number against the database before organizers see it, at about $0.08 per brief. Specified an AI debate grader calibrated on 42 real submissions with a rubric from coaches' own framework, launched as a capped free beta with go/stop targets and user corrections captured as training labels. Grew VersyTalks from 40 to 10,000 monthly active users and took VersyNow to market in Québec, from positioning and pricing to a free-trial-to-paid funnel that signed paying organizations, including an annual licence.
@@ -46,6 +46,17 @@ Projects, never jobs: Acteurly (acteurly.ai), GLRlight, and the Rio Tinto MMA ca
 
 In plain words (use this first with a non-specialist): GLRlight checks a UK company for warning signs before you sign with it. It reads the company's public record in about a second, answers green, amber or red with each warning sign dated and paired with its innocent explanation, and tells you whether paying for a proper credit check is worth it. It does not predict bankruptcy.
 Corporate filings contain signals that are easy to overlook in isolation. GLRlight examines their timing, sequence and concentration to help people decide where further diligence is warranted. A rules engine evaluates sixteen signals across filing behaviour, governance, director history, ownership, security interests and register events, and aggregates them into a green, amber or red screening band with the underlying evidence visible. An AI-generated memo explains what changed, why it may matter, plausible benign explanations and specific questions to ask the counterparty. The core design principle: make the evidence inspectable, the uncertainty explicit and the next questions actionable. GLRlight supports human judgment; its screening bands are not credit ratings. He tried to test whether it predicts insolvency; the backtest failed for instructive reasons (look-ahead bias, an anachronistic rule, an age confound, and a sample that was not random), and he published that it does not predict insolvency.
+
+## Marketing analytics: "Who should the bank call first?" (added 22 November 2026)
+
+Evidence: stated by Antonin. This is everything on record about this project; for anything beyond it (architecture details, exact metrics, the profit figures, the grade), say it is not in the notes and suggest writing to him.
+
+- Title: "Who should the bank call first? Ranking marketing prospects with deep learning". Section on the site: Marketing analytics.
+- His individual project for MGSC 673 at McGill (Master of Management in Analytics), fall 2026. A project, not a job.
+- What it is: a PyTorch neural network that ranks a bank's marketing prospects by how likely they are to subscribe, on the public UCI Bank Marketing dataset (41,188 calls).
+- Compared against logistic regression, gradient boosted trees and a rule of thumb, with a targeting simulation and a profit analysis.
+- Headline result: at a 20% call budget, 581 subscribers reached versus 389 for random calling. The neural network tied with the simpler models; it did not beat them. He reports the tie as the finding.
+- The code is not public at this time.
 
 # Part 2. The reasoning behind the products
 
