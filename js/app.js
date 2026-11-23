@@ -142,7 +142,7 @@ document.addEventListener("click", (e) => {
   if (e.target.closest("[data-open-ask]")) { openAsk(); return; }
   const jump = e.target.closest("[data-jump]");
   if (jump) { e.preventDefault(); const el = document.getElementById(jump.dataset.jump); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
-  const li = e.target.closest(".questions li");
+  const li = e.target.closest(".questions li, [data-ask-question]");
   if (!li) return;
   openAsk();
   setTimeout(() => askFromPage(li.textContent.trim()), 420);

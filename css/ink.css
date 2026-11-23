@@ -1045,3 +1045,124 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .spiral-filters { padding-top: 0; }
   .wf { font-size: 14px; }
 }
+
+/* Reduce CAC field notes */
+.cac .cac-route-title {
+  margin: 30px 0 10px;
+  font-family: var(--hand);
+  font-size: 20px;
+}
+.cac-route {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 0 0 10px;
+  padding: 0;
+}
+.cac-route li {
+  position: relative;
+  min-width: 0;
+  padding: 10px 5px 4px;
+  border-top: 1px dashed var(--pencil-light);
+  font-family: var(--hand);
+  font-size: 16px;
+  line-height: 1.3;
+}
+.cac-route li:first-child { border-color: var(--red-ink); }
+.cac-route svg {
+  display: block;
+  width: 52px;
+  height: 45px;
+  margin: 0 0 6px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cac-route li:nth-child(3) svg { stroke: var(--red-ink); }
+.cac-market { border-bottom: 1px dashed var(--pencil-light); }
+.cac-market:first-of-type { border-top: 1px dashed var(--pencil-light); }
+.cac-market summary { padding: 11px 0; cursor: pointer; font-weight: 600; }
+.cac-market p { margin-left: 19px; }
+.cac-market .cac-query { font-family: var(--hand); color: var(--ink-soft); font-size: 16px; }
+.cac-method { padding-left: 1.3em; }
+.cac-method strong { font-weight: 650; }
+.cac-method li { padding-left: .25em; }
+.cac-lab {
+  background: rgba(255, 253, 244, .44);
+  border: 1px solid var(--pencil-light);
+  box-shadow: 3px 3px 0 var(--paper-shadow);
+  padding: clamp(14px, 3vw, 24px);
+}
+.cac-control {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  margin: 18px 0;
+  font-family: var(--hand);
+  font-size: 16px;
+  line-height: 1.4;
+}
+.cac-control span { color: var(--red-ink); font-weight: 400; }
+.cac-control input {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-height: 32px;
+  margin: 0;
+  accent-color: var(--red-ink);
+}
+.cac-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 22px;
+  margin: 22px 0 13px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--pencil-light);
+}
+.cac-results dt { font-family: var(--hand); font-size: 15px; line-height: 1.3; }
+.cac-results dd { margin: 3px 0 0; font-size: 27px; line-height: 1; overflow-wrap: anywhere; }
+.cac-results div:last-child dd { color: var(--red-ink); }
+.cac-lab .cac-lab-foot { margin-bottom: 0; font-size: 16px; line-height: 1.45; }
+.cac-questions { display: grid; gap: 8px; }
+.cac-questions .ask-starter {
+  width: 100%;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.cac :is(summary, button, input):focus-visible { outline: 2px solid var(--red-ink); outline-offset: 4px; }
+
+@media (max-width: 520px) {
+  .cac-route { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.cac-workflow {
+  border-block: 1px dashed var(--pencil-light);
+  margin: 17px 0 17px 19px;
+  padding: 12px 0;
+}
+.cac-workflow h3 {
+  color: var(--ink-soft);
+  font-family: var(--hand);
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 0 7px;
+}
+.cac-workflow ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 26px;
+  padding-left: 23px;
+  margin: 0;
+  font-size: 17px;
+}
+.cac-workflow li::marker { color: var(--red-ink); }
+.cac-market .cac-example {
+  border-left: 2px solid var(--pencil-light);
+  color: var(--ink-soft);
+  padding-left: 12px;
+}
+@media (max-width: 460px) {
+  .cac-workflow ol { grid-template-columns: 1fr; }
+}

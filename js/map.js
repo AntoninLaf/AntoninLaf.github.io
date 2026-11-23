@@ -2,7 +2,7 @@
 import { t, lang } from "./i18n.js";
 import { esc, inkable } from "./ink.js";
 
-const W = 1200, H = 660;
+const W = 1200, H = 690;
 const ABOUT = { x: 150, y: 520, noteSide: "above" };
 const SCALE = 1.15;      // landmarks are drawn in a 180-wide box and scaled up a little
 const FOOT = 114;        // the route runs this far under each place, below its two label lines

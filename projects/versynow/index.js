@@ -8,7 +8,7 @@ export default {
   order: 3,
   kind: { en: "AI product & go-to-market · Product Manager", fr: "Produit IA et mise en marché · Chef de produit" },
   tags: ["product", "ai"],
-  map: { x: 930, y: 540, noteSide: "above" },
+  map: { x: 950, y: 540, noteSide: "above" },
   links: {
     live: "https://versynow.com/"
   },

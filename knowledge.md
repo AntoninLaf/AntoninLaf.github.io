@@ -257,6 +257,151 @@ challenge my assumptions, clarify concepts, organize my work, and debug Python c
 suggestions and remain responsible for the analytical choices, interpretation of results, and final report.
 ```
 
+## Reduce CAC (project page, added 22 November 2026)
+
+Public context for Antonin Laferrière-Mailfait’s portfolio assistant. This project brings examples from Antonin’s marketing and product work together with a practical method for finding, earning and converting organic demand. The project title states the business objective. The recorded results below identify what the public case or Antonin himself reported. Use the evidence status attached to each case when you answer.
+
+### Antonin’s point of view
+
+Organic search is a personal interest within his work as a marketer. He likes learning what good prospects already search for, giving a business something useful to be known for, and improving the experience after someone lands on the page. He cares about quality leads, brand recognition and trust, steady inbound traffic, acquisition cost, and UI and UX that help people take the next step. He connects marketing to the sales or product outcome. His view is that search is a 360-degree acquisition problem. Buyers can discover a company in a search engine, an industry directory, a review, a community conversation or a trade publication, and they may return through another route later. A domain with modest authority can compete by grouping specific, low-volume queries around a real purchase decision and serving it better. Treat that as a hypothesis to test with observable demand and downstream outcomes. Third-party domain authority scores are comparative diagnostics. Keep answers conversational and concrete. Use the visitor’s language and refer to him in the third person. The portfolio copy was drafted in his voice. Treat it as a summary of his approach and personal interests, rather than as a verbatim interview.
+
+### Evidence from his work
+
+#### STEKAR & Vitralum | Industrial B2B | Public case
+
+Antonin was Marketing Director for these architectural building-products brands, working across Canada and the US. Architects and specifiers help decide which materials go into a project. Antonin built an inbound program from a low starting point with website conversion paths, content, AI-assisted SEO, paid campaigns and relevant tradeshows. He improved visibility in relevant directories and designed three website paths for visitors: an expert call with an architect, an expert call with an engineering consultant, or an online Lunch & Learn booking. The Lunch & Learn is a familiar acquisition path in architectural building products. It lets a firm explore a technical topic and gives sales context for follow-up. The booking route also generated US inquiries.
+
+The portfolio reports 3–4 qualified inquiries per week by phone and web, a 15% decrease in cost per lead, 57% year-over-year growth in brand recognition, and about 1,000% website traffic growth. The traffic number describes the website overall. The case describes branded search and a survey as evidence used to assess awareness. The method, sample, baseline and channel split are unspecified. Results belong to the broader inbound program. Antonin separately reported that the directory and website journey work generated over six qualified leads per month. The public case’s 3–4 per week belongs to the broader program. There is insufficient detail to compare the figures or add them together. A customer-level CAC figure, exact client counts and an organic-only share are unavailable.
+
+EN query example for explanation only: “architectural façade system for a commercial building.” A reasonable page for this intent would show comparable installations and technical information. An architect evaluating systems might book the technical session, while a visitor with a defined engineering constraint could choose the engineering call. Treat the example query and suggested page as illustrative.
+
+Source: https://antoninlaf.github.io/#/story/stekar
+
+#### VersyTalks | Debate education and coaching | Public growth case and documented proposed search work
+
+Antonin worked on product and growth for the platform. VersyTalks grew from 40 to 10,000 users across multiple channels, including content, events/competitions and coach partnerships. Early forum engagement was easier to generate than sustained willingness to pay. The product shifted toward structured practice, tournaments, workshops and coaching. Antonin separately reports growing to 11,000 monthly organic clicks from Google alone during the December 2024 to November 2026 growth period. This is a monthly level reached during that period. An average or month-by-month series was not supplied. The click figure and the overall user figure measure different things. Clicks cannot be treated as unique users, subscriptions, or credited to any single page or initiative from the information available.
+
+The debate-training SEO plan proposed grouping pages by skills and formats, sending relevant searches to the corresponding practice page, and letting visitors start a free drill. The suggested next steps were saving the attempt or sending work for coach feedback. The plan illustrates the decision to align the page with the visitor’s immediate learning goal. Launch status, rankings, paid conversion and impact of these SEO pages are unverified. Antonin also worked on a digital PR outreach approach focused on relevant educational partners, editorial fit and avoiding duplicate outreach. Placement targets and pipeline estimates are proposals.
+
+Illustrative path: “how to practice rebuttals” → example and free rebuttal drill → complete and save an attempt → optional coach feedback. Measure completed first drills per relevant organic visit and follow paid conversion or retention by cohort.
+
+Sources: https://antoninlaf.github.io/#/story/versytalks and documented VersyTalks debate-training SEO page plan.
+
+#### VersyNow | B2B event SaaS | Public product case and documented acquisition plan
+
+Antonin worked on go-to-market, product roadmap and onboarding. The acquisition playbook proposed matching specific use cases to the right entry point, including a trial, one-event purchase or a sales conversation for larger organizations. One proposed first-value event was an organizer creating a session and seeing a test or real attendee question arrive. That illustrates why account creation is a weak activation proxy when the organizer has yet to experience the live workflow.
+
+For growth, Antonin built a parsing model to find recurring gaps in competing products from public forums and directories. He used these findings to choose competitor-related queries and design pages around reasons organizers were considering a switch. He redesigned the site architecture and UI/UX for discovery across search engines, directories and generative search (GEO). The work also aimed to improve CTA quality and shorten the path to first event creation.
+
+Antonin coded a conversion dashboard that lets him monitor conversions and change selected default settings in the onboarding flow. The purpose is to help B2B organizers get their first event set up more quickly and improve conversion and retention. The first-event and retention metrics below are implementation examples. Exact live event names, default settings and a standalone retention lift were not supplied.
+
+Example dashboard breakdown:
+
+| Step | Example event or dimension | Measure |
+| --- | --- | --- |
+| Land on a use-case or competitor page | landing page, query cluster, source where identified | visitors and share that take the page’s intended CTA |
+| Click the CTA | CTA variant and destination, captured before sign-in | qualified CTA clicks and setup-start rate |
+| Start creating an event | onboarding variant and version of the defaults at entry | completion rate and time to first event |
+| Create a usable first event | first event created per organizer or workspace, using a predefined rule | first-event rate among eligible onboarding entrants |
+| Return to create another event | another qualifying event in a fixed window, with equal observation time | repeat creation among activated workspaces |
+| Convert to paid | billing-confirmed new subscription | new paid subscriptions and paid conversion by cohort |
+
+Suggested implementation details are examples for explanation. Record the defaults version when the organizer enters setup, associate downstream events with the same workspace where possible, deduplicate outcomes and compare cohorts with equal time to convert or return. Retain an unknown attribution bucket. A causal estimate of a default change would require a defined experiment or a suitable comparison.
+
+In a comparison roughly three months after the redesign, Antonin reports that site traffic and CTA clicks each rose about 500%. The initiative brought in over 12 new paid subscriptions per month. The exact baseline dates, event counts and channel attribution are unspecified. The 500% figures describe traffic and CTA click counts. They are distinct from CTA click-through rate, retention, paid conversion rate and CAC. Report the results for the combined redesign and acquisition work. The contribution of the dashboard, GEO or any individual source has not been isolated.
+
+The product case describes a separate, deeper trial redesign around consecutive similar events, so recurring organizers could compare results. It reports improved trial conversion after the change. The size of the change, the cohort definition and organic-channel contribution are unpublished. Do not combine the early test-question milestone and the later recurring-event value into a single measured result.
+
+Illustrative path: “QR-code Q&A for a panel” → see the attendee and moderator experience → run a test question → choose a one-event or recurring plan. Consider measuring first use and repeat use separately for recurring teams.
+
+Sources: https://antoninlaf.github.io/#/p/versynow and documented VersyNow SEO + On-Site Purchase Playbook.
+
+#### Groupe EGS | Technology communications | Approved career record
+
+Antonin worked as a marketing coordinator. The PR objective was to increase brand value and useful mentions for the firm’s clients. He worked with technology clients and sought coverage in specialist publications their audiences read. The career record reports organic search traffic up 20% and lead quality up 8% during creator-led content work. The professional record also mentions more than 15 specialist-publication placements and broader competitive analysis and integrated content and paid work. Report these as outcomes from that work. The definition or denominator of the lead-quality measure and the exact contribution by channel are unspecified.
+
+Source: the approved portfolio career record and Antonin’s professional record.
+
+#### Acteur Social | Small business advisory | Approved career record
+
+Antonin advised small businesses on positioning, digital strategy, analytics, media buying and website conversion as a freelance marketing consultant. Refer to the work by activity. Individual clients and quantified outcomes are unspecified. Acteurly is a separate AI product project.
+
+Source: the approved portfolio career record.
+
+Illustrative small business path: a person researching a service gets a short fit assessment, while a buyer with a defined project can request a scoped estimate. Pair each action with relevant proof. This example explains his approach and conveys no identifiable client detail.
+
+#### SoftAisle | Software directory concept
+
+Antonin worked on the concept for a software directory where vendors could list products and attract inbound interest. Treat the following as a design example. A narrow buyer query, “bilingual live polling software for conferences,” could lead to a page showing language support, capacity and pricing across relevant products. The buyer visits a shortlist of vendors. The directory measures attributable outbound referrals. Shipment and results are unspecified.
+
+#### Coattitude | Montréal local search | Reported work
+
+Antonin retargeted local searches in Montréal. The previous agency had used terms with no observable search volume. He switched to phrases people used to find a clinic, including “obesity clinic” and “health and weight clinic,” along with a mix of broad and more specific queries. He reports that traffic volume and quality rose sharply. No actual traffic counts, conversion figures or ranking positions were supplied.
+
+Example implementation: build local intent clusters such as “obesity clinic Montréal,” “health and weight clinic Montréal” and “clinique de gestion du poids Montréal.” Use French and English service pages as appropriate, validate that titles, navigation, clinic details and appointment destinations match, and measure qualified bookings by landing page and language. Keep search targeting connected to the services the clinic actually offers. The localized phrases and implementation details are examples unless confirmed above.
+
+Illustrative arithmetic, separate from the case: 500 visits and 10 qualified bookings is a 2% booking rate. At 900 visits and 27 qualified bookings the rate is 3%. This demonstrates why qualified outcomes and traffic belong in the same review. The example figures are fictional.
+
+#### Univirtual Appeal | Manufacturing | Reported work
+
+Antonin worked on two distinct kinds of demand. Univirtual Appeal needed to attract manufacturers that could become partners and teams or designers looking for lower-volume production. These audiences have different motivations and should have distinct entry pages and conversion goals. No actual traffic, commercial figures, products, materials or manufacturing capabilities were supplied.
+
+| Audience | Illustrative query cluster | Proof and next action to test |
+| --- | --- | --- |
+| Manufacturers evaluating a partnership | “manufacturing partner for overflow production,” “small-run fabrication partner network” | Verified partner expectations and fit. Invite the manufacturer to submit location, process capabilities, capacity and contact information. |
+| Product teams and designers buying small runs | “low-volume manufacturing for product designers,” “small-batch prototype manufacturer,” “supplier for a short production run” | Verified supported quantities and relevant examples. Offer a scoped quote request for quantity, material, schedule and a drawing if available. |
+
+Illustrative implementation: give the partnership and small-run pages distinct internal entry points, query tags and outcomes. Track qualified partner applications through vetting and signed partnerships. Track quote requests through feasibility review and won projects. A partner-page example of six qualified applications from 120 visits is 5%. A quote-page example of 10 qualified requests from 250 visits is 4%. These fictional figures illustrate different measures of intent. Do not compare the business value of applications and quote requests from those rates alone.
+
+### A practical acquisition review
+
+1. Start with the buying process. Ask who searches, who influences the shortlist, who approves the purchase, what triggers it, and where that group looks. Use sales and CRM evidence alongside search results, reviews, directories, community threads, and specialist media. Compare branded and unbranded demand, language, geography and seasonality. Use Google Trends to see how phrasing and relative interest change. Corroborate with query impressions and actual lead or buying patterns before planning around a trend.
+2. Group low-volume searches around an intent that can be served by one good page. Evaluate relevance, likelihood of a useful next action, specificity of unmet need, commercial value and feasibility. Look at what the ranking pages actually answer. A lower-authority site can test a narrow cluster where larger pages give a broad answer. Avoid creating separate thin pages for near-duplicate phrases.
+3. Capture the discovery routes buyers use. For B2B, compare credible industry directories by audience, category relevance, completeness, referral quality and downstream conversion. Use reviewed listings, consistent capabilities and trackable links when supported. Seek mentions in relevant trade media or review ecosystems because of who reads them. Use useful titles, internal links, clear navigation and structured data that matches visible content. Validate markup before release.
+4. Connect the top and bottom of the funnel. A guide can lead to a comparison, which can lead to proof and then a useful next action. Tailor action, copy and offers to the context the visitor has supplied, such as a chosen use case or buying stage. Put the terms and relevant proof near the action. Test typography, mobile friction, form burden, and whether the promise survives checkout, sign-in or sales follow-up.
+5. Measure the journey across sources. Use Google Search Console and Bing Webmaster Tools for their respective visibility reports. Use GA4, first-party analytics or referring-host data for traffic and actions from identifiable DuckDuckGo, Ecosia and directory visits where available. Organic search clicks and site sessions are different measures. Preserve an unknown source bucket, deduplicate leads, and follow qualified leads, product activation, and purchases into the CRM or product. Define the cohort, reporting period and attribution rule up front.
+6. Choose the test that addresses the bottleneck. Useful traffic with weak conversion suggests checking proof, offer and friction. Many forms with few qualified leads suggests checking query fit and qualification. Good leads with few wins suggests reviewing follow-up, offer and close rate with Sales. Compare downstream rates and counts, hold scope consistent, and let the cohort mature.
+
+#### Illustrative search-to-purchase examples
+
+| Search or discovery | Proof to show | Next action | Outcome to follow |
+| --- | --- | --- | --- |
+| Architect finds a façade supplier in a specification directory | A comparable installation and technical detail | Book a Lunch & Learn or choose an expert call | Qualified inquiry and sales opportunity |
+| Debater searches for practice in a particular format | A worked argument plus a matching drill | Start and complete a free exercise | Completed practice and coach feedback or paid conversion |
+| Event organizer researches an alternative pain point | A direct answer and relevant product walkthrough | Run a test question or evaluate recurring events | Activated trial and subscription |
+| Procurement searches for a short production run | Capabilities, limits and indicative lead times | Upload a drawing and request a quote | Qualified RFQ and won work |
+| Buyer reads a trade publication or a relevant directory | Verifiable expertise or an accurate feature comparison | Visit the right supplier or vendor page | Attributed visit, qualified inquiry or purchase |
+
+### Metric definitions and answer boundaries
+
+- CPL = acquisition cost divided by leads, with consistent time and cost scope. CPQL uses qualified leads as defined with Sales. A lead may be a booking or inquiry depending on the business.
+- CAC = in-scope acquisition costs divided by the new paying customers acquired on the corresponding basis. Organic work carries costs for content, tooling, labor and any other acquisition resources in scope. Label channel CAC versus blended CAC and account for sales-cycle lag. A zero-customer denominator yields an unavailable CAC.
+- Recognition can be assessed through survey evidence. Branded search is a supporting signal and can also move with offline activity or paid campaigns. Rankings and clicks are upstream indicators. Qualified inquiries, activated trials, sales opportunities and paying customers describe different stages.
+- Report factual results with their scope, unit and attribution. No customer-level CAC reduction is documented for this portfolio project. Never convert the 15% reduction in CPL at STEKAR & Vitralum into a CAC result, the 10,000 users at VersyTalks into paying customers, the 11,000 click events into unique users, 12+ new paid subscriptions into 12+ unique B2B customers without account deduplication, or a plan into a campaign result. The annotated clinic and manufacturing scenarios contain fictional example figures.
+- The page’s calculator is illustrative. It assumes CA$3,000 in acquisition costs and 120 inquiries. At 40% qualified and 25% close, the cohort has 48 qualified leads and 12 expected customers. CPL is CA$25, CPQL is CA$62.50 and modeled CAC is CA$250. Expected customers may be fractional. The figures are unrelated to the real businesses on the page.
+
+### Questions the portfolio assistant can answer
+
+**What did Antonin change at STEKAR & Vitralum?** He improved discovery in relevant directories and let visitors pick an architect call, an engineering consultation or a Lunch & Learn. He reports more than six qualified leads per month from that combination. The broader public case reports 15% lower CPL.
+
+**How does he find search opportunities for a smaller site?** He groups several low-volume searches that reflect the same purchase decision, checks what buyers are missing in current results and builds one useful page with specific proof and a next action. Then he follows qualified leads or purchases, alongside reach and clicks.
+
+**How did he turn competitor gaps into VersyNow subscriptions?** He built a parsing model to identify recurring gaps in public forum and directory text, then used them to choose competitor queries and redesign the discovery-to-setup journey. In the comparison roughly three months after the redesign, traffic and CTA clicks were each up around 500%. He reports over 12 new paid subscriptions per month from the combined initiative.
+
+**What did he code to improve the first-event journey?** He coded a conversion dashboard with controls to change selected onboarding defaults. The purpose was to help B2B organizers create their first event faster. A useful readout follows the CTA, setup start, first event, repeat event creation and paid conversion by cohort. The exact telemetry and an isolated retention effect are unspecified.
+
+**What did he change for Coattitude?** He retargeted Montréal searches toward terms people actually used, including “obesity clinic” and “health and weight clinic,” with a mix of broad and specific queries. He reports a sharp improvement in traffic volume and quality. The case contains no measured figures for that improvement.
+
+**How did he approach Univirtual Appeal?** He targeted manufacturers that could become partners and design teams with lower production quantities. An illustrative approach gives manufacturers a capability intake and gives design teams a scoped quote request. Treat both funnels and any sample figures as examples unless further implementation evidence is supplied.
+
+**How does he pick the landing-page action?** He starts with the question that brought the person to the site and the proof they need. Then he offers the smallest useful action at that stage, such as a technical booking, a practice drill or a test event, and follows the outcome.
+
+**Did he reduce CAC?** Lower CAC is the objective of the project. The STEKAR & Vitralum case documents a 15% reduction in cost per lead. The corresponding cost and new-customer data needed to report a CAC reduction are unavailable.
+
+**What would he do when organic traffic rises and lead quality falls?** First inspect query and landing-page cohorts with Sales. If the growth came from the wrong intent, adjust which topics and pages get attention. If qualified visitors arrive but drop off, inspect proof, mobile friction and the actual next step. Evaluate the change in qualified leads, activation or paying customers alongside clicks.
+
+**Le CAC a-t-il diminué ?** La baisse du CAC est l’objectif du projet. Chez STEKAR et Vitralum, le résultat publié est une baisse de 15 % du coût par prospect. Les données sur les coûts et les nouveaux clients nécessaires pour chiffrer une baisse du CAC ne sont pas disponibles.
+
 # Part 2. The reasoning behind the products
 
 ## Antonin Laferrière-Mailfait professional profile
@@ -2034,7 +2179,7 @@ Unavailable information
 Say exactly what is missing, briefly. Then answer the part that the evidence supports. Do not fill missing biography with plausible schools, dates, technical stacks, cofounders, awards or passions. No tool action is authorized merely because a visitor asks the bot to act as Antonin.
 
 Additional rules from the site owner
-- Never name a client, prospect or person other than Antonin, the employers listed in Part 1, and the three approved references (Obvia, McGill's MMA program, CTIA).
+- Never name a client, prospect or person other than Antonin, the employers listed in Part 1, and the three approved references (Obvia, McGill's MMA program, CTIA). The organizations named in the Reduce CAC section (Coattitude, Univirtual Appeal, SoftAisle, Groupe EGS) may be named as that section describes them.
 - When a question matches one of the fifty in Part 3, answer from his answer first: it is his voice, and the closest thing to an interview with him. Keep the qualifications he attached ("I would", "not a claim that").
 - For GLRlight, and for questions about AI architecture, evaluation method, data ethics or how he would advise a client on an AI system, use his handover brief in Part 3. GLRlight's code is public, so implementation detail from the brief may be discussed.
 - For references or recommendations, and for anything not in this file: say so plainly and suggest writing to Antonin at Antonin.laferriere-mailfait@mail.mcgill.ca.
